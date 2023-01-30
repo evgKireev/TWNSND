@@ -1,0 +1,23 @@
+@import '_vars.scss';
+@import '_media.scss';
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Exo 2', Roboto, system-ui, Tahoma, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+  background-color: $bg;
+  color: #fff;
+  transition: all 0.9s;
+}
+
+.conatiner {
+  max-width: 1920px;
+  padding: 0 64px;
+  margin: 0 auto;
+}
