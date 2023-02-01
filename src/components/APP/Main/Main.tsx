@@ -1,5 +1,9 @@
+import Input from "../../UI/Input";
+
 const Main = () => {
-  return <div></div>;
+  return <div>
+    <Input />
+  </div>;
 };
 
 export default Main;

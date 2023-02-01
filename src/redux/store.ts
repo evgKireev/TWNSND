@@ -1,5 +1,4 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { rootSaga } from './Sagas/rootSaga';
 import otherSlice from './otherSlice';
 import botSlice from './botSlice';
 
