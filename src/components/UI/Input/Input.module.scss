@@ -16,14 +16,6 @@
   padding: 26px 24px 25px 50px;
   &:focus {
     border: 2px solid $button_1;
-    & ~ .infoPassword {
-      display: block;
-      margin-top: 3px;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 130%;
-      color: $button_1;
-    }
     & + label {
       top: 11px;
       left: initial;
@@ -53,6 +45,8 @@
 
 .setlabel {
   top: 6px;
+  left: initial;
+  right: 40px;
   font-size: 20px;
   line-height: 24px;
 }
@@ -69,10 +63,6 @@
   }
 }
 
-.infoPassword {
-  display: none;
-}
-
 .password {
   &:focus {
     & + label {
@@ -80,6 +70,13 @@
       left: 50px;
     }
   }
+}
+
+.setlabelPassword {
+  top: 6px;
+  left: 50px;
+  font-size: 20px;
+  line-height: 24px;
 }
 
 .lastname,
@@ -91,6 +88,26 @@
   }
 }
 
+.setlabelName {
+  color: #909473;
+}
+
 .eldiz::after {
   content: '';
+}
+
+.errorInput {
+  border: 2px solid $error;
+  &:focus {
+    border: 2px solid $error;
+  }
+}
+
+.errorLabel {
+  color: $error;
+}
+
+.okInput {
+  background-color: #cdd8f2;
+  border: 1px solid $button_1;
 }

@@ -11,6 +11,8 @@ type InputType = {
   type?: string
   className?: string
   value: string
+  error?: boolean | undefined
+  okValidat?: boolean
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   onBlur: (e: React.FocusEvent<HTMLInputElement>) => void
 }
@@ -30,6 +32,8 @@ const Input: React.FC<InputType> = ({
   typeInput,
   value,
   name,
+  error,
+  okValidat,
   onChange,
   onBlur,
 }) => {
@@ -47,12 +51,18 @@ const Input: React.FC<InputType> = ({
         type={checkPassword ? 'text' : type}
         className={classNames(styles.input, inputStyles, className, {
           [styles.disabled]: disabled,
+          [styles.errorInput]: error,
+          [styles.okInput]: okValidat,
         })}
       ></input>
       <label
         className={classNames(styles.label, {
           [styles.setlabel]: value,
+          [styles.errorLabel]: error,
           [styles.eldiz]: typeInput === 'lastname',
+          [styles.setlabelPassword]: typeInput === 'password' && value,
+          [styles.setlabelName]:
+            (typeInput === 'lastname' || typeInput === 'ferstname') && value,
         })}
         htmlFor="text1"
       >
@@ -65,11 +75,6 @@ const Input: React.FC<InputType> = ({
         >
           {checkPassword ? <AiFillEyeInvisible /> : <AiFillEye />}
         </div>
-      )}
-      {typeInput === 'password' && (
-        <span className={styles.infoPassword}>
-          *Пароль должен содержать минимум 8 символов
-        </span>
       )}
     </div>
   )

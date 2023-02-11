@@ -10,6 +10,9 @@ const SignUp = () => {
   const [emailDirty, setEmailDirty] = useState(false)
   const [passwordDirty, setPasswordDirty] = useState(false)
   const [ferstNameDirty, setFerstNameDirty] = useState(false)
+  const [okPassword, setOkPassword] = useState<boolean | undefined>(undefined)
+  const [okMail, setOkMail] = useState<boolean | undefined>(undefined)
+  const [okName, setOkName] = useState<boolean | undefined>(undefined)
   const [emailError, setEmailError] = useState('E-mail не может быть пустым')
   const [passwordError, setPasswordError] = useState(
     '*Пароль должен содержать минимум 8 символов'
@@ -39,8 +42,10 @@ const SignUp = () => {
       setEmailError(
         '*Электронная почта должна быть в допустимом формате электронной почты (например, username@coolexample.com). Пожалуйста, попробуйте еще раз.'
       )
+      setOkMail(false)
     } else {
       setEmailError('')
+      setOkMail(true)
     }
   }
 
@@ -48,22 +53,28 @@ const SignUp = () => {
     setPassword(e.target.value)
     if (e.target.value.length < 8) {
       setPasswordError('*Пароль должен содержать минимум 8 символов')
+      setOkPassword(false)
       if (!e.target.value) {
         setPasswordError('Пароль не может быть пустым')
+        setOkPassword(false)
       }
     } else {
       setPasswordError('')
+      setOkPassword(true)
     }
   }
 
   const ferstNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFerstName(e.target.value)
     if (!e.target.value) {
-      setPasswordError('Имя не может быть пустым')
+      setFerstNameError('Имя не может быть пустым')
+      setOkName(false)
     } else {
-      setPasswordError('')
+      setFerstNameError('')
+      setOkName(true)
     }
   }
+
   return (
     <div>
       <Input
@@ -75,9 +86,16 @@ const SignUp = () => {
         typeInput={InputTypeEnum.Password}
         value={password}
         onChange={(e) => passworwHandler(e)}
+        error={Boolean(passwordDirty && passwordError)}
+        okValidat={okPassword}
       />
-      {passwordDirty && passwordError && (
+      {passwordDirty && passwordError ? (
         <div className={styles.errorMessage}>{passwordError}</div>
+      ) : (
+        <div className={styles.passwordInfo}>
+          {' '}
+          *Пароль должен содержать минимум 8 символов
+        </div>
       )}
       <Input
         onBlur={blurHandler}
@@ -88,6 +106,8 @@ const SignUp = () => {
         typeInput={InputTypeEnum.Email}
         value={email}
         onChange={(e) => emailHandler(e)}
+        error={Boolean(emailDirty && emailError)}
+        okValidat={okMail}
       />
       {emailDirty && emailError && (
         <div className={styles.errorMessage}>{emailError}</div>
@@ -101,6 +121,8 @@ const SignUp = () => {
         typeInput={InputTypeEnum.FerstName}
         value={ferstName}
         onChange={(e) => ferstNameHandler(e)}
+        error={Boolean(ferstNameDirty && ferstNameError)}
+        okValidat={okName}
       />
       {ferstNameDirty && ferstNameError && (
         <div className={styles.errorMessage}>{ferstNameError}</div>
