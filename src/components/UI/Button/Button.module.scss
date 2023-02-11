@@ -16,9 +16,12 @@
 }
 
 .primary {
+  display: flex;
+  align-items: center;
+  gap: 24px;
   border: 1px solid $text_basic;
   color: $text_basic;
-  padding: 26px 100px;
+  padding: 26px 80px;
   transition: all 0.5s;
   &:hover {
     color: $button_1;
