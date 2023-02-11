@@ -64,6 +64,19 @@
 }
 
 .password {
+  font-size: 18px;
+  line-height: 20px;
+  &:focus {
+    & + label {
+      top: 8px;
+      left: 50px;
+    }
+  }
+}
+
+.confirm {
+  font-size: 18px;
+  line-height: 20px;
   &:focus {
     & + label {
       top: 8px;

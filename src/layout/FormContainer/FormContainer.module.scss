@@ -1,0 +1,50 @@
+@import '../../scss/vars';
+
+.inner {
+  margin: 100px auto 100px;
+  border: 1px solid $text_basic;
+  border-radius: 5px;
+  max-width: 864px;
+  padding: 68px 101px 68px 99px;
+  color: $text_basic;
+}
+
+.logo {
+  margin-bottom: 48px;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 48px;
+  margin-bottom: 24px;
+}
+
+.innerLink {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 36px;
+}
+
+.text {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 24px;
+}
+.link {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 24px;
+  color: $button_1;
+}
+
+.polis {
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 27px;
+  margin-top: 48px;
+  span {
+    color: $button_1;
+    cursor: pointer;
+  }
+}

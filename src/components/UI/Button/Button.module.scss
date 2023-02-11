@@ -8,9 +8,10 @@
   font-size: 22px;
   line-height: 27px;
   text-align: center;
-
+  transition: all 0.5s;
   &:hover {
     cursor: pointer;
+    transition: all 0.5s;
   }
 }
 
@@ -18,9 +19,10 @@
   border: 1px solid $text_basic;
   color: $text_basic;
   padding: 26px 100px;
-
+  transition: all 0.5s;
   &:hover {
     color: $button_1;
+    transition: all 0.5s;
   }
 
   &:active {
@@ -36,9 +38,10 @@
   font-size: 28px;
   line-height: 140%;
   border: none;
-
+  transition: all 0.5s;
   &:hover {
     background-color: $btn_hover;
+    transition: all 0.5s;
   }
 
   &:active {
@@ -55,9 +58,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
+  transition: all 0.5s;
   &:hover {
     color: #459eeb;
+    transition: all 0.5s;
   }
 
   &:active {
