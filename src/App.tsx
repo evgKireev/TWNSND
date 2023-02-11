@@ -1,11 +1,14 @@
+import { useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Main from './components/APP/Main'
+import Input, { InputTypeEnum } from './components/UI/Input'
 import Home from './pages/Home'
+import SignUp from './pages/SignUp'
 import './scss/app.scss'
 
 const App = () => {
   return (
-    <div className="conatiner">
+    <div className="container">
       <Routes>
         <Route
           path="/"
@@ -16,6 +19,10 @@ const App = () => {
             element={<Main />}
           />
         </Route>
+        <Route
+          path="signup"
+          element={<SignUp />}
+        />
       </Routes>
     </div>
   )

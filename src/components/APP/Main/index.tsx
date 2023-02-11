@@ -1,9 +1,9 @@
-import Input from '../../UI/Input'
-// import styles from './Main.module.scss'
+
+import styles from './Main.module.scss'
 const Main = () => {
   return (
     <div>
-      <Input />
+      
     </div>
   )
 }

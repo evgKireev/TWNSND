@@ -1,1 +1,96 @@
 @import '../../../scss/vars';
+
+.wrap {
+  position: relative;
+}
+.input {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  color: $border;
+  border: 1px solid $border;
+  border-radius: 5px;
+  height: 80px;
+  width: 100%;
+  outline: none;
+  padding: 26px 24px 25px 50px;
+  &:focus {
+    border: 2px solid $button_1;
+    & ~ .infoPassword {
+      display: block;
+      margin-top: 3px;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 130%;
+      color: $button_1;
+    }
+    & + label {
+      top: 11px;
+      left: initial;
+      right: 40px;
+      font-size: 20px;
+      line-height: 24px;
+    }
+  }
+}
+
+.label {
+  position: absolute;
+  left: 50px;
+  top: 26px;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  color: $border;
+  &::after {
+    margin-left: 8px;
+    content: '*';
+    color: $error;
+    width: 13px;
+    height: 29px;
+  }
+}
+
+.setlabel {
+  top: 6px;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.eye {
+  cursor: pointer;
+  top: 33px;
+  right: 34px;
+  position: absolute;
+  svg {
+    display: block;
+    width: 19px;
+    height: 20px;
+  }
+}
+
+.infoPassword {
+  display: none;
+}
+
+.password {
+  &:focus {
+    & + label {
+      top: 8px;
+      left: 50px;
+    }
+  }
+}
+
+.lastname,
+.ferstname {
+  &:focus {
+    & + label {
+      color: #909473;
+    }
+  }
+}
+
+.eldiz::after {
+  content: '';
+}
