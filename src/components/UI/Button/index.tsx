@@ -6,6 +6,7 @@ import classNames from "classnames";
 export enum ButtonTypes {
    Primary = "primary",
    Secondary = "secondary",
+   Icons = "icons"
 };
 
 type ButtonProps = {

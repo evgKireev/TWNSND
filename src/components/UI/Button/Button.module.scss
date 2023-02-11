@@ -8,7 +8,7 @@
    font-size: 22px;
    line-height: 27px;
    text-align: center;
- 
+
    &:hover {
       cursor: pointer;
    }
@@ -44,6 +44,24 @@
    &:active {
       background-color: $button_1;
       color: $backgr_white;
+   }
+}
+
+.icons {
+   border-radius: 4px;
+   background-color: #0B84EE;
+   width: 56px;
+   height: 56px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+
+   &:hover {
+      color: #459EEB;
+   }
+
+   &:active {
+      background-color: $text_basic;
    }
 }
 
