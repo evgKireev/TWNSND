@@ -1,1 +1,54 @@
 @import '../../../scss/vars';
+
+.button {
+   border-radius: 5px;
+   font-family: 'Inter';
+   font-style: normal;
+   font-weight: 500;
+   font-size: 22px;
+   line-height: 27px;
+   text-align: center;
+ 
+   &:hover {
+      cursor: pointer;
+   }
+}
+
+.primary {
+   border: 1px solid $text_basic;
+   color: $text_basic;
+   padding: 26px 100px;
+
+   &:hover {
+      color: $button_1;
+   }
+
+   &:active {
+      background-color: $button_1;
+      color: $backgr_white;
+   }
+}
+
+.secondary {
+   padding: 13px 78px 16px;
+   background-color: $text_basic;
+   color: $backgr_white;
+   font-size: 28px;
+   line-height: 140%;
+   border: none;
+
+   &:hover {
+      background-color: $btn_hover;
+   }
+
+   &:active {
+      background-color: $button_1;
+      color: $backgr_white;
+   }
+}
+
+.disabled {
+   background-color: $button_disabled;
+   color: $backgr_white;
+   pointer-events: none;
+}
