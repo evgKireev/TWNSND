@@ -19,6 +19,7 @@ type InputType = {
 
 export enum InputTypeEnum {
   Password = 'password',
+  ConfirmPassword = 'confirm',
   Email = 'email',
   LastName = 'lastname',
   FerstName = 'ferstname',
@@ -43,7 +44,7 @@ const Input: React.FC<InputType> = ({
   return (
     <div className={styles.wrap}>
       <input
-        id="text1"
+        id={typeInput}
         onBlur={onBlur}
         onChange={onChange}
         value={value}
@@ -60,7 +61,8 @@ const Input: React.FC<InputType> = ({
           [styles.setlabel]: value,
           [styles.errorLabel]: error,
           [styles.eldiz]: typeInput === 'lastname',
-          [styles.setlabelPassword]: typeInput === 'password' && value,
+          [styles.setlabelPassword]:
+            (typeInput === 'password' || typeInput === 'confirm') && value,
           [styles.setlabelName]:
             (typeInput === 'lastname' || typeInput === 'ferstname') && value,
         })}
@@ -68,7 +70,7 @@ const Input: React.FC<InputType> = ({
       >
         {labelText}
       </label>
-      {typeInput === 'password' && (
+      {(typeInput === 'password' || typeInput === 'confirm') && (
         <div
           className={styles.eye}
           onClick={() => setCheckPassword(!checkPassword)}

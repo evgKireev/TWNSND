@@ -5,6 +5,7 @@ import Button, { ButtonTypes } from './components/UI/Button'
 import Input, { InputTypeEnum } from './components/UI/Input'
 import Home from './pages/Home'
 import SignUp from './pages/SignUp'
+import SignUpHome from './pages/SignUpHome'
 import './scss/app.scss'
 
 const App = () => {
@@ -21,8 +22,12 @@ const App = () => {
           />
         </Route>
         <Route
-          path="signup"
+          path="signup/mail"
           element={<SignUp />}
+        />
+        <Route
+          path="signup"
+          element={<SignUpHome />}
         />
       </Routes>
     </div>
