@@ -1,6 +1,6 @@
 import styles from './Main.module.scss'
 const Main = () => {
-  return <div>123...</div>
+  return <div></div>
 }
 
 export default Main

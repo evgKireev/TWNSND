@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Main from './components/APP/Main'
 import Button, { ButtonTypes } from './components/UI/Button'
@@ -15,14 +14,9 @@ const App = () => {
         <Route
           path="/"
           element={<Home />}
-        >
-          <Route
-            index
-            element={<Main />}
-          />
-        </Route>
+        ></Route>
         <Route
-          path="signup/mail"
+          path="/signup/mail"
           element={<SignUp />}
         />
         <Route
