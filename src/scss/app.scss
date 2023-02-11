@@ -7,16 +7,17 @@ body {
 }
 
 body {
-  font-family: 'Exo 2', Roboto, system-ui, Tahoma, sans-serif;
+  font-family: 'Inter', Roboto, system-ui, Tahoma, sans-serif;
   font-size: 16px;
   line-height: 24px;
-  font-weight: 600;
-  background-color: $bg;
-  color: #fff;
+  font-weight: 500;
+  background-color: white;
 }
 
-.conatiner {
+.container {
   max-width: 1920px;
   padding: 0 64px;
   margin: 0 auto;
 }
+
+
