@@ -7,7 +7,7 @@ type FormContainerType = {
   title: string
   link: string
   textLink: string
-  text: string
+  text?: string
   children: ReactElement
 }
 
@@ -27,7 +27,7 @@ const FormContainer: React.FC<FormContainerType> = ({
       <h1 className={styles.title}>{title}</h1>
       <div
         className={styles.innerLink}
-        onClick={() => navigate('/signup')}
+        onClick={() => navigate(link)}
       >
         {textLink === 'Войти' ? <p className={styles.text}>{text}</p> : null}
         <a
@@ -38,10 +38,10 @@ const FormContainer: React.FC<FormContainerType> = ({
         </a>
       </div>
       <div>{children}</div>
-      <div className={styles.polis}>
+      {/* <div className={styles.polis}>
         Создавая аккаунт, вы соглашаетесь с
         <span>политикой конфиденциальности и условиями использования LOGO</span>
-      </div>
+      </div> */}
     </div>
   )
 }
