@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Button, { ButtonTypes } from '../../components/UI/Button'
 import Input, { InputTypeEnum } from '../../components/UI/Input'
 import FormContainer from '../../layout/FormContainer/index'
@@ -20,7 +20,7 @@ const SignUp = () => {
   >(undefined)
   const [okMail, setOkMail] = useState<boolean | undefined>(undefined)
   const [okName, setOkName] = useState<boolean | undefined>(undefined)
-  const [emailError, setEmailError] = useState('E-mail не может быть пустым')
+  const [emailError, setEmailError] = useState('*E-mail не может быть пустым')
   const [passwordError, setPasswordError] = useState(
     '*Пароль должен содержать минимум 8 символов'
   )
@@ -30,6 +30,14 @@ const SignUp = () => {
   const [ferstNameError, setFerstNameError] = useState(
     '*Это поле обязательно к заполнению'
   )
+  const [validForm, setValidForm] = useState(false)
+  useEffect(() => {
+    if (emailError || passwordError || passwordConfirmError || ferstNameError) {
+      setValidForm(false)
+    } else {
+      setValidForm(true)
+    }
+  }, [emailError, passwordError, passwordConfirmError, ferstNameError])
 
   const blurHandler = (e: React.FocusEvent<HTMLInputElement>) => {
     switch (e.target.name) {
@@ -68,7 +76,7 @@ const SignUp = () => {
       setPasswordError('*Пароль должен содержать минимум 8 символов')
       setOkPassword(false)
       if (!e.target.value) {
-        setPasswordError('Пароль не может быть пустым')
+        setPasswordError('*Пароль не может быть пустым')
         setOkPassword(false)
       }
     } else {
@@ -83,11 +91,11 @@ const SignUp = () => {
       setPasswordConfirmError('*Пароль должен содержать минимум 8 символов')
       setOkPasswordConfirm(false)
       if (!e.target.value) {
-        setPasswordConfirmError('Пароль не может быть пустым')
+        setPasswordConfirmError('*Пароль не может быть пустым')
         setOkPasswordConfirm(false)
       }
       if (e.target.value !== password) {
-        setPasswordConfirmError('Пароль не совпадает')
+        setPasswordConfirmError('*Пароль не совпадает')
         setOkPasswordConfirm(false)
       }
     } else {
@@ -99,7 +107,7 @@ const SignUp = () => {
   const ferstNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFerstName(e.target.value)
     if (!e.target.value) {
-      setFerstNameError('Имя не может быть пустым')
+      setFerstNameError('*Имя не может быть пустым')
       setOkName(false)
     } else {
       setFerstNameError('')
@@ -111,7 +119,7 @@ const SignUp = () => {
     <FormContainer
       logo={'LOGO'}
       title={'Создать аккаунт'}
-      link={''}
+      link={'/signup'}
       textLink={'< Назад'}
       text={''}
     >
@@ -207,6 +215,7 @@ const SignUp = () => {
           <span>Запомнить пароль</span>
         </div>
         <Button
+          disabled={!validForm}
           title={'Создать аккаунт'}
           type={ButtonTypes.Secondary}
         />

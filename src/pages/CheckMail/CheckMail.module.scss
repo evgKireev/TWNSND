@@ -1,0 +1,19 @@
+.text {
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 30px;
+}
+
+@media (max-width: 580px) {
+  .text {
+    font-size: 20px;
+    line-height: 22px;
+  }
+}
+
+@media (max-width: 580px) {
+  .text {
+    font-size: 17px;
+    line-height: 20px;
+  }
+}

@@ -1,8 +1,7 @@
 import React, { FC, ReactElement } from 'react'
-
-import styles from './Button.module.scss'
 import classNames from 'classnames'
-import { GoogleIcon } from '../../../assets/SocialMediaIcons/GoogleIcon'
+import styles from './Button.module.scss'
+
 
 export enum ButtonTypes {
   Primary = 'primary',

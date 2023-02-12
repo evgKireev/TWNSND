@@ -48,3 +48,56 @@
     cursor: pointer;
   }
 }
+
+@media (max-width: 1170px) {
+  .inner {
+    padding: 68px 70px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .inner {
+    padding: 68px 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .inner {
+    border: none;
+    padding: 0 45px;
+  }
+}
+
+@media (max-width: 750px) {
+  .inner {
+    padding: 0 17px;
+  }
+}
+
+@media (max-width: 580px) {
+  .inner {
+    margin: 20px auto;
+  }
+
+  .logo {
+    margin-bottom: 20px;
+  }
+  .title {
+    font-size: 23px;
+    line-height: 28px;
+    margin-bottom: 18px;
+  }
+
+  .innerLink {
+    display: none;
+  }
+
+  .text {
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .link {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}

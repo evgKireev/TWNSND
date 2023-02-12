@@ -3,9 +3,13 @@ import { FacebookIcon } from '../../assets/SocialMediaIcons/FacebookIcon'
 import { GoogleIcon } from '../../assets/SocialMediaIcons/GoogleIcon'
 import { MailIcon } from '../../assets/SocialMediaIcons/MailIcon'
 import { VKIcon } from '../../assets/SocialMediaIcons/VKIcon'
+import { FaFacebookF } from 'react-icons/fa'
 import Button, { ButtonTypes } from '../../components/UI/Button'
+import ButtonIcon, { ButtonTypesIcon } from '../../components/UI/ButtonIcon'
 import FormContainer from '../../layout/FormContainer'
 import styles from './SignUpHome.module.scss'
+import Facebook from '../../assets/SocialMediaIcons/Facebook'
+import Vk from '../../assets/SocialMediaIcons/Vk'
 
 const regUser = [
   { title: 'Зарегистрироваться через Google', icon: <GoogleIcon /> },
@@ -23,7 +27,7 @@ const SignUpHome = () => {
     <FormContainer
       logo={'Logo'}
       title={'Создать аккаунт'}
-      link={''}
+      link={'/signin'}
       textLink={'Войти'}
       text={'Уже есть аккаунт?'}
     >
