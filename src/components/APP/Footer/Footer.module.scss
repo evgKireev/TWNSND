@@ -4,9 +4,18 @@
    border-top: 1px solid #F6F5F5;
    display: flex;
    justify-content: space-between;
+   background-color: black;
 }
 
-.icons {
+.containerIcons {
    display: flex;
    gap: 18px;
+}
+
+.icon {
+   cursor: pointer;
+
+   &:hover {
+      opacity: 0.9;
+   }
 }
