@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
+import Footer from './components/APP/Footer'
 import Main from './components/APP/Main'
 import Button, { ButtonTypes } from './components/UI/Button'
 import Input, { InputTypeEnum } from './components/UI/Input'
@@ -25,6 +26,7 @@ const App = () => {
           element={<SignUp />}
         />
       </Routes>
+      <Footer />
     </div>
   )
 }

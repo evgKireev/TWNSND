@@ -1,5 +1,12 @@
 .footer {
-   text-align: start;
-   padding: 80px 0 64px 62px;
-   color: #afb2b6;
+   width: 100%;
+   padding: 35px 280px 163px;
+   border-top: 1px solid #F6F5F5;
+   display: flex;
+   justify-content: space-between;
+}
+
+.icons {
+   display: flex;
+   gap: 18px;
 }

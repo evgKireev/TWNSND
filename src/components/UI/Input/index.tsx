@@ -48,7 +48,9 @@ const Input: React.FC<InputType> = ({
         className={classNames(styles.input, inputStyles, className, {
           [styles.disabled]: disabled,
         })}
-      ></input>
+      >
+        
+      </input>
       <label
         className={classNames(styles.label, {
           [styles.setlabel]: value,
