@@ -1,7 +1,4 @@
 import { Route, Routes } from 'react-router-dom'
-import Main from './components/APP/Main'
-import Button, { ButtonTypes } from './components/UI/Button'
-import Input, { InputTypeEnum } from './components/UI/Input'
 import Home from './pages/Home'
 import SignUp from './pages/SignUp'
 import SignUpHome from './pages/SignUpHome'
