@@ -1,0 +1,120 @@
+@import '../../../scss/vars';
+
+.userControl {
+  position: absolute;
+  opacity: 0;
+  transform: translateY(-75px);
+  transition: all 0.9s;
+  z-index: -1;
+  right: 0;
+  top: 85px;
+  background-color: $button_disabled;
+  border-radius: 8px;
+  padding: 48px 30px 50px 30px;
+  width: 466px;
+  color: $border;
+  font-weight: 500;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 29px;
+  margin-bottom: 50px;
+}
+
+.userNameOne {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(315deg, #4fa0ff 0%, #83f8ff 100%);
+  border-radius: 50%;
+  color: $bg;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+}
+
+.userName {
+  font-size: 28px;
+  line-height: 30px;
+  margin-bottom: 2px;
+}
+
+.userEmail {
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.logaut {
+  display: flex;
+  align-items: center;
+  gap: 21px;
+  cursor: pointer;
+}
+
+.logautText {
+  font-size: 24px;
+  line-height: 24px;
+}
+
+.logautIcon {
+  svg {
+    height: 40px;
+    width: 35px;
+    color: $button_1;
+  }
+}
+
+.logautQuestionText {
+  font-size: 24px;
+  line-height: 24px;
+  margin-bottom: 36px;
+}
+
+.logautBtn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.btnLogaut {
+  font-size: 22px;
+  line-height: 140%;
+  padding: 13px 37px 16px 35px;
+  background-color: $text;
+  border-radius: 4px;
+  color: $bg;
+  cursor: pointer;
+  border: none;
+  &:hover {
+    background-color: $btn_hover;
+    transition: all 0.5s;
+  }
+  &:active {
+    background-color: $button_1;
+  }
+}
+
+.btnCancel {
+  font-size: 22px;
+  line-height: 140%;
+  padding: 13px 30px 16px 26px;
+  background-color: $backgr_white;
+  border-radius: 4px;
+  color: $text;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.5s;
+  &:hover {
+    border: 2px solid $text;
+    transition: all 0.5s;
+  }
+}
+
+.blockModal {
+  z-index: 1;
+  opacity: 100%;
+  transform: translateY(0);
+  transition: all 0.9s;
+}
