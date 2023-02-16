@@ -74,6 +74,10 @@ color: $text2;
    display: flex;
    flex-direction: column;
    gap: 24px;
+   
+   &:hover {
+      cursor: pointer;
+   }
 }
 
 .footerBottom {
