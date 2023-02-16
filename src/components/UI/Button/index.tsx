@@ -12,7 +12,7 @@ export enum ButtonTypes {
 type ButtonProps = {
    title: string | ReactElement;
    type: ButtonTypes;
-   onClick?: () => void;
+   onClick: () => void;
    className?: string;
    disabled?: boolean;
 };

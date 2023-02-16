@@ -98,7 +98,7 @@ const SignUp = () => {
         labelText={'Имя'}
         name={'Имя'}
         disabled={false}
-        typeInput={InputTypeEnum.FerstName}
+        typeInput={InputTypeEnum.FirstName}
         value={ferstName}
         onChange={(e) => ferstNameHandler(e)}
       />

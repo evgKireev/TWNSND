@@ -1,10 +1,86 @@
-.footer {
+@import '../../../scss/vars';
+
+.container {
    width: 100%;
+   background-color: $black;
+}
+
+.footerTop {
+   padding: 100px 280px;
+}
+
+.textTitle {
+   font-family: 'Inter';
+font-style: normal;
+font-weight: 500;
+font-size: 28px;
+line-height: 140%;
+display: flex;
+align-items: center;
+text-align: center;
+color: $text2;
+margin-bottom: 36px;
+}
+
+.textDesc {
+   font-family: 'Inter';
+font-style: normal;
+font-weight: 500;
+font-size: 24px;
+line-height: 140%;
+display: flex;
+align-items: center;
+text-align: center;
+color: $text2;
+}
+
+.containerInput {
+   display: flex;
+   padding: 28px 0 103px;
+}
+
+.input {
+   width: 410px;
+   border: 1px solid $backgr_white;
+   background-color: transparent;
+   border-radius: 4px 0px 0px 4px;
+   font-family: 'Inter';
+   font-style: normal;
+   font-weight: 500;
+   font-size: 24px;
+   line-height: 140%;
+   color: $text2;
+   padding-left: 28px;
+
+   &::placeholder {
+      color: $text2;
+   }
+}
+
+.button {
+   background: $text2;
+   text-align: center;
+   border: 1px solid $backgr_white;
+   border-radius: 0px 4px 4px 0px;
+}
+
+.lists {
+   display: flex;
+   gap: 50px;
+}
+
+.list {
+   width: 322px;
+   display: flex;
+   flex-direction: column;
+   gap: 24px;
+}
+
+.footerBottom {
    padding: 35px 280px 163px;
-   border-top: 1px solid #F6F5F5;
+   border-top: 1px solid $backgr_white;
    display: flex;
    justify-content: space-between;
-   background-color: black;
 }
 
 .containerIcons {

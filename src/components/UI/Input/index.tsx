@@ -19,7 +19,7 @@ export enum InputTypeEnum {
   Password = 'password',
   Email = 'email',
   LastName = 'lastname',
-  FerstName = 'ferstname',
+  FirstName = 'firstname',
 }
 
 const Input: React.FC<InputType> = ({
@@ -51,6 +51,7 @@ const Input: React.FC<InputType> = ({
       >
         
       </input>
+
       <label
         className={classNames(styles.label, {
           [styles.setlabel]: value,
