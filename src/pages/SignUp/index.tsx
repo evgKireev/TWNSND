@@ -5,16 +5,16 @@ import styles from './SignUp.module.scss'
 const SignUp = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [ferstName, setFerstName] = useState('')
+  const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [emailDirty, setEmailDirty] = useState(false)
   const [passwordDirty, setPasswordDirty] = useState(false)
-  const [ferstNameDirty, setFerstNameDirty] = useState(false)
+  const [firstNameDirty, setFirstNameDirty] = useState(false)
   const [emailError, setEmailError] = useState('E-mail не может быть пустым')
   const [passwordError, setPasswordError] = useState(
     '*Пароль должен содержать минимум 8 символов'
   )
-  const [ferstNameError, setFerstNameError] = useState(
+  const [firstNameError, setFirstNameError] = useState(
     '*Это поле обязательно к заполнению'
   )
 
@@ -27,7 +27,7 @@ const SignUp = () => {
         setEmailDirty(true)
         break
       case 'Имя':
-        setFerstNameDirty(true)
+        setFirstNameDirty(true)
     }
   }
 
@@ -56,8 +56,8 @@ const SignUp = () => {
     }
   }
 
-  const ferstNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFerstName(e.target.value)
+  const firstNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFirstName(e.target.value)
     if (!e.target.value) {
       setPasswordError('Имя не может быть пустым')
     } else {
@@ -99,11 +99,11 @@ const SignUp = () => {
         name={'Имя'}
         disabled={false}
         typeInput={InputTypeEnum.FirstName}
-        value={ferstName}
-        onChange={(e) => ferstNameHandler(e)}
+        value={firstName}
+        onChange={(e) => firstNameHandler(e)}
       />
-      {ferstNameDirty && ferstNameError && (
-        <div className={styles.errorMessage}>{ferstNameError}</div>
+      {firstNameDirty && firstNameError && (
+        <div className={styles.errorMessage}>{firstNameError}</div>
       )}
 
       <Input
