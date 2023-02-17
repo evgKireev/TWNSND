@@ -9,11 +9,21 @@ const registerUserMail = ({
   LastName,
   Country,
 }: UserType) => {
-  return (
-    API.get(`api/Account/Register`),
-    { FirstName, Email, Password, ConfirmPassword, LastName, Country }
-  )
-}
+  const body = JSON.stringify({
+    FirstName,
+    Email,
+    Password,
+    ConfirmPassword,
+    LastName,
+    Country,
+  });
+
+  return API.post(`api/Account/Register`, body, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+};
 
 export default {
   registerUserMail,
