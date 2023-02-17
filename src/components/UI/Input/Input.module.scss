@@ -16,14 +16,6 @@
   padding: 26px 24px 25px 50px;
   &:focus {
     border: 2px solid $button_1;
-    & ~ .infoPassword {
-      display: block;
-      margin-top: 3px;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 130%;
-      color: $button_1;
-    }
     & + label {
       top: 11px;
       left: initial;
@@ -52,11 +44,12 @@
 }
 
 .setlabel {
-  top: 6px;
+  top: 11px;
+  left: initial;
+  right: 40px;
   font-size: 20px;
   line-height: 24px;
 }
-
 .eye {
   cursor: pointer;
   top: 33px;
@@ -69,17 +62,33 @@
   }
 }
 
-.infoPassword {
-  display: none;
-}
-
 .password {
+  font-size: 18px;
+  line-height: 20px;
   &:focus {
     & + label {
-      top: 8px;
+      top: 6px;
       left: 50px;
     }
   }
+}
+
+.confirm {
+  font-size: 18px;
+  line-height: 20px;
+  &:focus {
+    & + label {
+      top: 6px;
+      left: 50px;
+    }
+  }
+}
+
+.setlabelPassword {
+  top: 6px;
+  left: 50px;
+  font-size: 20px;
+  line-height: 24px;
 }
 
 .lastname,
@@ -91,6 +100,85 @@
   }
 }
 
+.setlabelName {
+  color: #909473;
+}
+
 .eldiz::after {
   content: '';
+}
+
+.errorInput {
+  border: 2px solid $error;
+  &:focus {
+    border: 2px solid $error;
+  }
+}
+
+.errorLabel {
+  color: $error;
+}
+
+.okInput {
+  background-color: #cdd8f2;
+  border: 1px solid $button_1;
+}
+
+@media (max-width: 580px) {
+  .input {
+    height: 56px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    padding: 18px 16px 19px 23px;
+    &:focus {
+      & + label {
+        font-size: 14px;
+        line-height: 18px;
+      }
+    }
+  }
+
+  .label {
+    font-size: 16px;
+    line-height: 24px;
+    top: 15px;
+    left: 25px;
+  }
+
+  .password {
+    &:focus {
+      & + label {
+        top: 5px;
+        left: 25px;
+      }
+    }
+  }
+
+  .confirm {
+    &:focus {
+      & + label {
+        top: 5px;
+        left: 25px;
+      }
+    }
+  }
+
+  .setlabel {
+    top: 11px;
+    left: initial;
+    right: 40px;
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  .setlabelPassword {
+    top: 5px;
+    left: 25px;
+  }
+
+  .eye {
+    right: 20px;
+    top: 20px;
+  }
 }

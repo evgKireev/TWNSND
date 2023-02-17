@@ -1,37 +1,39 @@
-import React, { FC, ReactElement } from "react";
-
+import React, { FC, ReactElement } from 'react'
+import classNames from 'classnames'
 import styles from './Button.module.scss'
-import classNames from "classnames";
+
 
 export enum ButtonTypes {
-   Primary = "primary",
-   Secondary = "secondary",
-   Icons = "icons"
-};
+  Primary = 'primary',
+  Secondary = 'secondary',
+  Icons = 'icons',
+}
 
 type ButtonProps = {
-   title: string | ReactElement;
-   type: ButtonTypes;
-   onClick: () => void;
-   className?: string;
-   disabled?: boolean;
-};
+  title: string | ReactElement
+  type: ButtonTypes
+  onClick?: () => void
+  className?: string
+  disabled?: boolean
+  icon?: JSX.Element
+}
 
 const Button: FC<ButtonProps> = (props) => {
-   const { type, title, onClick, className, disabled } = props;
+  const { type, title, onClick, className, disabled, icon } = props
 
-   const buttonClassName = styles[type];
+  const buttonClassName = styles[type]
 
-   return (
-      <div
-         className={classNames(styles.button, buttonClassName, className, {
-            [styles.disabled]: !!disabled,
-         })}
-         onClick={onClick}
-      >
+  return (
+    <div
+      className={classNames(styles.button, buttonClassName, className, {
+        [styles.disabled]: !!disabled,
+      })}
+      onClick={onClick}
+    >
+      {icon}
       {title}
-      </div>
-   );
-};
+    </div>
+  )
+}
 
-export default Button;
+export default Button

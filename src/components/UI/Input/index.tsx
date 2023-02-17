@@ -11,12 +11,15 @@ type InputType = {
   type?: string
   className?: string
   value: string
+  error?: boolean | undefined
+  okValidat?: boolean
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   onBlur: (e: React.FocusEvent<HTMLInputElement>) => void
 }
 
 export enum InputTypeEnum {
   Password = 'password',
+  ConfirmPassword = 'confirm',
   Email = 'email',
   LastName = 'lastname',
   FirstName = 'firstname',
@@ -30,6 +33,8 @@ const Input: React.FC<InputType> = ({
   typeInput,
   value,
   name,
+  error,
+  okValidat,
   onChange,
   onBlur,
 }) => {
@@ -39,7 +44,7 @@ const Input: React.FC<InputType> = ({
   return (
     <div className={styles.wrap}>
       <input
-        id="text1"
+        id={typeInput}
         onBlur={onBlur}
         onChange={onChange}
         value={value}
@@ -47,6 +52,8 @@ const Input: React.FC<InputType> = ({
         type={checkPassword ? 'text' : type}
         className={classNames(styles.input, inputStyles, className, {
           [styles.disabled]: disabled,
+          [styles.errorInput]: error,
+          [styles.okInput]: okValidat,
         })}
       >
         
@@ -55,24 +62,24 @@ const Input: React.FC<InputType> = ({
       <label
         className={classNames(styles.label, {
           [styles.setlabel]: value,
+          [styles.errorLabel]: error,
           [styles.eldiz]: typeInput === 'lastname',
+          [styles.setlabelPassword]:
+            (typeInput === 'password' || typeInput === 'confirm') && value,
+          [styles.setlabelName]:
+            (typeInput === 'lastname' || typeInput === 'ferstname') && value,
         })}
         htmlFor="text1"
       >
         {labelText}
       </label>
-      {typeInput === 'password' && (
+      {(typeInput === 'password' || typeInput === 'confirm') && (
         <div
           className={styles.eye}
           onClick={() => setCheckPassword(!checkPassword)}
         >
           {checkPassword ? <AiFillEyeInvisible /> : <AiFillEye />}
         </div>
-      )}
-      {typeInput === 'password' && (
-        <span className={styles.infoPassword}>
-          *Пароль должен содержать минимум 8 символов
-        </span>
       )}
     </div>
   )
