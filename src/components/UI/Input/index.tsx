@@ -67,7 +67,7 @@ const Input: React.FC<InputType> = ({
           [styles.setlabelPassword]:
             (typeInput === 'password' || typeInput === 'confirm') && value,
           [styles.setlabelName]:
-            (typeInput === 'lastname' || typeInput === 'ferstname') && value,
+            (typeInput === 'lastname' || typeInput === 'firstname') && value,
         })}
         htmlFor="text1"
       >

@@ -13,12 +13,12 @@ const SignUp = () => {
   const { email } = useAppSelector((state) => state.signUpSlice)
   const [password, setPassword] = useState('')
   const [passwordConfirm, setPasswordConfirm] = useState('')
-  const [ferstName, setFerstName] = useState('')
+  const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [emailDirty, setEmailDirty] = useState(false)
   const [passwordDirty, setPasswordDirty] = useState(false)
-  const [passworConfirmdDirty, setPasswordConfirmDirty] = useState(false)
-  const [ferstNameDirty, setFerstNameDirty] = useState(false)
+  const [passwordConfirmDirty, setPasswordConfirmDirty] = useState(false)
+  const [firstNameDirty, setFirstNameDirty] = useState(false)
   const [okPassword, setOkPassword] = useState<boolean | undefined>(undefined)
   const [okPasswordConfirm, setOkPasswordConfirm] = useState<
     boolean | undefined
@@ -56,7 +56,7 @@ const SignUp = () => {
         setEmailDirty(true)
         break
       case 'Имя':
-        setFerstNameDirty(true)
+        setFirstNameDirty(true)
     }
   }
 
@@ -117,8 +117,8 @@ const SignUp = () => {
     }
   }
 
-  const ferstNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFerstName(e.target.value)
+  const firstNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFirstName(e.target.value)
     const re = /^[а-яА-Я]{2}|[a-zA-Z]{2}$/
     if (!re.test(e.target.value)) {
       setFerstNameError('*Имя должно содержать минимум 2 символа')
@@ -137,7 +137,7 @@ const SignUp = () => {
     dispatch(
       registerUser({
         data: {
-          FirstName: ferstName,
+          FirstName: firstName,
           LastName: lastName,
           Email: email,
           Password: password,
@@ -167,13 +167,13 @@ const SignUp = () => {
               labelText={'Имя'}
               name={'Имя'}
               disabled={false}
-              typeInput={InputTypeEnum.FerstName}
-              value={ferstName}
-              onChange={(e) => ferstNameHandler(e)}
-              error={Boolean(ferstNameDirty && ferstNameError)}
+              typeInput={InputTypeEnum.FirstName}
+              value={firstName}
+              onChange={(e) => firstNameHandler(e)}
+              error={Boolean(firstNameDirty && ferstNameError)}
               okValidat={okName}
             />
-            {ferstNameDirty && ferstNameError && (
+            {firstNameDirty && ferstNameError && (
               <div className={styles.errorMessage}>{ferstNameError}</div>
             )}
           </div>
@@ -238,10 +238,10 @@ const SignUp = () => {
             typeInput={InputTypeEnum.ConfirmPassword}
             value={passwordConfirm}
             onChange={(e) => passworwConfirmHandler(e)}
-            error={Boolean(passworConfirmdDirty && passwordConfirmError)}
+            error={Boolean(passwordConfirmDirty && passwordConfirmError)}
             okValidat={okPasswordConfirm}
           />
-          {passworConfirmdDirty && passwordConfirmError && (
+          {passwordConfirmDirty && passwordConfirmError && (
             <div className={styles.errorMessage}>{passwordConfirmError}</div>
           )}
         </div>
