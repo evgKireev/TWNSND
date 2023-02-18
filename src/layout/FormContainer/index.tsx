@@ -25,15 +25,11 @@ const FormContainer: React.FC<FormContainerType> = ({
     <div className={styles.inner}>
       <div className={styles.logo}>{logo}</div>
       <h1 className={styles.title}>{title}</h1>
-      <div
-        className={styles.innerLink}
-        onClick={() => navigate(link)}
-      >
-        {textLink === 'Войти' ? <p className={styles.text}>{text}</p> : null}
-        <a
-          className={styles.link}
-          href={link}
-        >
+      <div className={styles.innerLink} onClick={() => navigate(link)}>
+        {textLink === 'Войти' || 'Зарегистрироваться' ? (
+          <p className={styles.text}>{text}</p>
+        ) : null}
+        <a className={styles.link} href={link}>
           {textLink}
         </a>
       </div>
