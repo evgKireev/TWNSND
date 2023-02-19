@@ -3,7 +3,6 @@ import { all, call, put, takeLatest } from 'redux-saga/effects'
 import {
   ParamsUrlPayloadType,
   SentMailRegisterUser,
-  UserType,
   UserTypePayloadType,
 } from '../../@types/types/auth'
 import {

@@ -1,11 +1,13 @@
 import { useNavigate, useParams } from 'react-router-dom'
 import Button, { ButtonTypes } from '../../components/UI/Button'
+import Loader from '../../components/UI/Loader'
 import FormContainer from '../../layout/FormContainer'
-import { useAppDispatch } from '../../redux/hooks'
+import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { getRegistrationConfirmUser } from '../../redux/SignUser/signUpSlice'
 import styles from './SuccessRegistration.module.scss'
 
 const SuccessRegistration = () => {
+  const { statusRegisterUser } = useAppSelector((state) => state.statusSlice)
   const dispatch = useAppDispatch()
   const { id, email, code } = useParams()
   const navigate = useNavigate()
@@ -17,8 +19,9 @@ const SuccessRegistration = () => {
       })
     )
   }
-
-  return (
+  return statusRegisterUser === 'pending' ? (
+    <Loader />
+  ) : (
     <FormContainer
       logo={''}
       title={'Завершение регистрации'}

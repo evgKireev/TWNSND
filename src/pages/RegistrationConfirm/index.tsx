@@ -1,20 +1,16 @@
-import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 import { API } from '../../@types/constant'
 import Button, { ButtonTypes } from '../../components/UI/Button'
 import Loader from '../../components/UI/Loader'
 import FormContainer from '../../layout/FormContainer'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
-import {
-  getMailRegisterUser,
-  getRegistrationConfirmUser,
-} from '../../redux/SignUser/signUpSlice'
+import { getMailRegisterUser } from '../../redux/SignUser/signUpSlice'
 import styles from './RegistrationConfirm.module.scss'
 
 const RegistrationConfirm = () => {
   const { email, userId } = useAppSelector((state) => state.signUpSlice)
   const { statusRegisterUser } = useAppSelector((state) => state.statusSlice)
   const dispatch = useAppDispatch()
-  const navigate = useNavigate()
   const regisrtationConfirmation = () => {
     dispatch(
       getMailRegisterUser({
@@ -27,6 +23,8 @@ const RegistrationConfirm = () => {
   if (statusRegisterUser === 'pending') {
     return <Loader />
   }
+
+
   return (
     <FormContainer
       logo={''}
