@@ -156,7 +156,7 @@ const SignUp = () => {
           ConfirmPassword: passwordConfirm,
         },
         callback: () => {
-          navigate(`${API}/confirm/password`)
+          navigate(`/confirm/password`)
         },
       })
     )
