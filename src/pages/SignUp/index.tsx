@@ -7,7 +7,6 @@ import Loader from '../../components/UI/Loader'
 import FormContainer from '../../layout/FormContainer/index'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import {
-  getMailRegisterUser,
   getRegisterUser,
   setEmail,
 } from '../../redux/SignUser/signUpSlice'

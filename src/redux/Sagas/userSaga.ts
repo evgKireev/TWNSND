@@ -11,7 +11,11 @@ import {
   getRegistrationConfirmUser,
   setUserId,
 } from '../SignUser/signUpSlice'
-import { setConfirmStatusUser, setStatusUser, setSuccessStatusUser } from '../SignUser/statusSlice'
+import {
+  setConfirmStatusUser,
+  setStatusUser,
+  setSuccessStatusUser,
+} from '../SignUser/statusSlice'
 import API from '../utils/API'
 
 function* registerUserWorker(actions: PayloadAction<UserTypePayloadType>) {
@@ -21,9 +25,10 @@ function* registerUserWorker(actions: PayloadAction<UserTypePayloadType>) {
     API.registerUserMail,
     registerUserData
   )
+  console.log(data)
   if (ok) {
     yield put(setStatusUser('fullfilled'))
-    yield put(setUserId(data.UserId))
+    yield put(setUserId(data.userId))
     callback()
   } else {
     yield put(setStatusUser('regected'))
