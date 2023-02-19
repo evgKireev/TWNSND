@@ -34,14 +34,9 @@ const sentEmailRegisterUser = ({
   Email,
   ReturnUrl,
 }: SentMailRegisterUser) => {
-  const body = JSON.stringify({
-    Email,
-    UserId,
-    ReturnUrl,
-  })
   return API.post(
     `api/Account/SendConfirmationEmail`,
-    { body },
+    { Email, UserId, ReturnUrl },
     {
       headers: {
         'Content-Type': 'application/json',
@@ -51,14 +46,9 @@ const sentEmailRegisterUser = ({
 }
 
 const activateUser = ({ id, email, code }: ParamsUrlType) => {
-  const body = JSON.stringify({
-    id,
-    email,
-    code,
-  })
   return API.post(
     `Account/ConfirmEmail`,
-    { body },
+    { id, email, code },
     {
       headers: {
         'Content-Type': 'application/json',

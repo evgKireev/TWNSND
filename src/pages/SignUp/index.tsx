@@ -162,8 +162,6 @@ const SignUp = () => {
     )
   }
 
-  useEffect(() => {}, [statusRegisterUser])
-
   return statusRegisterUser === 'pending' ? (
     <Loader />
   ) : (

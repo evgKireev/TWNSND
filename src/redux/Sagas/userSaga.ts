@@ -11,7 +11,7 @@ import {
   getRegistrationConfirmUser,
   setUserId,
 } from '../SignUser/signUpSlice'
-import { setStatusUser } from '../SignUser/statusSlice'
+import { setConfirmStatusUser, setStatusUser, setSuccessStatusUser } from '../SignUser/statusSlice'
 import API from '../utils/API'
 
 function* registerUserWorker(actions: PayloadAction<UserTypePayloadType>) {
@@ -32,30 +32,30 @@ function* registerUserWorker(actions: PayloadAction<UserTypePayloadType>) {
 }
 
 function* sentMailRegistrUser(actions: PayloadAction<SentMailRegisterUser>) {
-  yield put(setStatusUser('pending'))
+  yield put(setConfirmStatusUser('pending'))
   const { ok, data, problem } = yield call(
     API.sentEmailRegisterUser,
     actions.payload
   )
   if (ok) {
-    yield put(setStatusUser('fullfilled'))
+    yield put(setConfirmStatusUser('fullfilled'))
   } else {
-    yield put(setStatusUser('regected'))
+    yield put(setConfirmStatusUser('regected'))
   }
 }
 
 function* confirmRegistrUser(actions: PayloadAction<ParamsUrlPayloadType>) {
-  yield put(setStatusUser('pending'))
+  yield put(setSuccessStatusUser('pending'))
   const { data: confirmRegisterUser, callback } = actions.payload
   const { ok, data, problem } = yield call(
     API.activateUser,
     confirmRegisterUser
   )
   if (ok) {
-    yield put(setStatusUser('fullfilled'))
+    yield put(setSuccessStatusUser('fullfilled'))
     callback()
   } else {
-    yield put(setStatusUser('regected'))
+    yield put(setSuccessStatusUser('regected'))
   }
 }
 

@@ -7,7 +7,7 @@ import { getRegistrationConfirmUser } from '../../redux/SignUser/signUpSlice'
 import styles from './SuccessRegistration.module.scss'
 
 const SuccessRegistration = () => {
-  const { statusRegisterUser } = useAppSelector((state) => state.statusSlice)
+  const { statusSuccessUser } = useAppSelector((state) => state.statusSlice)
   const dispatch = useAppDispatch()
   const { id, email, code } = useParams()
   const navigate = useNavigate()
@@ -19,7 +19,7 @@ const SuccessRegistration = () => {
       })
     )
   }
-  return statusRegisterUser === 'pending' ? (
+  return statusSuccessUser === 'pending' ? (
     <Loader />
   ) : (
     <FormContainer

@@ -9,21 +9,20 @@ import styles from './RegistrationConfirm.module.scss'
 
 const RegistrationConfirm = () => {
   const { email, userId } = useAppSelector((state) => state.signUpSlice)
-  const { statusRegisterUser } = useAppSelector((state) => state.statusSlice)
+  const { statusConfirmUser } = useAppSelector((state) => state.statusSlice)
   const dispatch = useAppDispatch()
   const regisrtationConfirmation = () => {
     dispatch(
       getMailRegisterUser({
         Email: email,
         UserId: userId,
-        ReturnUrl: `${API}/confirm/password`,
+        ReturnUrl: `https://localhost:7247/confirm/password`,
       })
     )
   }
-  if (statusRegisterUser === 'pending') {
+  if (statusConfirmUser === 'pending') {
     return <Loader />
   }
-
 
   return (
     <FormContainer
@@ -32,7 +31,7 @@ const RegistrationConfirm = () => {
       link={'/'}
       textLink={'Главная'}
     >
-      {statusRegisterUser === 'fullfilled' ? (
+      {statusConfirmUser === 'fullfilled' ? (
         <div className={styles.title}>
           Пожалуйста, активируйте свою учетную запись, с помощью активации
           ссылки в письме {email}. Пожалуйста, проверьте свою электронную почту.
