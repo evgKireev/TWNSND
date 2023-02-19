@@ -21,7 +21,7 @@ const App = () => {
         <Route path="signin/recovery/passord" element={<RecoveryPassword />} />
         <Route path="confirm/password" element={<RegistrationConfirm />} />
         <Route
-          path="success/:id/:email/:code"
+          path="success/:userId/:email/:code"
           element={<SuccessRegistration />}
         />
       </Routes>
