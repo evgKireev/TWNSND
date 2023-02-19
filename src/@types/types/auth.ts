@@ -14,7 +14,7 @@ export type SentMailRegisterUser = {
 }
 
 export type ParamsUrlType = {
-  id: string | null
+  userId: string | null
   email: string | null
   code: string | null
 }

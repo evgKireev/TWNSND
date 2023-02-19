@@ -19,7 +19,7 @@ const SuccessRegistration = () => {
   const regisrtationConfirmation = () => {
     dispatch(
       getRegistrationConfirmUser({
-        data: { id: userId, email, code },
+        data: { userId, email, code },
         callback: () => navigate('/'),
       })
     )

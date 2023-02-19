@@ -45,10 +45,10 @@ const sentEmailRegisterUser = ({
   )
 }
 
-const activateUser = ({ id, email, code }: ParamsUrlType) => {
+const activateUser = ({ userId, email, code }: ParamsUrlType) => {
   return API.post(
     `Account/ConfirmEmail`,
-    { id, email, code },
+    { userId, email, code },
     {
       headers: {
         'Content-Type': 'application/json',
