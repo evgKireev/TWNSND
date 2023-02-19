@@ -16,7 +16,7 @@ const RegistrationConfirm = () => {
       getMailRegisterUser({
         Email: email,
         UserId: userId,
-        ReturnUrl: `https://localhost:7247/confirm/password`,
+        ReturnUrl: `https://localhost:3000/success/:id/:email/:code`,
       })
     )
   }
