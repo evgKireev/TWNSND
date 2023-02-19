@@ -19,6 +19,11 @@ export type ParamsUrlType = {
   code: string | null
 }
 
+export type SignInType = {
+  email: string
+  password: string
+}
+
 export type UserTypePayloadType = {
   data: UserType
   callback: () => void
@@ -26,5 +31,11 @@ export type UserTypePayloadType = {
 
 export type ParamsUrlPayloadType = {
   data: ParamsUrlType
+  callback: () => void
+}
+
+export type SignInPayloadType = {
+  data: SignInType
+  rememberPassword: boolean
   callback: () => void
 }

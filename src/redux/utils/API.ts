@@ -2,6 +2,7 @@ import { API } from '../../@types/constant'
 import {
   ParamsUrlType,
   SentMailRegisterUser,
+  SignInType,
   UserType,
 } from '../../@types/types/auth'
 
@@ -57,8 +58,39 @@ const activateUser = ({ userId, email, code }: ParamsUrlType) => {
   )
 }
 
+const signInUser = ({
+  email: USER_EMAIL,
+  password: USER_PASSWORD,
+}: SignInType) => {
+  const body = {
+    client_id: 'Test_js_client',
+    scope: 'openid profile TownSend_Backend offline_access',
+    username: USER_EMAIL,
+    password: USER_PASSWORD,
+  }
+  return API.post(
+    'connect/token',
+    { body },
+    {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Cache-Control': 'no-cache',
+      },
+    }
+  )
+}
+
+const getNewAccessToken = (refresh_token: string) => {
+  return API.post(
+    'connect/token?grant_type=refresh_token&client_id=Test_js_client',
+    { refresh_token }
+  )
+}
+
 export default {
   registerUserMail,
   sentEmailRegisterUser,
   activateUser,
+  signInUser,
+  getNewAccessToken
 }

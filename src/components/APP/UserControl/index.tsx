@@ -1,6 +1,8 @@
 import classNames from 'classnames'
 import { useState } from 'react'
 import { FiLogOut } from 'react-icons/fi'
+import { useAppDispatch } from '../../../redux/hooks'
+import { logoutUser } from '../../../redux/SignUser/signInSlice'
 import styles from './UserControl.module.scss'
 
 type UserControlType = {
@@ -9,6 +11,7 @@ type UserControlType = {
 
 const UserControl: React.FC<UserControlType> = ({ openPanel }) => {
   const [logautQuestion, setLogautQuestion] = useState(false)
+  const dispatch = useAppDispatch()
   return (
     <div
       className={classNames(styles.userControl, {
@@ -26,7 +29,12 @@ const UserControl: React.FC<UserControlType> = ({ openPanel }) => {
         <div className={styles.logautQuestion}>
           <div className={styles.logautQuestionText}>Выйти из профиля?</div>
           <div className={styles.logautBtn}>
-            <button className={styles.btnLogaut}>Выйти</button>
+            <button
+              className={styles.btnLogaut}
+              onClick={() => dispatch(logoutUser())}
+            >
+              Выйти
+            </button>
             <button
               className={styles.btnCancel}
               onClick={() => setLogautQuestion(false)}
@@ -36,10 +44,7 @@ const UserControl: React.FC<UserControlType> = ({ openPanel }) => {
           </div>
         </div>
       ) : (
-        <div
-          className={styles.logaut}
-          onClick={() => setLogautQuestion(true)}
-        >
+        <div className={styles.logaut} onClick={() => setLogautQuestion(true)}>
           <div className={styles.logautIcon}>
             <FiLogOut />
           </div>

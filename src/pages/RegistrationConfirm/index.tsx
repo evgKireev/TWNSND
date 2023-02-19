@@ -23,7 +23,6 @@ const RegistrationConfirm = () => {
   if (statusConfirmUser === 'pending') {
     return <Loader />
   }
-
   return (
     <FormContainer
       logo={''}

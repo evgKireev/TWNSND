@@ -1,10 +1,17 @@
 import { PayloadAction } from '@reduxjs/toolkit'
 import { all, call, put, takeLatest } from 'redux-saga/effects'
+import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '../../@types/constant'
 import {
   ParamsUrlPayloadType,
   SentMailRegisterUser,
+  SignInPayloadType,
   UserTypePayloadType,
 } from '../../@types/types/auth'
+import {
+  getSignInUser,
+  logoutUser,
+  setRegisterUser,
+} from '../SignUser/signInSlice'
 import {
   getMailRegisterUser,
   getRegisterUser,
@@ -13,6 +20,7 @@ import {
 } from '../SignUser/signUpSlice'
 import {
   setConfirmStatusUser,
+  setSignInStatusUser,
   setStatusUser,
   setSuccessStatusUser,
 } from '../SignUser/statusSlice'
@@ -64,8 +72,39 @@ function* confirmRegistrUser(actions: PayloadAction<ParamsUrlPayloadType>) {
   }
 }
 
+function* signInUserWorker(actions: PayloadAction<SignInPayloadType>) {
+  yield put(setSignInStatusUser('pending'))
+  const { data: singInUserData, rememberPassword, callback } = actions.payload
+  const { data, ok, problem } = yield call(API.signInUser, singInUserData)
+  if (ok && data) {
+    if (rememberPassword) {
+      localStorage.setItem(ACCESS_TOKEN_KEY, data?.access_token)
+      localStorage.setItem(REFRESH_TOKEN_KEY, data?.refresh_token)
+    } else {
+      sessionStorage.setItem(ACCESS_TOKEN_KEY, data?.access_token)
+      sessionStorage.setItem(REFRESH_TOKEN_KEY, data?.refresh_token)
+    }
+    yield put(setRegisterUser(true))
+    callback()
+    yield put(setSignInStatusUser('fullfilled'))
+  } else {
+    yield put(setSignInStatusUser('rejected'))
+    //TODO записать ошибку в стэйт и вывести
+  }
+}
+
+function* logoutUserWorker() {
+  yield put(setRegisterUser(false))
+  localStorage.removeItem(ACCESS_TOKEN_KEY)
+  localStorage.removeItem(REFRESH_TOKEN_KEY)
+  sessionStorage.removeItem(ACCESS_TOKEN_KEY)
+  sessionStorage.removeItem(REFRESH_TOKEN_KEY)
+}
+
 export default function* userSaga() {
   yield all([takeLatest(getRegisterUser, registerUserWorker)])
   yield all([takeLatest(getMailRegisterUser, sentMailRegistrUser)])
   yield all([takeLatest(getRegistrationConfirmUser, confirmRegistrUser)])
+  yield all([takeLatest(getSignInUser, signInUserWorker)])
+  yield all([takeLatest(logoutUser, logoutUserWorker)])
 }

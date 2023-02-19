@@ -5,6 +5,7 @@ import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md'
 import { useState } from 'react'
 import classNames from 'classnames'
 import UserControl from '../UserControl'
+import {  useAppSelector } from '../../../redux/hooks'
 const naw = [
   'Сервис по подбору решений',
   'Поиск по параметрам',
@@ -12,20 +13,16 @@ const naw = [
   'Блог',
 ]
 const Header = () => {
-  const registrUser = true
+  const { registerUser } = useAppSelector((state) => state.signInSlice)
   const [activeNaw, setActiveNaw] = useState('')
   const [openPanel, setOpenPanel] = useState(false)
-
   return (
     <header className={styles.header}>
       <div className={styles.headerTop}>
         <div className={styles.logo}>
-          <img
-            src={logo}
-            alt="logo"
-          />
+          <img src={logo} alt="logo" />
         </div>
-        {registrUser ? (
+        {registerUser ? (
           <div className={styles.UserPanel}>
             <div className={styles.userName}>A</div>
             <div
@@ -69,10 +66,7 @@ const Header = () => {
           </div>
           <button className={styles.btn}>Выбрать шаблон</button>
         </div>
-        <img
-          src={headerImg}
-          alt="images"
-        />
+        <img src={headerImg} alt="images" />
       </div>
     </header>
   )

@@ -22,7 +22,7 @@ const SuccessRegistration = () => {
     dispatch(
       getRegistrationConfirmUser({
         data: { userId, email, code: formattedCode },
-        callback: () => navigate('/'),
+        callback: () => navigate('signup/mail'),
       })
     )
   }
