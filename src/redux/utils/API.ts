@@ -47,7 +47,7 @@ const sentEmailRegisterUser = ({
 
 const activateUser = ({ userId, email, code }: ParamsUrlType) => {
   return API.post(
-    `Account/ConfirmEmail`,
+    `api/Account/ConfirmEmail`,
     { userId, email, code },
     {
       headers: {

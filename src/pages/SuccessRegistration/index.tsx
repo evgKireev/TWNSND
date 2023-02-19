@@ -13,13 +13,15 @@ const SuccessRegistration = () => {
   const searchParams = new URLSearchParams(location.search)
   const userId = searchParams.get('userId')
   const email = searchParams.get('email')
-  const code = searchParams.get('code')
+  const code = searchParams.get('code');
+  const formattedCode = code ? code.replace(/\s/g, '+') : null;
+  console.log(code);
 
   const navigate = useNavigate()
   const regisrtationConfirmation = () => {
     dispatch(
       getRegistrationConfirmUser({
-        data: { userId, email, code },
+        data: { userId, email, code: formattedCode },
         callback: () => navigate('/'),
       })
     )
