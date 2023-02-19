@@ -43,6 +43,11 @@
   }
 }
 
+.emailInfo {
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 30px;
+}
 @media (max-width: 1024px) {
   .innerName {
     flex-direction: column;

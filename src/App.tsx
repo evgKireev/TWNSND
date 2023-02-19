@@ -1,11 +1,13 @@
 import { Route, Routes } from 'react-router-dom'
 import RecoveryPassword from './pages/ RecoveryPassword'
+import RegistrationConfirm from './pages/RegistrationConfirm'
 import CheckMail from './pages/CheckMail'
 import Home from './pages/Home'
 import SignUp from './pages/SignUp'
 import SignUpHome from './pages/SignUpHome'
 import SignIn from './pages/SingIn'
 import './scss/app.scss'
+import SuccessRegistration from './pages/SuccessRegistration'
 
 const App = () => {
   return (
@@ -17,6 +19,11 @@ const App = () => {
         <Route path="signin" element={<SignIn />} />
         <Route path="signup/mail/check" element={<CheckMail />} />
         <Route path="signin/recovery/passord" element={<RecoveryPassword />} />
+        <Route path="confirm/password" element={<RegistrationConfirm />} />
+        <Route
+          path="success/:id/:email/:code"
+          element={<SuccessRegistration />}
+        />
       </Routes>
     </>
   )

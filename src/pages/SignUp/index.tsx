@@ -1,16 +1,28 @@
+import { divide } from 'lodash'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button, { ButtonTypes } from '../../components/UI/Button'
 import Input, { InputTypeEnum } from '../../components/UI/Input'
+import Loader from '../../components/UI/Loader'
 import FormContainer from '../../layout/FormContainer/index'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
-import { registerUser, setEmail } from '../../redux/SignUser/signUpSlice'
+import {
+  getMailRegisterUser,
+  getRegisterUser,
+  setEmail,
+} from '../../redux/SignUser/signUpSlice'
+import API from '../../redux/utils/API'
 import styles from './SignUp.module.scss'
 
 const SignUp = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const { email } = useAppSelector((state) => state.signUpSlice)
+  const { errorMessagesRegistration } = useAppSelector(
+    (state) => state.signUpSlice
+  )
+  const { statusRegisterUser } = useAppSelector((state) => state.statusSlice)
+  const { userId } = useAppSelector((state) => state.signUpSlice)
   const [password, setPassword] = useState('')
   const [passwordConfirm, setPasswordConfirm] = useState('')
   const [firstName, setFirstName] = useState('')
@@ -135,7 +147,7 @@ const SignUp = () => {
 
   const registerUserHandler = () => {
     dispatch(
-      registerUser({
+      getRegisterUser({
         data: {
           FirstName: firstName,
           LastName: lastName,
@@ -144,13 +156,17 @@ const SignUp = () => {
           ConfirmPassword: passwordConfirm,
         },
         callback: () => {
-          navigate('/signup/mail/check')
+          navigate(`${API}/confirm/password`)
         },
       })
     )
   }
 
-  return (
+  useEffect(() => {}, [statusRegisterUser])
+
+  return statusRegisterUser === 'pending' ? (
+    <Loader />
+  ) : (
     <FormContainer
       logo={'LOGO'}
       title={'Создать аккаунт'}
@@ -203,6 +219,11 @@ const SignUp = () => {
             error={Boolean(emailDirty && emailError)}
             okValidat={okMail}
           />
+          {!!errorMessagesRegistration ? (
+            <div className={styles.errorMessage}>
+              {errorMessagesRegistration}
+            </div>
+          ) : null}
           {emailDirty && emailError && (
             <div className={styles.errorMessage}>{emailError}</div>
           )}

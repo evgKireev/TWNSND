@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import { ReactElement } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styles from './FormContainer.module.scss'
@@ -9,6 +10,7 @@ type FormContainerType = {
   textLink: string
   text?: string
   children: ReactElement
+  className?: string
 }
 
 const FormContainer: React.FC<FormContainerType> = ({
@@ -18,14 +20,20 @@ const FormContainer: React.FC<FormContainerType> = ({
   link,
   textLink,
   text,
+  className,
 }) => {
   const navigate = useNavigate()
 
   return (
-    <div className={styles.inner}>
+    <div className={classNames(styles.inner, className)}>
       <div className={styles.logo}>{logo}</div>
       <h1 className={styles.title}>{title}</h1>
-      <div className={styles.innerLink} onClick={() => navigate(link)}>
+      <div
+        className={classNames(styles.innerLink, {
+          [styles.innerLinkNon]: !text,
+        })}
+        onClick={() => navigate(link)}
+      >
         {textLink === 'Войти' || 'Зарегистрироваться' ? (
           <p className={styles.text}>{text}</p>
         ) : null}
