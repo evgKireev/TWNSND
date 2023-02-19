@@ -14,9 +14,9 @@ export type SentMailRegisterUser = {
 }
 
 export type ParamsUrlType = {
-  id: string | undefined
-  email: string | undefined
-  code: string | undefined
+  id: string | null
+  email: string | null
+  code: string | null
 }
 
 export type UserTypePayloadType = {

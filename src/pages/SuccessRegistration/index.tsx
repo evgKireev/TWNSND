@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import Button, { ButtonTypes } from '../../components/UI/Button'
 import Loader from '../../components/UI/Loader'
 import FormContainer from '../../layout/FormContainer'
@@ -9,12 +9,17 @@ import styles from './SuccessRegistration.module.scss'
 const SuccessRegistration = () => {
   const { statusSuccessUser } = useAppSelector((state) => state.statusSlice)
   const dispatch = useAppDispatch()
-  const { id, email, code } = useParams()
+  const location = useLocation()
+  const searchParams = new URLSearchParams(location.search)
+  const userId = searchParams.get('userId')
+  const email = searchParams.get('email')
+  const code = searchParams.get('code')
+
   const navigate = useNavigate()
   const regisrtationConfirmation = () => {
     dispatch(
       getRegistrationConfirmUser({
-        data: { id, email, code },
+        data: { id: userId, email, code },
         callback: () => navigate('/'),
       })
     )
