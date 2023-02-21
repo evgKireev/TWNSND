@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import RecoveryPassword from './pages/ RecoveryPassword'
 import { Account } from './pages/Account'
+import ChangePassword from './pages/ChangePassword'
 import CheckMail from './pages/CheckMail'
 import Home from './pages/Home'
 import SignUp from './pages/SignUp'
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="account" element={<Account />} />
         <Route path="signup/mail/check" element={<CheckMail />} />
         <Route path="signin/recovery/passord" element={<RecoveryPassword />} />
+        <Route path="signin/recovery/passord/change" element={<ChangePassword />} />
       </Routes>
     </>
   )
