@@ -24,6 +24,11 @@ export type SignInType = {
   password: string
 }
 
+export type ParamsUrlGoggle = {
+  redirectUriGoogle: string
+  code: string
+}
+
 export type UserTypePayloadType = {
   data: UserType
   callback: () => void
@@ -37,5 +42,7 @@ export type ParamsUrlPayloadType = {
 export type SignInPayloadType = {
   data: SignInType
   rememberPassword: boolean
-  callback: () => void
+  callback: (link: string) => void
 }
+
+

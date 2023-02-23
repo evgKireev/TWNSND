@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import {
+  ParamsUrlGoggle,
   ParamsUrlPayloadType,
   SentMailRegisterUser,
   UserType,
@@ -23,6 +24,10 @@ const signUpSlice = createSlice({
   initialState,
   reducers: {
     getRegisterUser: (state, actions: PayloadAction<UserTypePayloadType>) => {},
+    getRegisterUserGoogle: (
+      state,
+      actions: PayloadAction<ParamsUrlGoggle>
+    ) => {},
     getMailRegisterUser: (
       state,
       actions: PayloadAction<SentMailRegisterUser>
@@ -49,6 +54,7 @@ export const {
   getRegistrationConfirmUser,
   setUserId,
   getMailRegisterUser,
+  getRegisterUserGoogle,
 } = signUpSlice.actions
 
 export default signUpSlice.reducer

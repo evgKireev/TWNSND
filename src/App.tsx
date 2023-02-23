@@ -8,11 +8,8 @@ import SignUpHome from './pages/SignUpHome'
 import SignIn from './pages/SingIn'
 import './scss/app.scss'
 import SuccessRegistration from './pages/SuccessRegistration'
-import { useAppSelector } from './redux/hooks'
 
 const App = () => {
-  const { userId } = useAppSelector((state) => state.signUpSlice)
-
   return (
     <>
       <Routes>
@@ -22,10 +19,7 @@ const App = () => {
         <Route path="signin" element={<SignIn />} />
         <Route path="signup/mail/check" element={<CheckMail />} />
         <Route path="signin/recovery/passord" element={<RecoveryPassword />} />
-        <Route
-          path="confirm/password"
-          element={userId ? <RegistrationConfirm /> : <SignUp />}
-        />
+        <Route path="confirm/password" element={<RegistrationConfirm />} />
         <Route path="success" element={<SuccessRegistration />} />
       </Routes>
     </>

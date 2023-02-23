@@ -74,8 +74,8 @@ const SignIn = () => {
         getSignInUser({
           data: { email, password },
           rememberPassword,
-          callback: () => {
-            navigate('/')
+          callback: (link) => {
+            navigate(link)
           },
         })
       )
@@ -103,7 +103,7 @@ const SignIn = () => {
   }
 
   useEffect(() => {
-    if (emailError || passwordError) {
+    if (emailError && passwordError) {
       setValidForm(false)
     } else {
       setValidForm(true)
@@ -156,7 +156,10 @@ const SignIn = () => {
           </div>
         </div>
 
-        <div className={styles.checkbox}>
+        <div
+          className={styles.checkbox}
+          onChange={() => dispatch(setRememberPassword(!rememberPassword))}
+        >
           <input type="checkbox" />
           <span>Запомнить пароль</span>
         </div>

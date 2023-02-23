@@ -1,10 +1,15 @@
 @import '../../scss/vars';
-
+.wrap {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10px;
+}
 .inner {
-  margin: 100px auto 100px;
   border: 1px solid $text_basic;
   border-radius: 5px;
-  max-width: 864px;
+  flex-basis: 864px;
   padding: 68px 101px 68px 99px;
   color: $text_basic;
 }
@@ -39,6 +44,12 @@
   font-size: 24px;
   line-height: 24px;
   color: $button_1;
+}
+
+.linkInner {
+  display: flex;
+  align-items: center;
+  gap: 17px;
 }
 
 .polis {

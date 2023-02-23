@@ -10,7 +10,7 @@ const RecoveryPassword = () => {
     <FormContainer
       logo={'LOGO'}
       title={'Восстановление пароля'}
-      textLink={'< Назад'}
+      textLink={'Назад'}
       link={'/signin'}
     >
       <>

@@ -58,7 +58,6 @@ const Input: React.FC<InputType> = ({
       >
         
       </input>
-
       <label
         className={classNames(styles.label, {
           [styles.setlabel]: value,

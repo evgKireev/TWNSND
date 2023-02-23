@@ -10,13 +10,14 @@ import styles from './RegistrationConfirm.module.scss'
 const RegistrationConfirm = () => {
   const { email, userId } = useAppSelector((state) => state.signUpSlice)
   const { statusConfirmUser } = useAppSelector((state) => state.statusSlice)
+
   const dispatch = useAppDispatch()
   const regisrtationConfirmation = () => {
     dispatch(
       getMailRegisterUser({
         Email: email,
         UserId: userId,
-        ReturnUrl: `http://localhost:5003/success`,
+        ReturnUrl: `http://localhost:3000/success`,
       })
     )
   }
@@ -31,15 +32,15 @@ const RegistrationConfirm = () => {
       textLink={'Главная'}
     >
       {statusConfirmUser === 'fullfilled' ? (
-        <div className={styles.title}>
+        <div className={styles.text}>
           Пожалуйста, активируйте свою учетную запись, с помощью активации
           ссылки в письме {email}. Пожалуйста, проверьте свою электронную почту.
         </div>
       ) : (
         <div>
-          <div className={styles.title}>
+          <div className={styles.text}>
             Для дальнейшей регистрации, Вам необходимо активировать ссылку,
-            которая будет отправлена на Вашу эоектронную почту:{email}.
+            которая будет отправлена на Вашу эоектронную почту {email}.
           </div>
           <Button
             title={'Активировать'}

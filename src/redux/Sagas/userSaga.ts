@@ -2,6 +2,7 @@ import { PayloadAction } from '@reduxjs/toolkit'
 import { all, call, put, takeLatest } from 'redux-saga/effects'
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '../../@types/constant'
 import {
+  ParamsUrlGoggle,
   ParamsUrlPayloadType,
   SentMailRegisterUser,
   SignInPayloadType,
@@ -15,12 +16,15 @@ import {
 import {
   getMailRegisterUser,
   getRegisterUser,
+  getRegisterUserGoogle,
   getRegistrationConfirmUser,
+  setEmail,
   setUserId,
 } from '../SignUser/signUpSlice'
 import {
   setConfirmStatusUser,
   setSignInStatusUser,
+  setSignInStatusUserGoogle,
   setStatusUser,
   setSuccessStatusUser,
 } from '../SignUser/statusSlice'
@@ -33,7 +37,6 @@ function* registerUserWorker(actions: PayloadAction<UserTypePayloadType>) {
     API.registerUserMail,
     registerUserData
   )
-  console.log(data)
   if (ok) {
     yield put(setStatusUser('fullfilled'))
     yield put(setUserId(data.userId))
@@ -85,11 +88,33 @@ function* signInUserWorker(actions: PayloadAction<SignInPayloadType>) {
       sessionStorage.setItem(REFRESH_TOKEN_KEY, data?.refresh_token)
     }
     yield put(setRegisterUser(true))
-    callback()
+    callback('/')
     yield put(setSignInStatusUser('fullfilled'))
   } else {
     yield put(setSignInStatusUser('rejected'))
+    if (data.error_description === 'Email not confirmed') {
+      console.log(data)
+      yield put(setUserId(data.user_id))
+      yield put(setEmail(data.email))
+      callback('/confirm/password')
+    }
     //TODO записать ошибку в стэйт и вывести
+  }
+}
+
+function* registerUserGoogleWorker(actions: PayloadAction<ParamsUrlGoggle>) {
+  yield put(setSignInStatusUserGoogle('pending'))
+  const { ok, data, problem } = yield call(
+    API.registerUserGoogle,
+    actions.payload
+  )
+  if (ok) {
+    yield put(setSignInStatusUserGoogle('fullfilled'))
+    localStorage.setItem(ACCESS_TOKEN_KEY, data?.access_token)
+    localStorage.setItem(REFRESH_TOKEN_KEY, data?.refresh_token)
+  } else {
+    yield put(setSignInStatusUserGoogle('regected'))
+    console.log(problem) //TODO записать оштбку google в стэйт
   }
 }
 
@@ -107,4 +132,5 @@ export default function* userSaga() {
   yield all([takeLatest(getRegistrationConfirmUser, confirmRegistrUser)])
   yield all([takeLatest(getSignInUser, signInUserWorker)])
   yield all([takeLatest(logoutUser, logoutUserWorker)])
+  yield all([takeLatest(getRegisterUserGoogle, registerUserGoogleWorker)])
 }

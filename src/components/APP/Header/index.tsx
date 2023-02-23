@@ -5,7 +5,8 @@ import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md'
 import { useState } from 'react'
 import classNames from 'classnames'
 import UserControl from '../UserControl'
-import {  useAppSelector } from '../../../redux/hooks'
+import { useAppSelector } from '../../../redux/hooks'
+import { useNavigate } from 'react-router-dom'
 const naw = [
   'Сервис по подбору решений',
   'Поиск по параметрам',
@@ -13,6 +14,7 @@ const naw = [
   'Блог',
 ]
 const Header = () => {
+  const navigate = useNavigate()
   const { registerUser } = useAppSelector((state) => state.signInSlice)
   const [activeNaw, setActiveNaw] = useState('')
   const [openPanel, setOpenPanel] = useState(false)
@@ -35,8 +37,18 @@ const Header = () => {
           </div>
         ) : (
           <div className={styles.innerControl}>
-            <button className={styles.registerBtn}>Зарегистрироваться</button>
-            <button className={styles.loginBtn}>Войти</button>
+            <button
+              className={styles.registerBtn}
+              onClick={() => navigate('/signup')}
+            >
+              Зарегистрироваться
+            </button>
+            <button
+              className={styles.loginBtn}
+              onClick={() => navigate('/signin')}
+            >
+              Войти
+            </button>
           </div>
         )}
       </div>
