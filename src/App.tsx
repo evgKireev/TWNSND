@@ -6,9 +6,11 @@ import Home from './pages/Home'
 import SignUp from './pages/SignUp'
 import SignUpHome from './pages/SignUpHome'
 import SignIn from './pages/SingIn'
-import './scss/app.scss'
 import SuccessRegistration from './pages/SuccessRegistration'
 import CheckPasswordSocial from './pages/CheckPasswordSocial'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import './scss/app.scss'
 
 const App = () => {
   return (
@@ -24,6 +26,7 @@ const App = () => {
         <Route path="success" element={<SuccessRegistration />} />
         <Route path="check/password/social" element={<CheckPasswordSocial />} />
       </Routes>
+      <ToastContainer position="bottom-right" />
     </>
   )
 }

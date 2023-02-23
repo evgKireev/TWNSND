@@ -63,7 +63,7 @@ const signInUser = ({
   email: USER_EMAIL,
   password: USER_PASSWORD,
 }: SignInType) => {
-  const body = `client_id=Test_js_client&scope=openid profile TownSend_Backend offline_access&grant_type=password&username=${USER_EMAIL}&password=${USER_PASSWORD}`
+  const body = `client_id=Test_js_client&scope=openid profile TownSend_Backend offline_access IdentityServerApi&grant_type=password&username=${USER_EMAIL}&password=${USER_PASSWORD}`
   return API.post('connect/token', body, {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
@@ -86,9 +86,9 @@ const registerUserGoogle = ({
   localPassword,
 }: ParamsUrlGoogle) => {
   const body =
-    localEmail && localPassword
-      ? `client_id=Test_js_client&scope=openid profile TownSend_Backend offline_access&grant_type=google_auth&code=${code}&return_url=${redirectUriGoogle}`
-      : `client_id=Test_js_client&scope=openid profile TownSend_Backend offline_access&grant_type=google_auth&code=${code}&return_url=${redirectUriGoogle}&localEmail=${localEmail}&localPassword=${localPassword}`
+    !localEmail && !localPassword
+      ? `client_id=Test_js_client&scope=openid profile TownSend_Backend offline_access IdentityServerApi&grant_type=google_auth&code=${code}&return_url=${redirectUriGoogle}`
+      : `client_id=Test_js_client&scope=openid profile TownSend_Backend offline_access IdentityServerApi&grant_type=google_auth&code=${code}&return_url=${redirectUriGoogle}&localEmail=${localEmail}&localPassword=${localPassword}`
   return API_GOOGLE.post('connect/token', body, {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',

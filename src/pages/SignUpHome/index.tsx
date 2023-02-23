@@ -8,7 +8,7 @@ import FormContainer from '../../layout/FormContainer'
 import styles from './SignUpHome.module.scss'
 
 const redirectUriGoogle = 'http://localhost:3000'
-const stateGoogle = '1234567890' // принципиально ли рандом?
+const stateGoogle = '1234567890'
 const googleId =
   '923826205735-l644r1ke16c87a4agdbs97ceqdmlesb6.apps.googleusercontent.com'
 const regUser = [

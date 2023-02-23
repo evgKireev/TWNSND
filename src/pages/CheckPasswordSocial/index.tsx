@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button, { ButtonTypes } from '../../components/UI/Button'
 import Input, { InputTypeEnum } from '../../components/UI/Input'
+import Loader from '../../components/UI/Loader'
 import FormContainer from '../../layout/FormContainer'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { getRegisterUserGoogle } from '../../redux/SignUser/signUpSlice'
@@ -11,6 +12,9 @@ const CheckPasswordSocial = () => {
   const redirectUriGoogle = 'http://localhost:3000'
   const { email } = useAppSelector((state) => state.signUpSlice)
   const { code } = useAppSelector((state) => state.signUpSlice)
+  const { statusRegisterUserGoogle } = useAppSelector(
+    (state) => state.statusSlice
+  )
   const [password, setPassword] = useState('')
   const [passwordDirty, setPasswordDirty] = useState(false)
   const [okPassword, setOkPassword] = useState<boolean | undefined>(undefined)
@@ -66,8 +70,9 @@ const CheckPasswordSocial = () => {
       setValidForm(true)
     }
   }, [passwordError])
-
-  return (
+  return statusRegisterUserGoogle === 'pending' ? (
+    <Loader />
+  ) : (
     <FormContainer
       logo={'Logo'}
       title={'Проверка пароля'}
@@ -76,8 +81,8 @@ const CheckPasswordSocial = () => {
     >
       <div className={styles.inner}>
         <div>
-          Аккаунт с email aliaksei.200351@gmail.com уже существует. Войдите в
-          него, чтобы привязать Google.
+          Аккаунт с email {email} уже существует. Войдите в него, чтобы
+          привязать Google.
         </div>
         <div className={styles.label}>
           <Input

@@ -1,4 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit'
+import { toast } from 'react-toastify'
 import { all, call, put, takeLatest } from 'redux-saga/effects'
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '../../@types/constant'
 import {
@@ -43,16 +44,13 @@ function* registerUserWorker(actions: PayloadAction<UserTypePayloadType>) {
     callback()
   } else {
     yield put(setStatusUser('regected'))
-    console.log(problem) //TODO записать оштбку майла в стэйт
+    toast.error('Указанный Email адрес уже занят')
   }
 }
 
 function* sentMailRegistrUser(actions: PayloadAction<SentMailRegisterUser>) {
   yield put(setConfirmStatusUser('pending'))
-  const { ok, data, problem } = yield call(
-    API.sentEmailRegisterUser,
-    actions.payload
-  )
+  const { ok } = yield call(API.sentEmailRegisterUser, actions.payload)
   if (ok) {
     yield put(setConfirmStatusUser('fullfilled'))
   } else {
@@ -96,8 +94,11 @@ function* signInUserWorker(actions: PayloadAction<SignInPayloadType>) {
       yield put(setUserId(data.user_id))
       yield put(setEmail(data.email))
       callback('/confirm/password')
+    } else if (data.error_description === 'Invalid username or password') {
+      toast.error('Неверный пароль или email')
+    } else if (data.error_description === 'Email not confirmed') {
+      toast.error('Email не подтвержден')
     }
-    //TODO записать ошибку в стэйт и вывести
   }
 }
 
@@ -118,7 +119,7 @@ function* registerUserGoogleWorker(
     } else {
       yield put(setSignInStatusUserGoogle('regected'))
       if (data.error_description === 'local_account_exist') {
-        yield put(setEmail(data.email))
+        yield put(setEmail(data.Email))
         callback('/check/password/social')
       }
     }
@@ -134,11 +135,11 @@ function* registerUserGoogleWorker(
     } else {
       yield put(setSignInStatusUserGoogle('regected'))
       if (data.error_description === 'wrong_local_email') {
-        console.log('Тут что нибудь придумаем при проблеме емайд')
+        toast.error('Неверный e-mail')
       } else if (data.error_description === 'wrong_local_password') {
-        console.log('Тут что нибудь придумаем при проблеме паспорта')
+        toast.error('Неверный пароль')
       } else {
-        console.log('тут вообще что то не так и нужно тоже придумать')
+        toast.error('Что-то пошло не так. Попробуйте еще раз!')
       }
     }
   }
