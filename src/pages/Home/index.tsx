@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import Footer from '../../components/APP/Footer'
 import Header from '../../components/APP/Header'
 import Loader from '../../components/UI/Loader'
@@ -17,13 +17,20 @@ const Home = () => {
     (state) => state.statusSlice
   )
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
   useEffect(() => {
     if (state != stateGoogle) {
       console.log('Error') // что тут показать аользователю?
       return
     } else if (state && code) {
-      console.log(state, code)
-      dispatch(getRegisterUserGoogle({ redirectUriGoogle, code }))
+      dispatch(
+        getRegisterUserGoogle({
+          data: { redirectUriGoogle, code },
+          callback: (link) => {
+            navigate(link)
+          },
+        })
+      )
     }
   }, [])
 

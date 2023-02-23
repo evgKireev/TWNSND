@@ -1,6 +1,6 @@
 import { API, API_GOOGLE } from '../../@types/constant'
 import {
-  ParamsUrlGoggle,
+  ParamsUrlGoogle,
   ParamsUrlType,
   SentMailRegisterUser,
   SignInType,
@@ -79,8 +79,16 @@ const getNewAccessToken = (refresh_token: string) => {
   )
 }
 
-const registerUserGoogle = ({ code, redirectUriGoogle }: ParamsUrlGoggle) => {
-  const body = `client_id=Test_js_client&scope=openid profile TownSend_Backend offline_access&grant_type=google_auth&code=${code}&return_url=${redirectUriGoogle}&localEmail=&localPassword=`
+const registerUserGoogle = ({
+  code,
+  redirectUriGoogle,
+  localEmail,
+  localPassword,
+}: ParamsUrlGoogle) => {
+  const body =
+    localEmail && localPassword
+      ? `client_id=Test_js_client&scope=openid profile TownSend_Backend offline_access&grant_type=google_auth&code=${code}&return_url=${redirectUriGoogle}`
+      : `client_id=Test_js_client&scope=openid profile TownSend_Backend offline_access&grant_type=google_auth&code=${code}&return_url=${redirectUriGoogle}&localEmail=${localEmail}&localPassword=${localPassword}`
   return API_GOOGLE.post('connect/token', body, {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',

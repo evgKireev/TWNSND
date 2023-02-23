@@ -2,9 +2,9 @@ import { PayloadAction } from '@reduxjs/toolkit'
 import { all, call, put, takeLatest } from 'redux-saga/effects'
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '../../@types/constant'
 import {
-  ParamsUrlGoggle,
   ParamsUrlPayloadType,
   SentMailRegisterUser,
+  SignInGooglePayloadType,
   SignInPayloadType,
   UserTypePayloadType,
 } from '../../@types/types/auth'
@@ -93,7 +93,6 @@ function* signInUserWorker(actions: PayloadAction<SignInPayloadType>) {
   } else {
     yield put(setSignInStatusUser('rejected'))
     if (data.error_description === 'Email not confirmed') {
-      console.log(data)
       yield put(setUserId(data.user_id))
       yield put(setEmail(data.email))
       callback('/confirm/password')
@@ -102,19 +101,46 @@ function* signInUserWorker(actions: PayloadAction<SignInPayloadType>) {
   }
 }
 
-function* registerUserGoogleWorker(actions: PayloadAction<ParamsUrlGoggle>) {
-  yield put(setSignInStatusUserGoogle('pending'))
-  const { ok, data, problem } = yield call(
-    API.registerUserGoogle,
-    actions.payload
-  )
-  if (ok) {
-    yield put(setSignInStatusUserGoogle('fullfilled'))
-    localStorage.setItem(ACCESS_TOKEN_KEY, data?.access_token)
-    localStorage.setItem(REFRESH_TOKEN_KEY, data?.refresh_token)
+function* registerUserGoogleWorker(
+  actions: PayloadAction<SignInGooglePayloadType>
+) {
+  const { data: dataSignGoogle, callback } = actions.payload
+  const { localEmail, localPassword } = dataSignGoogle
+  if (!localEmail && !localPassword) {
+    yield put(setSignInStatusUserGoogle('pending'))
+    const { ok, data } = yield call(API.registerUserGoogle, dataSignGoogle)
+    if (ok) {
+      yield put(setSignInStatusUserGoogle('fullfilled'))
+      localStorage.setItem(ACCESS_TOKEN_KEY, data?.access_token)
+      localStorage.setItem(REFRESH_TOKEN_KEY, data?.refresh_token)
+      yield put(setRegisterUser(true))
+      callback('/')
+    } else {
+      yield put(setSignInStatusUserGoogle('regected'))
+      if (data.error_description === 'local_account_exist') {
+        yield put(setEmail(data.email))
+        callback('/check/password/social')
+      }
+    }
   } else {
-    yield put(setSignInStatusUserGoogle('regected'))
-    console.log(problem) //TODO записать оштбку google в стэйт
+    yield put(setSignInStatusUserGoogle('pending'))
+    const { ok, data } = yield call(API.registerUserGoogle, dataSignGoogle)
+    if (ok) {
+      yield put(setSignInStatusUserGoogle('fullfilled'))
+      localStorage.setItem(ACCESS_TOKEN_KEY, data?.access_token)
+      localStorage.setItem(REFRESH_TOKEN_KEY, data?.refresh_token)
+      yield put(setRegisterUser(true))
+      callback('/')
+    } else {
+      yield put(setSignInStatusUserGoogle('regected'))
+      if (data.error_description === 'wrong_local_email') {
+        console.log('Тут что нибудь придумаем при проблеме емайд')
+      } else if (data.error_description === 'wrong_local_password') {
+        console.log('Тут что нибудь придумаем при проблеме паспорта')
+      } else {
+        console.log('тут вообще что то не так и нужно тоже придумать')
+      }
+    }
   }
 }
 

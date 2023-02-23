@@ -8,6 +8,7 @@ import SignUpHome from './pages/SignUpHome'
 import SignIn from './pages/SingIn'
 import './scss/app.scss'
 import SuccessRegistration from './pages/SuccessRegistration'
+import CheckPasswordSocial from './pages/CheckPasswordSocial'
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="signin/recovery/passord" element={<RecoveryPassword />} />
         <Route path="confirm/password" element={<RegistrationConfirm />} />
         <Route path="success" element={<SuccessRegistration />} />
+        <Route path="check/password/social" element={<CheckPasswordSocial />} />
       </Routes>
     </>
   )

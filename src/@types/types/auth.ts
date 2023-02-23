@@ -24,9 +24,11 @@ export type SignInType = {
   password: string
 }
 
-export type ParamsUrlGoggle = {
+export type ParamsUrlGoogle = {
   redirectUriGoogle: string
   code: string
+  localEmail?: string
+  localPassword?: string
 }
 
 export type UserTypePayloadType = {
@@ -45,4 +47,7 @@ export type SignInPayloadType = {
   callback: (link: string) => void
 }
 
-
+export type SignInGooglePayloadType = {
+  data: ParamsUrlGoogle
+  callback: (link: string) => void
+}
