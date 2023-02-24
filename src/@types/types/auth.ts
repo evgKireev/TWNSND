@@ -32,7 +32,7 @@ export type ParamsUrlGoogle = {
 }
 
 export type RestorePassword = {
-  Emai: string
+  Email: string
   ReturnUrl: string
 }
 

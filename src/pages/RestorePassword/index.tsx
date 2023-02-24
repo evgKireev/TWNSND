@@ -49,7 +49,7 @@ const RestorePassword = () => {
     if (email) {
       dispatch(
         getRestorePassword({
-          Emai: email,
+          Email: email,
           ReturnUrl: `${MY_URL}/signin/restore/passord/change`,
         })
       )
