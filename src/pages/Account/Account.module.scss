@@ -1,0 +1,237 @@
+@import '../../scss/vars';
+
+.wrapper {
+  position: relative;
+  max-width: 1438px;
+  width: 100%;
+  padding: 0 1px 200px 1px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-block: 110px;
+  margin-bottom: 48px;
+}
+
+.logo {
+  padding: 10px 55px;
+  margin-right: 93px;
+  background: $white;
+}
+
+.menu {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  font-size: 28px;
+  line-height: 30px;
+}
+
+.userLogo {
+  height: 60px;
+  width: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(315deg, #000000 27.6%, #8bb1ea 100%);
+  border-radius: 50%;
+  color: $white;
+  font-size: 28px;
+}
+
+.navigation {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  margin-bottom: 267px;
+}
+
+.link {
+  border-right: 2px solid #737475;
+  color: $text2;
+  &:last-child {
+    border-right: none;
+  }
+}
+
+.activeLink {
+  border: 2px solid #b9dcf0;
+  color: $blue;
+}
+
+.item {
+  padding: 60px 30px;
+  background: $total_black;
+  height: 100%;
+  font-size: 24px;
+  line-height: 24px;
+  letter-spacing: 0.2px;
+  color: inherit;
+  border: none;
+}
+
+.avatarContainer {
+  display: flex;
+  margin-bottom: 115px;
+}
+
+.avatar {
+  margin-right: 35px;
+  //   width: 331px;
+  //   height: 331px;
+  //   border-radius: 50%;
+  // TODO Добавить стили после того, как дизайнеры дадут квадратную картинку
+}
+
+.avatarButton {
+  padding: 18px 47px 18px 32px;
+  margin-block: 132px 36px;
+  background: $light_blue;
+  border-radius: 15px;
+  border: none;
+  font-size: 28px;
+  line-height: 30px;
+}
+
+.editContainer {
+  display: flex;
+  align-items: center;
+}
+
+.text {
+  margin-right: 10px;
+  font-size: 24px;
+  line-height: 24px;
+  letter-spacing: 0.2px;
+  color: $text;
+}
+
+.informationContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 76px;
+  margin-bottom: 77px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  max-width: 331px;
+  width: 100%;
+  margin-right: 35px;
+  font-size: 32px;
+  line-height: 39px;
+  color: $text;
+}
+
+.inputsWrapper {
+  max-width: 707px;
+  width: 100%;
+  display: flex;
+  gap: 22px;
+  margin-right: 24px;
+}
+
+.inputName {
+  width: 50%;
+}
+
+.inputsGeneral {
+  padding: 16px 18px;
+  background: $white;
+  border: 1px solid #7bb3d2;
+  border-radius: 10px;
+  font-size: 32px;
+  line-height: 39px;
+  color: $text;
+  outline: none;
+
+  &:focus {
+    border: 1px solid #3d6c97;
+  }
+}
+
+.inputError {
+  border: 1px solid $error;
+}
+
+.inputOk {
+  border: 1px solid #34a853;
+}
+
+.inputEmail {
+  width: 100%;
+}
+
+.select {
+  max-width: 707px;
+  width: 100%;
+  padding: 16px 18px;
+  background-color: $white;
+  border: 1px solid #7bb3d2;
+  border-radius: 10px;
+  font-size: 32px;
+  line-height: 39px;
+  color: $text;
+  outline: none;
+  appearance: none;
+  background-image: url('../../assets/AccountIcons/arrow.svg');
+  background-repeat: no-repeat;
+  background-position-x: calc(100% - 81px);
+  background-position-y: 30px;
+}
+
+.badgesContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(293px, 1fr));
+  grid-gap: 85px;
+  margin-block: 65px 77px;
+}
+
+.badgeWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.badge {
+  text-align: center;
+  width: 218px;
+  padding: 12px 20px;
+  margin-right: 36px;
+  border-radius: 5px;
+  background: $light_blue;
+  font-size: 32px;
+  line-height: 39px;
+  color: $text;
+}
+
+.addBadge {
+  width: 218px;
+  padding: 12px 20px;
+  background: $gray;
+  border: 1px solid $total_black;
+  border-radius: 10px;
+  font-size: 28px;
+  line-height: 30px;
+  color: $white;
+}
+
+.save {
+  position: absolute;
+  right: 65px;
+  padding: 20px 94.5px;
+  border-radius: 15px;
+  background: $total_black;
+  color: #f5f3f3;
+  font-size: 28px;
+  line-height: 30px;
+
+  &:active {
+    background: #737475;
+  }
+}
