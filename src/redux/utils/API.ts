@@ -97,6 +97,14 @@ const registerUserGoogle = ({
   })
 }
 
+const getUserData = (token: string) => {
+  return API.get('/api/user/GetCustomer', {
+    headers: {
+      Authorization: `Bearer {${token}}`,
+    },
+  })
+}
+
 export default {
   registerUserMail,
   sentEmailRegisterUser,
@@ -104,4 +112,5 @@ export default {
   signInUser,
   getNewAccessToken,
   registerUserGoogle,
+  getUserData,
 }
