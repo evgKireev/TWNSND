@@ -8,11 +8,17 @@ import ButtonIcon, { ButtonTypesIcon } from '../../components/UI/ButtonIcon'
 import Input, { InputTypeEnum } from '../../components/UI/Input'
 import { useWindowSize } from '../../hooks/useWindowsSize'
 import FormContainer from '../../layout/FormContainer/index'
+import { useAppDispatch, useAppSelector } from '../../redux/hooks'
+import {
+  getSignInUser,
+  setRememberPassword,
+} from '../../redux/SignUser/signInSlice'
 import styles from './SignIn.module.scss'
 
 const SignIn = () => {
   const { width = 0 } = useWindowSize()
   const navigate = useNavigate()
+  const dispatch = useAppDispatch()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [okPassword, setOkPassword] = useState<boolean | undefined>(undefined)
@@ -22,14 +28,7 @@ const SignIn = () => {
   const [emailDirty, setEmailDirty] = useState(false)
   const [passwordDirty, setPasswordDirty] = useState(false)
   const [validForm, setValidForm] = useState(false)
-
-  useEffect(() => {
-    if (emailError || passwordError) {
-      setValidForm(false)
-    } else {
-      setValidForm(true)
-    }
-  }, [emailError, passwordError])
+  const { rememberPassword } = useAppSelector((state) => state.signInSlice)
 
   const blurHandler = (e: React.FocusEvent<HTMLInputElement>) => {
     switch (e.target.name) {
@@ -60,7 +59,6 @@ const SignIn = () => {
 
   const passworwHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value)
-
     if (!e.target.value) {
       setPasswordError('*Пароль не может быть пустым')
       setOkPassword(false)
@@ -72,7 +70,16 @@ const SignIn = () => {
 
   const onSubmit = () => {
     if (email && password) {
-      // TODO: отправляем данные
+      dispatch(
+        getSignInUser({
+          data: { email, password },
+          rememberPassword,
+          callback: (link) => {
+            navigate(link)
+          },
+        })
+      )
+      dispatch(setRememberPassword(true))
     } else {
       if (!email && !password) {
         setPasswordError('*Пароль не может быть пустым')
@@ -94,6 +101,14 @@ const SignIn = () => {
       }
     }
   }
+
+  useEffect(() => {
+    if (emailError && passwordError) {
+      setValidForm(false)
+    } else {
+      setValidForm(true)
+    }
+  }, [emailError, passwordError])
 
   return (
     <FormContainer
@@ -141,7 +156,10 @@ const SignIn = () => {
           </div>
         </div>
 
-        <div className={styles.checkbox}>
+        <div
+          className={styles.checkbox}
+          onChange={() => dispatch(setRememberPassword(!rememberPassword))}
+        >
           <input type="checkbox" />
           <span>Запомнить пароль</span>
         </div>
@@ -179,7 +197,6 @@ const SignIn = () => {
             icon={<Vk />}
           />
         </div>
-
         <div className={styles.innerLink}>
           <p className={styles.textLink}>Забыли пароль?</p>
           <div

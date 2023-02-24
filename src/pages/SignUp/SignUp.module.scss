@@ -1,13 +1,5 @@
 @import '../../scss/vars';
 
-.errorMessage {
-  margin-top: 8px;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 130%;
-  color: $error;
-}
-
 .passwordInfo {
   margin-top: 3px;
   font-weight: 400;
@@ -20,6 +12,14 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
+}
+
+.errorMessage {
+  margin-top: 8px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 130%;
+  color: $error;
 }
 
 .innerName {
@@ -41,6 +41,12 @@
     font-size: 18px;
     line-height: 130%;
   }
+}
+
+.emailInfo {
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 30px;
 }
 
 @media (max-width: 1024px) {

@@ -2,15 +2,20 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button, { ButtonTypes } from '../../components/UI/Button'
 import Input, { InputTypeEnum } from '../../components/UI/Input'
+import Loader from '../../components/UI/Loader'
 import FormContainer from '../../layout/FormContainer/index'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
-import { registerUser, setEmail } from '../../redux/SignUser/signUpSlice'
+import { getRegisterUser, setEmail } from '../../redux/SignUser/signUpSlice'
 import styles from './SignUp.module.scss'
 
 const SignUp = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const { email } = useAppSelector((state) => state.signUpSlice)
+  const { errorMessagesRegistration } = useAppSelector(
+    (state) => state.signUpSlice
+  )
+  const { statusRegisterUser } = useAppSelector((state) => state.statusSlice)
   const [password, setPassword] = useState('')
   const [passwordConfirm, setPasswordConfirm] = useState('')
   const [firstName, setFirstName] = useState('')
@@ -25,19 +30,13 @@ const SignUp = () => {
   >(undefined)
   const [okMail, setOkMail] = useState<boolean | undefined>(undefined)
   const [okName, setOkName] = useState<boolean | undefined>(undefined)
-  const [emailError, setEmailError] = useState('*E-mail не может быть пустым')
-  const [passwordError, setPasswordError] = useState(
-    '*Пароль должен содержать минимум 8 символов'
-  )
-  const [passwordConfirmError, setPasswordConfirmError] = useState(
-    '*Пароль должен содержать минимум 8 символов'
-  )
-  const [ferstNameError, setFerstNameError] = useState(
-    '*Это поле обязательно к заполнению'
-  )
+  const [emailError, setEmailError] = useState('')
+  const [passwordError, setPasswordError] = useState('')
+  const [passwordConfirmError, setPasswordConfirmError] = useState('')
+  const [ferstNameError, setFerstNameError] = useState('')
   const [validForm, setValidForm] = useState(false)
   useEffect(() => {
-    if (emailError || passwordError || passwordConfirmError || ferstNameError) {
+    if (emailError && passwordError && passwordConfirmError && ferstNameError) {
       setValidForm(false)
     } else {
       setValidForm(true)
@@ -134,28 +133,72 @@ const SignUp = () => {
   }
 
   const registerUserHandler = () => {
-    dispatch(
-      registerUser({
-        data: {
-          FirstName: firstName,
-          LastName: lastName,
-          Email: email,
-          Password: password,
-          ConfirmPassword: passwordConfirm,
-        },
-        callback: () => {
-          navigate('/signup/mail/check')
-        },
-      })
-    )
+    if (firstName && email && password && passwordConfirm) {
+      dispatch(
+        getRegisterUser({
+          data: {
+            FirstName: firstName,
+            LastName: lastName,
+            Email: email,
+            Password: password,
+            ConfirmPassword: passwordConfirm,
+          },
+          callback: () => {
+            navigate(`/confirm/password`)
+          },
+        })
+      )
+    } else {
+      if (!firstName && !email && !password && !passwordConfirm) {
+        setPasswordError('*Пароль не может быть пустым')
+        setPasswordConfirmError('*Пароль не может быть пустым')
+        setEmailError('*Введите электронную почту')
+        setFerstNameError('*Имя должно содержать минимум 2 символа')
+        setOkPasswordConfirm(false)
+        setOkPassword(false)
+        setOkMail(false)
+        setOkName(false)
+        setPasswordDirty(true)
+        setPasswordConfirmDirty(true)
+        setFirstNameDirty(true)
+        setEmailDirty(true)
+        setValidForm(false)
+      }
+      if (!email) {
+        setEmailError('*Введите электронную почту')
+        setOkMail(false)
+        setEmailDirty(true)
+        setValidForm(false)
+      }
+      if (!password) {
+        setPasswordError('*Пароль не может быть пустым')
+        setOkPassword(false)
+        setPasswordDirty(true)
+        setValidForm(false)
+      }
+      if (!passwordConfirm) {
+        setPasswordConfirmError('*Пароль не может быть пустым')
+        setOkPasswordConfirm(false)
+        setPasswordConfirmDirty(true)
+        setValidForm(false)
+      }
+      if (!firstName) {
+        setFerstNameError('*Имя должно содержать минимум 2 символа')
+        setOkName(false)
+        setFirstNameDirty(true)
+        setValidForm(false)
+      }
+    }
   }
 
-  return (
+  return statusRegisterUser === 'pending' ? (
+    <Loader />
+  ) : (
     <FormContainer
       logo={'LOGO'}
       title={'Создать аккаунт'}
       link={'/signup'}
-      textLink={'< Назад'}
+      textLink={'Назад'}
       text={''}
     >
       <div className={styles.innerInput}>
@@ -203,6 +246,11 @@ const SignUp = () => {
             error={Boolean(emailDirty && emailError)}
             okValidat={okMail}
           />
+          {!!errorMessagesRegistration ? (
+            <div className={styles.errorMessage}>
+              {errorMessagesRegistration}
+            </div>
+          ) : null}
           {emailDirty && emailError && (
             <div className={styles.errorMessage}>{emailError}</div>
           )}
@@ -220,12 +268,8 @@ const SignUp = () => {
             error={Boolean(passwordDirty && passwordError)}
             okValidat={okPassword}
           />
-          {passwordDirty && passwordError ? (
+          {passwordDirty && passwordError && (
             <div className={styles.errorMessage}>{passwordError}</div>
-          ) : (
-            <div className={styles.passwordInfo}>
-              *Пароль должен содержать минимум 8 символов
-            </div>
           )}
         </div>
         <div className={styles.label}>
