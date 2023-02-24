@@ -201,7 +201,7 @@ const SignIn = () => {
           <p className={styles.textLink}>Забыли пароль?</p>
           <div
             className={styles.link}
-            onClick={() => navigate('recovery/passord')}
+            onClick={() => navigate('/signin/restore/passord')}
           >
             Восстановить пароль
           </div>

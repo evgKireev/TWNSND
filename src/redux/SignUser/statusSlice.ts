@@ -6,6 +6,8 @@ type initialStateType = {
   statusSuccessUser: string
   statusSignIn: string
   statusRegisterUserGoogle: string
+  statusRestorePassword: string
+  statusRestoreChangePassword: string
 }
 
 const initialState: initialStateType = {
@@ -14,6 +16,8 @@ const initialState: initialStateType = {
   statusSuccessUser: '',
   statusSignIn: '',
   statusRegisterUserGoogle: '',
+  statusRestorePassword: '',
+  statusRestoreChangePassword: '',
 }
 
 const statusSlice = createSlice({
@@ -35,6 +39,12 @@ const statusSlice = createSlice({
     setSignInStatusUserGoogle: (state, actions) => {
       state.statusRegisterUserGoogle = actions.payload
     },
+    setStatusRestorePassword: (state, actions) => {
+      state.statusRestorePassword = actions.payload
+    },
+    setStatusRestoreChangePassword: (state, actions) => {
+      state.statusRestoreChangePassword = actions.payload
+    },
   },
 })
 
@@ -44,6 +54,8 @@ export const {
   setSuccessStatusUser,
   setSignInStatusUser,
   setSignInStatusUserGoogle,
+  setStatusRestorePassword,
+  setStatusRestoreChangePassword,
 } = statusSlice.actions
 
 export default statusSlice.reducer

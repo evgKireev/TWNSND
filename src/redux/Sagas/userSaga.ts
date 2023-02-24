@@ -4,12 +4,16 @@ import { all, call, put, takeLatest } from 'redux-saga/effects'
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '../../@types/constant'
 import {
   ParamsUrlPayloadType,
+  RestorePassword,
+  RestorePasswordData,
   SentMailRegisterUser,
   SignInGooglePayloadType,
   SignInPayloadType,
   UserTypePayloadType,
 } from '../../@types/types/auth'
 import {
+  getRestoreChangePassword,
+  getRestorePassword,
   getSignInUser,
   logoutUser,
   setRegisterUser,
@@ -26,6 +30,8 @@ import {
   setConfirmStatusUser,
   setSignInStatusUser,
   setSignInStatusUserGoogle,
+  setStatusRestoreChangePassword,
+  setStatusRestorePassword,
   setStatusUser,
   setSuccessStatusUser,
 } from '../SignUser/statusSlice'
@@ -145,6 +151,45 @@ function* registerUserGoogleWorker(
   }
 }
 
+function* restorePasswordWorker(actions: PayloadAction<RestorePassword>) {
+  yield put(setStatusRestorePassword('pending'))
+  const { ok, data } = yield call(API.restorePassword, actions.payload)
+  if (ok) {
+    yield put(setStatusRestorePassword('fullfilled'))
+  } else {
+    yield put(setStatusRestorePassword('regected'))
+    if (data.error_message === 'user_not_found') {
+      toast.error('Пользователь с указанным email ну существует')
+    } else if (data.error_message === 'external_only') {
+      toast.error(
+        'Невозможно восстановить пароль, так как Ваша регистрация происходила через внешние провайдеры'
+      )
+    } else {
+      toast.error('Что-то пошло не так. Попробуйте еще раз!')
+    }
+  }
+}
+
+function* restoreChangePasswordWorker(
+  actions: PayloadAction<RestorePasswordData>
+) {
+  yield put(setStatusRestoreChangePassword('pending'))
+  const { ok, data } = yield call(
+    API.restoreChangePasswordUsser,
+    actions.payload
+  )
+  if (ok) {
+    yield put(setStatusRestoreChangePassword('fullfilled'))
+  } else {
+    yield put(setStatusRestoreChangePassword('regected'))
+    if (data.error_message === 'user_not_found') {
+      toast.error('Пользователь с указанным email ну существует')
+    } else {
+      toast.error('Что-то пошло не так. Попробуйте еще раз!')
+    }
+  }
+}
+
 function* logoutUserWorker() {
   yield put(setRegisterUser(false))
   localStorage.removeItem(ACCESS_TOKEN_KEY)
@@ -160,4 +205,6 @@ export default function* userSaga() {
   yield all([takeLatest(getSignInUser, signInUserWorker)])
   yield all([takeLatest(logoutUser, logoutUserWorker)])
   yield all([takeLatest(getRegisterUserGoogle, registerUserGoogleWorker)])
+  yield all([takeLatest(getRestorePassword, restorePasswordWorker)])
+  yield all([takeLatest(getRestoreChangePassword, restoreChangePasswordWorker)])
 }
