@@ -1,4 +1,4 @@
-import { API, API_GOOGLE } from '../../@types/constant'
+import { API, API_GOOGLE, API_SERVER } from '../../@types/constant'
 import {
   ParamsUrlGoogle,
   ParamsUrlType,
@@ -98,7 +98,7 @@ const registerUserGoogle = ({
 }
 
 const getUserData = (token: string) => {
-  return API.get('/api/user/GetCustomer', {
+  return API_SERVER.get('/api/user/GetCustomer', {
     headers: {
       Authorization: `Bearer {${token}}`,
     },

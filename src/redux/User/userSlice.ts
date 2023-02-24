@@ -1,30 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { UserType } from '../../../@types/types/user'
+import { UserType } from '../../@types/types/user'
 
 type initialStateType = {
-  userData: UserType
+  userData: UserType | null
 }
 
 const initialState: initialStateType = {
-  userData: {
-    id: '',
-    name: '',
-    given_name: '',
-    family_name: '',
-    email: '',
-    interests: [
-      {
-        id: null,
-        name: '',
-      },
-    ],
-    sphere: {
-      id: null,
-      name: '',
-    },
-    role: '',
-    country: '',
-  },
+  userData: null,
 }
 
 const userSlice = createSlice({

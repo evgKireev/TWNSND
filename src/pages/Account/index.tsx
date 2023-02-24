@@ -6,6 +6,7 @@ import { Edit } from '../../assets/AccountIcons/Edit'
 import classNames from 'classnames'
 import { useState } from 'react'
 import { Close } from '../../assets/AccountIcons/Close'
+import { useAppSelector } from '../../redux/hooks'
 
 let badgesArr = [
   'Маркетинг',
@@ -20,6 +21,9 @@ let badgesArr = [
 export const Account = () => {
   //TODO настроить правильный путь кнопки "изменить пароль"
   const navigate = useNavigate()
+  const { userData } = useAppSelector((state) => state.userSlice)
+  console.log(userData)
+
   const [badges, setBadges] = useState<string[]>(badgesArr)
   const [editName, setEditName] = useState<boolean>(false)
   const [editEmail, setEditEmail] = useState<boolean>(false)

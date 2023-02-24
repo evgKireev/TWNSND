@@ -9,7 +9,7 @@ import {
   SignInPayloadType,
   UserTypePayloadType,
 } from '../../@types/types/auth'
-import { UserType } from '../../@types/types/user'
+
 import {
   getSignInUser,
   logoutUser,
@@ -31,8 +31,6 @@ import {
   setSuccessStatusUser,
 } from '../SignUser/statusSlice'
 import API from '../utils/API'
-import { setStatusDataUser } from './User/statusDataUserSlice'
-import { getUser, setUser } from './User/userSlice'
 
 function* registerUserWorker(actions: PayloadAction<UserTypePayloadType>) {
   yield put(setStatusUser('pending'))
@@ -156,21 +154,6 @@ function* logoutUserWorker() {
   sessionStorage.removeItem(REFRESH_TOKEN_KEY)
 }
 
-function* getDataUserWorker(actions: PayloadAction<UserType>) {
-  const token = localStorage.getItem(ACCESS_TOKEN_KEY)
-
-  const { ok, data, problem } = yield call(API.getUserData, token)
-
-  yield put(setStatusDataUser('pending'))
-  if (ok) {
-    yield put(setStatusDataUser('fullfilled'))
-    yield put(setUser(data))
-  } else {
-    yield put(setStatusDataUser('regected'))
-    toast.error('Что-то пошло не так. Перезагрузите страницу.')
-  }
-}
-
 export default function* userSaga() {
   yield all([takeLatest(getRegisterUser, registerUserWorker)])
   yield all([takeLatest(getMailRegisterUser, sentMailRegistrUser)])
@@ -178,5 +161,4 @@ export default function* userSaga() {
   yield all([takeLatest(getSignInUser, signInUserWorker)])
   yield all([takeLatest(logoutUser, logoutUserWorker)])
   yield all([takeLatest(getRegisterUserGoogle, registerUserGoogleWorker)])
-  yield all([takeLatest(getUser, getDataUserWorker)])
 }

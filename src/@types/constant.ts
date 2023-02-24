@@ -8,4 +8,9 @@ export const API = create({
 export const API_GOOGLE = create({
   baseURL: 'https://43aa-185-158-218-132.eu.ngrok.io',
 })
+
+export const API_SERVER = create({
+  baseURL: 'https://localhost:7128',
+})
+
 export const MY_URL = 'https://twnsnd.vercel.app'
