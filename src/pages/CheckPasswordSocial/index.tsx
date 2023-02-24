@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { MY_URL } from '../../@types/constant'
 import Button, { ButtonTypes } from '../../components/UI/Button'
 import Input, { InputTypeEnum } from '../../components/UI/Input'
 import Loader from '../../components/UI/Loader'
@@ -9,7 +10,7 @@ import { getRegisterUserGoogle } from '../../redux/SignUser/signUpSlice'
 import styles from './CheckPasswordSocial.module.scss'
 
 const CheckPasswordSocial = () => {
-  const redirectUriGoogle = 'http://localhost:3000'
+  const redirectUriGoogle = MY_URL
   const { email } = useAppSelector((state) => state.signUpSlice)
   const { code } = useAppSelector((state) => state.signUpSlice)
   const { statusRegisterUserGoogle } = useAppSelector(

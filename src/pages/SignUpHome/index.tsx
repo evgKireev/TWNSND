@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom'
+import { MY_URL } from '../../@types/constant'
 import { FacebookIcon } from '../../assets/SocialMediaIcons/FacebookIcon'
 import { GoogleIcon } from '../../assets/SocialMediaIcons/GoogleIcon'
 import { MailIcon } from '../../assets/SocialMediaIcons/MailIcon'
@@ -7,7 +8,7 @@ import Button, { ButtonTypes } from '../../components/UI/Button'
 import FormContainer from '../../layout/FormContainer'
 import styles from './SignUpHome.module.scss'
 
-const redirectUriGoogle = 'http://localhost:3000'
+const redirectUriGoogle = MY_URL
 const stateGoogle = '1234567890'
 const googleId =
   '923826205735-l644r1ke16c87a4agdbs97ceqdmlesb6.apps.googleusercontent.com'

@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { API } from '../../@types/constant'
+import { API, MY_URL } from '../../@types/constant'
 import Button, { ButtonTypes } from '../../components/UI/Button'
 import Loader from '../../components/UI/Loader'
 import FormContainer from '../../layout/FormContainer'
@@ -17,7 +17,7 @@ const RegistrationConfirm = () => {
       getMailRegisterUser({
         Email: email,
         UserId: userId,
-        ReturnUrl: `http://localhost:3000/success`,
+        ReturnUrl: `${MY_URL}/success`,
       })
     )
   }
