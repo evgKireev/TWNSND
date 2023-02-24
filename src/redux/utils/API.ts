@@ -99,8 +99,8 @@ const registerUserGoogle = ({
   })
 }
 
-const restorePassword = ({ Emai, ReturnUrl }: RestorePassword) => {
-  return API.post('api/Account/ForgotPassword', { Emai, ReturnUrl })
+const restorePassword = ({ Email, ReturnUrl }: RestorePassword) => {
+  return API.post('api/Account/ForgotPassword', { Email, ReturnUrl })
 }
 
 const restoreChangePasswordUsser = ({
