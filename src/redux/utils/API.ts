@@ -2,6 +2,8 @@ import { API, API_GOOGLE } from '../../@types/constant'
 import {
   ParamsUrlGoogle,
   ParamsUrlType,
+  RestorePassword,
+  RestorePasswordData,
   SentMailRegisterUser,
   SignInType,
   UserType,
@@ -97,6 +99,27 @@ const registerUserGoogle = ({
   })
 }
 
+const restorePassword = ({ Emai, ReturnUrl }: RestorePassword) => {
+  return API.post('api/Account/ForgotPassword', { Emai, ReturnUrl })
+}
+
+const restoreChangePasswordUsser = ({
+  Password,
+  Email,
+  Code,
+  ConfirmPassword,
+}: RestorePasswordData) => {
+  return API.post(
+    `api/Account/ResetPassword`,
+    { Email, Code, Password, ConfirmPassword },
+    {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+  )
+}
+
 export default {
   registerUserMail,
   sentEmailRegisterUser,
@@ -104,4 +127,6 @@ export default {
   signInUser,
   getNewAccessToken,
   registerUserGoogle,
+  restorePassword,
+  restoreChangePasswordUsser,
 }
