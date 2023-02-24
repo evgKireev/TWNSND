@@ -62,7 +62,7 @@ const RestorePassword = () => {
       }
     }
   }
-  console.log()
+  console.log('s')
   return statusRestorePassword === 'pending' ? (
     <Loader />
   ) : (
