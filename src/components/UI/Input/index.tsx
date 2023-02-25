@@ -40,11 +40,10 @@ const Input: React.FC<InputType> = ({
 }) => {
   const inputStyles = styles[typeInput]
   const [checkPassword, setCheckPassword] = useState(false)
-
+  console.log(error)
   return (
     <div className={styles.wrap}>
       <input
-        id={typeInput}
         onBlur={onBlur}
         onChange={onChange}
         value={value}
@@ -55,9 +54,7 @@ const Input: React.FC<InputType> = ({
           [styles.errorInput]: error,
           [styles.okInput]: okValidat,
         })}
-      >
-        
-      </input>
+      ></input>
       <label
         className={classNames(styles.label, {
           [styles.setlabel]: value,

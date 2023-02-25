@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useMemo, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Button, { ButtonTypes } from '../../components/UI/Button'
 import Input, { InputTypeEnum } from '../../components/UI/Input'
 import Loader from '../../components/UI/Loader'
@@ -39,7 +39,7 @@ const ChangePassword = () => {
         setPasswordConfirmDirty(true)
         break
       case 'Текущий пароль':
-        setPasswordConfirmDirty(true)
+        setOldPasswordDirty(true)
     }
   }
 
