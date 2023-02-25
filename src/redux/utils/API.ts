@@ -1,3 +1,4 @@
+import { API, API_GOOGLE, API_SERVER } from '../../@types/constant'
 import { ACCESS_TOKEN_KEY, API, API_GOOGLE } from '../../@types/constant'
 import {
   ChangePasswordData,
@@ -100,6 +101,12 @@ const registerUserGoogle = ({
   })
 }
 
+const getUserData = (token: string) => {
+  return API_SERVER.get('/api/user/GetCustomer', {
+    headers: {
+      Authorization: `Bearer {${token}}`,
+    },
+  })
 const restorePassword = ({ Email, ReturnUrl }: RestorePassword) => {
   return API.post('api/Account/ForgotPassword', { Email, ReturnUrl })
 }
@@ -152,6 +159,7 @@ export default {
   signInUser,
   getNewAccessToken,
   registerUserGoogle,
+  getUserData,
   restorePassword,
   restoreChangePasswordUsser,
   changePasswordUser,

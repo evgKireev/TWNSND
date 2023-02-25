@@ -6,6 +6,7 @@ import botSlice from './botSlice'
 import signUpSlice from './SignUser/signUpSlice'
 import statusSlice from './SignUser/statusSlice'
 import signInSlice from './SignUser/signInSlice'
+import userSlice from './User/userSlice'
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -16,6 +17,7 @@ export const store = configureStore({
     signUpSlice,
     statusSlice,
     signInSlice,
+    userSlice,
   },
   middleware: [sagaMiddleware],
 })

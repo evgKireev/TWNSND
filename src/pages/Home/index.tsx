@@ -5,6 +5,7 @@ import Footer from '../../components/APP/Footer'
 import Header from '../../components/APP/Header'
 import Loader from '../../components/UI/Loader'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
+import { getUser, setUser } from '../../redux/User/userSlice'
 import {
   getRegisterUserGoogle,
   setCode,
@@ -36,6 +37,10 @@ const Home = () => {
         })
       )
     }
+  }, [])
+
+  useEffect(() => {
+    dispatch(getUser())
   }, [])
 
   return statusRegisterUserGoogle === 'pending' ? (
