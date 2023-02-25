@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { MY_URL } from '../../@types/constant'
+import { redirectUriGoogle, stateGoogle } from '../../@types/constant'
 import Footer from '../../components/APP/Footer'
 import Header from '../../components/APP/Header'
 import Loader from '../../components/UI/Loader'
@@ -11,18 +11,18 @@ import {
   setCode,
 } from '../../redux/SignUser/signUpSlice'
 import styles from './Home.module.scss'
+
 const Home = () => {
-  const stateGoogle = '1234567890'
-  const redirectUriGoogle = MY_URL
   const location = useLocation()
   const searchParams = new URLSearchParams(location.search)
   const state = searchParams.get('state')
   const code = searchParams.get('code')
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
   const { statusRegisterUserGoogle } = useAppSelector(
     (state) => state.statusSlice
   )
-  const dispatch = useAppDispatch()
-  const navigate = useNavigate()
+  
   useEffect(() => {
     if (state != stateGoogle) {
       return

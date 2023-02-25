@@ -31,6 +31,24 @@ export type ParamsUrlGoogle = {
   localPassword?: string
 }
 
+export type RestorePassword = {
+  Email: string
+  ReturnUrl: string
+}
+
+export type RestorePasswordData = {
+  Email: string | null
+  Password: string
+  ConfirmPassword: string
+  Code: string | null
+}
+
+export type ChangePasswordData = {
+  OldPassword: string
+  NewPassword: string
+  NewPasswordConfirmation: string
+}
+
 export type UserTypePayloadType = {
   data: UserType
   callback: () => void
@@ -49,5 +67,15 @@ export type SignInPayloadType = {
 
 export type SignInGooglePayloadType = {
   data: ParamsUrlGoogle
+  callback: (link: string) => void
+}
+
+export type RestorePasswordlePayloadType = {
+  data: RestorePasswordData
+  callback: (link: string) => void
+}
+
+export type ChangePasswordPayloadType = {
+  data: ChangePasswordData
   callback: (link: string) => void
 }

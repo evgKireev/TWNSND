@@ -1,7 +1,11 @@
 import { API, API_GOOGLE, API_SERVER } from '../../@types/constant'
+import { ACCESS_TOKEN_KEY, API, API_GOOGLE } from '../../@types/constant'
 import {
+  ChangePasswordData,
   ParamsUrlGoogle,
   ParamsUrlType,
+  RestorePassword,
+  RestorePasswordData,
   SentMailRegisterUser,
   SignInType,
   UserType,
@@ -103,6 +107,49 @@ const getUserData = (token: string) => {
       Authorization: `Bearer {${token}}`,
     },
   })
+const restorePassword = ({ Email, ReturnUrl }: RestorePassword) => {
+  return API.post('api/Account/ForgotPassword', { Email, ReturnUrl })
+}
+
+const restoreChangePasswordUsser = ({
+  Password,
+  Email,
+  Code,
+  ConfirmPassword,
+}: RestorePasswordData) => {
+  return API.post(
+    `api/Account/ResetPassword`,
+    { Email, Code, Password, ConfirmPassword },
+    {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+  )
+}
+
+const changePasswordUser = ({
+  OldPassword,
+  NewPassword,
+  NewPasswordConfirmation,
+}: ChangePasswordData) => {
+  const token =
+    localStorage.getItem(ACCESS_TOKEN_KEY) ||
+    sessionStorage.getItem(ACCESS_TOKEN_KEY)
+  return API.post(
+    'api/Account/ChangePassword',
+    {
+      OldPassword,
+      NewPassword,
+      NewPasswordConfirmation,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    }
+  )
 }
 
 export default {
@@ -113,4 +160,7 @@ export default {
   getNewAccessToken,
   registerUserGoogle,
   getUserData,
+  restorePassword,
+  restoreChangePasswordUsser,
+  changePasswordUser,
 }

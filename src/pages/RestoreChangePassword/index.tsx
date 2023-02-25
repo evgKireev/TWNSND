@@ -1,31 +1,30 @@
-import { useMemo, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useEffect, useMemo, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import Button, { ButtonTypes } from '../../components/UI/Button'
 import Input, { InputTypeEnum } from '../../components/UI/Input'
 import Loader from '../../components/UI/Loader'
 import FormContainer from '../../layout/FormContainer/index'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
-import { getChangePassword } from '../../redux/SignUser/signInSlice'
-import styles from './ChangePassword.module.scss'
+import { getRestoreChangePassword } from '../../redux/SignUser/signInSlice'
+import styles from './RestoreChangePassword.module.scss'
 
-const ChangePassword = () => {
+const RestoreChangePassword = () => {
   const navigate = useNavigate()
-  const [oldPassword, setOldPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [newPasswordDirty, setNewPasswordDirty] = useState(false)
   const [passwordConfirmDirty, setPasswordConfirmDirty] = useState(false)
-  const [oldPasswordDirty, setOldPasswordDirty] = useState(false)
   const [passwordError, setPasswordError] = useState('')
   const [passwordConfirmError, setPasswordConfirmError] = useState('')
-  const [oldPasswordError, setOldPasswordError] = useState('')
   const [okPassword, setOkPassword] = useState<boolean | undefined>(undefined)
   const [okPasswordConfirm, setOkPasswordConfirm] = useState<
     boolean | undefined
   >(undefined)
-  const [okOldPassword, setOldOkPassword] = useState<boolean | undefined>(
-    undefined
-  )
+  const location = useLocation()
+  const searchParams = new URLSearchParams(location.search)
+  const email = searchParams.get('email')
+  const code = searchParams.get('code')
+  const formattedCode = code ? code.replace(/\s/g, '+') : null
   const dispatch = useAppDispatch()
   const { statusRestoreChangePassword } = useAppSelector(
     (state) => state.statusSlice
@@ -37,20 +36,6 @@ const ChangePassword = () => {
         break
       case 'Подтвердите пароль':
         setPasswordConfirmDirty(true)
-        break
-      case 'Текущий пароль':
-        setOldPasswordDirty(true)
-    }
-  }
-
-  const oldPassworwHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setOldPassword(e.target.value)
-    if (!e.target.value) {
-      setOldPasswordError('*Пароль не может быть пустым')
-      setOldOkPassword(false)
-    } else {
-      setOldPasswordError('')
-      setOldOkPassword(true)
     }
   }
 
@@ -96,28 +81,26 @@ const ChangePassword = () => {
   }
 
   const newPasswordHandler = () => {
-    if (newPassword && confirmPassword && oldPassword) {
+    if (newPassword && confirmPassword) {
       dispatch(
-        getChangePassword({
+        getRestoreChangePassword({
           data: {
-            OldPassword: oldPassword,
-            NewPassword: newPassword,
-            NewPasswordConfirmation: confirmPassword,
+            Email: email,
+            Password: newPassword,
+            ConfirmPassword: confirmPassword,
+            Code: formattedCode,
           },
           callback: (link) => navigate(link),
         })
       )
     } else {
-      if (!newPassword && !confirmPassword && !oldPassword) {
+      if (!newPassword && !confirmPassword) {
         setPasswordError('*Пароль не может быть пустым')
         setPasswordConfirmError('*Пароль не может быть пустым')
-        setOldPasswordError('*Пароль не может быть пустым')
         setOkPasswordConfirm(false)
         setOkPassword(false)
-        setOldOkPassword(false)
         setPasswordConfirmDirty(true)
         setNewPasswordDirty(true)
-        setOldPasswordDirty(true)
       }
       if (!newPassword) {
         setPasswordError('*Пароль не может быть пустым')
@@ -129,17 +112,12 @@ const ChangePassword = () => {
         setOkPasswordConfirm(false)
         setPasswordConfirmDirty(true)
       }
-      if (!oldPassword) {
-        setOldPasswordError('*Пароль не может быть пустым')
-        setOldOkPassword(false)
-        setOldPasswordDirty(true)
-      }
     }
   }
 
   const validForm = useMemo(() => {
-    return okPassword && okPasswordConfirm && okOldPassword
-  }, [okPassword, okPasswordConfirm, okOldPassword])
+    return okPassword && okPasswordConfirm
+  }, [okPassword, okPasswordConfirm])
 
   return statusRestoreChangePassword === 'pending' ? (
     <Loader />
@@ -155,24 +133,6 @@ const ChangePassword = () => {
       ) : (
         <div className={styles.innerContainer}>
           <div className={styles.innerInput}>
-            <div className={styles.label}>
-              <div className={styles.innerText}>Введите ваш текущий пароль</div>
-              <Input
-                onBlur={blurHandler}
-                type="password"
-                labelText={'Пароль'}
-                name={'Текущий пароль'}
-                disabled={false}
-                typeInput={InputTypeEnum.Password}
-                value={oldPassword}
-                onChange={(e) => oldPassworwHandler(e)}
-                error={Boolean(oldPasswordDirty && oldPasswordError)}
-                okValidat={okOldPassword}
-              />
-              {oldPasswordDirty && oldPasswordError && (
-                <div className={styles.errorMessage}>{oldPasswordError}</div>
-              )}
-            </div>
             <div className={styles.label}>
               <div className={styles.innerText}>Введите новый пароль</div>
               <Input
@@ -223,4 +183,4 @@ const ChangePassword = () => {
   )
 }
 
-export default ChangePassword
+export default RestoreChangePassword

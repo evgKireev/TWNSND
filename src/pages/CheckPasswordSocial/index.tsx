@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { MY_URL } from '../../@types/constant'
 import Button, { ButtonTypes } from '../../components/UI/Button'
@@ -20,7 +20,6 @@ const CheckPasswordSocial = () => {
   const [passwordDirty, setPasswordDirty] = useState(false)
   const [okPassword, setOkPassword] = useState<boolean | undefined>(undefined)
   const [passwordError, setPasswordError] = useState('')
-  const [validForm, setValidForm] = useState(false)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const blurHandler = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -64,13 +63,10 @@ const CheckPasswordSocial = () => {
     }
   }
 
-  useEffect(() => {
-    if (passwordError) {
-      setValidForm(false)
-    } else {
-      setValidForm(true)
-    }
-  }, [passwordError])
+  const validForm = useMemo(() => {
+    return okPassword
+  }, [okPassword])
+
   return statusRegisterUserGoogle === 'pending' ? (
     <Loader />
   ) : (

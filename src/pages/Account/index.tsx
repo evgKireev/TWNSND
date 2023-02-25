@@ -18,8 +18,7 @@ let badgesArr = [
   'Маркетинг',
 ]
 
-export const Account = () => {
-  //TODO настроить правильный путь кнопки "изменить пароль"
+const Account = () => {
   const navigate = useNavigate()
   const { userData } = useAppSelector((state) => state.userSlice)
   console.log(userData)
@@ -27,27 +26,21 @@ export const Account = () => {
   const [badges, setBadges] = useState<string[]>(badgesArr)
   const [editName, setEditName] = useState<boolean>(false)
   const [editEmail, setEditEmail] = useState<boolean>(false)
-
   const [firstName, setFirstName] = useState('')
   const [errorFirstName, setErrorFirstName] = useState<boolean | undefined>(
     undefined
   )
   const [okFirstName, setOkFirstName] = useState<boolean | undefined>(undefined)
-
   const [lastName, setLastName] = useState('')
   const [errorLastName, setErrorLastName] = useState<boolean | undefined>(
     undefined
   )
   const [okLastName, setOkLastName] = useState<boolean | undefined>(undefined)
-
   const [email, setEmail] = useState('')
   const [errorEmail, setErrorEmail] = useState<boolean | undefined>(undefined)
   const [okEmail, setOkEmail] = useState<boolean | undefined>(undefined)
-
   const [country, setCountry] = useState<string>('')
-
   const [business, setBusiness] = useState<string>('')
-
   const [role, setRole] = useState<string>('')
 
   const firstNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -106,7 +99,6 @@ export const Account = () => {
     <div className={styles.wrapper}>
       <div className={styles.header}>
         <div className={styles.logo}>LOGO</div>
-
         <ul className={styles.menu}>
           <li>
             <a href="/">Главная</a>
@@ -187,7 +179,7 @@ export const Account = () => {
           <div className={styles.editContainer}>
             <p className={styles.text}>Изменить пароль</p>
 
-            <button onClick={() => navigate('recovery/passord')}>
+            <button onClick={() => navigate('/signin/recovery/passord/change')}>
               <Edit />
             </button>
           </div>
@@ -307,3 +299,5 @@ export const Account = () => {
     </div>
   )
 }
+
+export default Account

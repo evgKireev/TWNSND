@@ -10,7 +10,6 @@ import styles from './Footer.module.scss'
 type InputType = {}
 const Footer = () => {
   const [email, setEmail] = useState('')
-
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>

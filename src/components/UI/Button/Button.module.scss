@@ -72,9 +72,8 @@
 }
 
 .disabled {
-  background-color: $button_disabled;
-  color: $backgr_white;
   pointer-events: none;
+  cursor: no-drop;
 }
 
 @media (max-width: 750px) {

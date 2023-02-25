@@ -1,6 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { ACCESS_TOKEN_KEY } from '../../@types/constant'
-import { SignInPayloadType } from '../../@types/types/auth'
+import {
+  ChangePasswordPayloadType,
+  RestorePassword,
+  RestorePasswordlePayloadType,
+  SignInPayloadType,
+} from '../../@types/types/auth'
 
 type initialStateType = {
   rememberPassword: boolean
@@ -19,6 +24,15 @@ const signInSlice = createSlice({
   initialState,
   reducers: {
     getSignInUser: (state, actions: PayloadAction<SignInPayloadType>) => {},
+    getRestorePassword: (state, actions: PayloadAction<RestorePassword>) => {},
+    getRestoreChangePassword: (
+      state,
+      actions: PayloadAction<RestorePasswordlePayloadType>
+    ) => {},
+    getChangePassword: (
+      state,
+      actions: PayloadAction<ChangePasswordPayloadType>
+    ) => {},
     logoutUser(state, actions: PayloadAction<undefined>) {},
     setRememberPassword: (state, actions: PayloadAction<boolean>) => {
       state.rememberPassword = actions.payload
@@ -34,5 +48,8 @@ export const {
   getSignInUser,
   setRegisterUser,
   logoutUser,
+  getRestorePassword,
+  getRestoreChangePassword,
+  getChangePassword,
 } = signInSlice.actions
 export default signInSlice.reducer

@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { MY_URL } from '../../@types/constant'
+import { linkGoogle } from '../../@types/constant'
 import { FacebookIcon } from '../../assets/SocialMediaIcons/FacebookIcon'
 import { GoogleIcon } from '../../assets/SocialMediaIcons/GoogleIcon'
 import { MailIcon } from '../../assets/SocialMediaIcons/MailIcon'
@@ -8,15 +8,11 @@ import Button, { ButtonTypes } from '../../components/UI/Button'
 import FormContainer from '../../layout/FormContainer'
 import styles from './SignUpHome.module.scss'
 
-const redirectUriGoogle = MY_URL
-const stateGoogle = '1234567890'
-const googleId =
-  '923826205735-l644r1ke16c87a4agdbs97ceqdmlesb6.apps.googleusercontent.com'
 const regUser = [
   {
     title: 'Зарегистрироваться через Google',
     icon: <GoogleIcon />,
-    link: `https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=${redirectUriGoogle}&client_id=${googleId}&access_type=offline&response_type=code&prompt=consent&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email&state=${stateGoogle}`,
+    link: linkGoogle,
   },
   { title: 'Зарегистрироваться через Facebook', icon: <FacebookIcon /> },
   { title: 'Зарегистрироваться через Вконтакте', icon: <VKIcon /> },

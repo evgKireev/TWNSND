@@ -8,9 +8,8 @@ import styles from './UserControl.module.scss'
 type UserControlType = {
   openPanel: boolean
 }
-
 const UserControl: React.FC<UserControlType> = ({ openPanel }) => {
-  const [logautQuestion, setLogautQuestion] = useState(false)
+  const [logoutQuestion, setLogoutQuestion] = useState(false)
   const dispatch = useAppDispatch()
   return (
     <div
@@ -25,30 +24,30 @@ const UserControl: React.FC<UserControlType> = ({ openPanel }) => {
           <div className={styles.userEmail}>{'anna@coolexample.com'}</div>
         </div>
       </div>
-      {logautQuestion ? (
-        <div className={styles.logautQuestion}>
-          <div className={styles.logautQuestionText}>Выйти из профиля?</div>
-          <div className={styles.logautBtn}>
+      {logoutQuestion ? (
+        <div className={styles.logoutQuestion}>
+          <div className={styles.logoutQuestionText}>Выйти из профиля?</div>
+          <div className={styles.logoutBtn}>
             <button
-              className={styles.btnLogaut}
+              className={styles.btnLogout}
               onClick={() => dispatch(logoutUser())}
             >
               Выйти
             </button>
             <button
               className={styles.btnCancel}
-              onClick={() => setLogautQuestion(false)}
+              onClick={() => setLogoutQuestion(false)}
             >
               Отмена
             </button>
           </div>
         </div>
       ) : (
-        <div className={styles.logaut} onClick={() => setLogautQuestion(true)}>
-          <div className={styles.logautIcon}>
+        <div className={styles.logout} onClick={() => setLogoutQuestion(true)}>
+          <div className={styles.logoutIcon}>
             <FiLogOut />
           </div>
-          <div className={styles.logautText}>Выйти из профиля</div>
+          <div className={styles.logoutText}>Выйти из профиля</div>
         </div>
       )}
     </div>

@@ -1,5 +1,3 @@
-import React from "react";
-
 export const WhatsAppFooter = ({width="40", height="40"}) => {
    return (
       <svg

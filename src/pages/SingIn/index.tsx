@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { linkGoogle } from '../../@types/constant'
 import Facebook from '../../assets/SocialMediaIcons/Facebook'
 import { GoogleIcon } from '../../assets/SocialMediaIcons/GoogleIcon'
 import Vk from '../../assets/SocialMediaIcons/Vk'
@@ -27,7 +28,6 @@ const SignIn = () => {
   const [passwordError, setPasswordError] = useState('')
   const [emailDirty, setEmailDirty] = useState(false)
   const [passwordDirty, setPasswordDirty] = useState(false)
-  const [validForm, setValidForm] = useState(false)
   const { rememberPassword } = useAppSelector((state) => state.signInSlice)
 
   const blurHandler = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -102,13 +102,9 @@ const SignIn = () => {
     }
   }
 
-  useEffect(() => {
-    if (emailError && passwordError) {
-      setValidForm(false)
-    } else {
-      setValidForm(true)
-    }
-  }, [emailError, passwordError])
+  const validForm = useMemo(() => {
+    return okPassword
+  }, [okPassword])
 
   return (
     <FormContainer
@@ -182,14 +178,14 @@ const SignIn = () => {
             disabled={false}
             icon={<Facebook />}
           />
-
-          <ButtonIcon
-            type={ButtonTypesIcon.G}
-            onClick={() => {}}
-            disabled={false}
-            icon={<GoogleIcon />}
-          />
-
+          <a href={linkGoogle}>
+            <ButtonIcon
+              type={ButtonTypesIcon.G}
+              onClick={() => {}}
+              disabled={false}
+              icon={<GoogleIcon />}
+            />
+          </a>
           <ButtonIcon
             type={ButtonTypesIcon.VK}
             onClick={() => {}}
@@ -201,14 +197,13 @@ const SignIn = () => {
           <p className={styles.textLink}>Забыли пароль?</p>
           <div
             className={styles.link}
-            onClick={() => navigate('recovery/passord')}
+            onClick={() => navigate('/signin/restore/passord')}
           >
             Восстановить пароль
           </div>
         </div>
       </div>
     </FormContainer>
-    // TODO: на кнопки навесить редерект на регистрацию через соцсети и ссылку на восстановление пароля
   )
 }
 
