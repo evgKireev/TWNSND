@@ -5,12 +5,12 @@ export type UserType = {
   family_name: string
   email: string
   interests: {
-    id: number | null
+    id: number
     name: string
   }[]
 
   sphere: {
-    id: number | null
+    id: number
     name: string
   }
   role: string

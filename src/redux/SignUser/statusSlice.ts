@@ -45,6 +45,7 @@ const statusSlice = createSlice({
     },
     setStatusDataUser: (state, actions) => {
       state.statusDataUser = actions.payload
+    },
     setStatusRestorePassword: (state, actions) => {
       state.statusRestorePassword = actions.payload
     },

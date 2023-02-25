@@ -13,8 +13,18 @@ import RestoreChangePassword from './pages/RestoreChangePassword'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import './scss/app.scss'
+import { useAppDispatch, useAppSelector } from './redux/hooks'
+import { useEffect } from 'react'
+import { getUser } from './redux/User/userSlice'
 
 const App = () => {
+  const { registerUser } = useAppSelector((state) => state.signInSlice)
+  const dispatch = useAppDispatch()
+  useEffect(() => {
+    if (registerUser) {
+      dispatch(getUser())
+    }
+  }, [registerUser])
   return (
     <>
       <Routes>

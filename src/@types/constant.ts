@@ -11,7 +11,6 @@ export const API_SERVER = create({
   baseURL: 'https://localhost:7128',
 })
 export const MY_URL = 'https://twnsnd.vercel.app'
-export const MY_URL = 'http://localhost:3000'
 
 //SignIn Google
 export const redirectUriGoogle = MY_URL
