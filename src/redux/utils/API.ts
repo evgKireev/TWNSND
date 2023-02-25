@@ -126,7 +126,9 @@ const changePasswordUser = ({
   NewPassword,
   NewPasswordConfirmation,
 }: ChangePasswordData) => {
-  const token = localStorage.getItem(ACCESS_TOKEN_KEY)
+  const token =
+    localStorage.getItem(ACCESS_TOKEN_KEY) ||
+    sessionStorage.getItem(ACCESS_TOKEN_KEY)
   return API.post(
     'api/Account/ChangePassword',
     {
