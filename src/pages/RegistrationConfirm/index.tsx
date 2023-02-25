@@ -1,5 +1,4 @@
-import { useEffect } from 'react'
-import { API, MY_URL } from '../../@types/constant'
+import {  MY_URL } from '../../@types/constant'
 import Button, { ButtonTypes } from '../../components/UI/Button'
 import Loader from '../../components/UI/Loader'
 import FormContainer from '../../layout/FormContainer'
@@ -10,7 +9,6 @@ import styles from './RegistrationConfirm.module.scss'
 const RegistrationConfirm = () => {
   const { email, userId } = useAppSelector((state) => state.signUpSlice)
   const { statusConfirmUser } = useAppSelector((state) => state.statusSlice)
-
   const dispatch = useAppDispatch()
   const regisrtationConfirmation = () => {
     dispatch(

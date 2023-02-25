@@ -10,12 +10,13 @@ import styles from './RestorePassword.module.scss'
 
 const RestorePassword = () => {
   const [email, setEmail] = useState('')
-  const dispatch = useAppDispatch()
   const [emailDirty, setEmailDirty] = useState(false)
   const [okMail, setOkMail] = useState<boolean | undefined>(undefined)
   const [emailError, setEmailError] = useState('')
   const [validForm, setValidForm] = useState(false)
   const { statusRestorePassword } = useAppSelector((state) => state.statusSlice)
+  const dispatch = useAppDispatch()
+
   useEffect(() => {
     if (emailError) {
       setValidForm(false)

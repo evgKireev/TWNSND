@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { linkGoogle } from '../../@types/constant'
 import Facebook from '../../assets/SocialMediaIcons/Facebook'
 import { GoogleIcon } from '../../assets/SocialMediaIcons/GoogleIcon'
 import Vk from '../../assets/SocialMediaIcons/Vk'
@@ -182,14 +183,14 @@ const SignIn = () => {
             disabled={false}
             icon={<Facebook />}
           />
-
-          <ButtonIcon
-            type={ButtonTypesIcon.G}
-            onClick={() => {}}
-            disabled={false}
-            icon={<GoogleIcon />}
-          />
-
+          <a href={linkGoogle}>
+            <ButtonIcon
+              type={ButtonTypesIcon.G}
+              onClick={() => {}}
+              disabled={false}
+              icon={<GoogleIcon />}
+            />
+          </a>
           <ButtonIcon
             type={ButtonTypesIcon.VK}
             onClick={() => {}}
@@ -208,7 +209,6 @@ const SignIn = () => {
         </div>
       </div>
     </FormContainer>
-    // TODO: на кнопки навесить редерект на регистрацию через соцсети и ссылку на восстановление пароля
   )
 }
 

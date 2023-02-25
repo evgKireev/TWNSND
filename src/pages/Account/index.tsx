@@ -23,27 +23,21 @@ export const Account = () => {
   const [badges, setBadges] = useState<string[]>(badgesArr)
   const [editName, setEditName] = useState<boolean>(false)
   const [editEmail, setEditEmail] = useState<boolean>(false)
-
   const [firstName, setFirstName] = useState('')
   const [errorFirstName, setErrorFirstName] = useState<boolean | undefined>(
     undefined
   )
   const [okFirstName, setOkFirstName] = useState<boolean | undefined>(undefined)
-
   const [lastName, setLastName] = useState('')
   const [errorLastName, setErrorLastName] = useState<boolean | undefined>(
     undefined
   )
   const [okLastName, setOkLastName] = useState<boolean | undefined>(undefined)
-
   const [email, setEmail] = useState('')
   const [errorEmail, setErrorEmail] = useState<boolean | undefined>(undefined)
   const [okEmail, setOkEmail] = useState<boolean | undefined>(undefined)
-
   const [country, setCountry] = useState<string>('')
-
   const [business, setBusiness] = useState<string>('')
-
   const [role, setRole] = useState<string>('')
 
   const firstNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {

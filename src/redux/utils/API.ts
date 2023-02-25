@@ -1,5 +1,6 @@
-import { API, API_GOOGLE } from '../../@types/constant'
+import { ACCESS_TOKEN_KEY, API, API_GOOGLE } from '../../@types/constant'
 import {
+  ChangePasswordData,
   ParamsUrlGoogle,
   ParamsUrlType,
   RestorePassword,
@@ -120,6 +121,28 @@ const restoreChangePasswordUsser = ({
   )
 }
 
+const changePasswordUser = ({
+  OldPassword,
+  NewPassword,
+  NewPasswordConfirmation,
+}: ChangePasswordData) => {
+  const token = localStorage.getItem(ACCESS_TOKEN_KEY)
+  return API.post(
+    'api/Account/ChangePassword',
+    {
+      OldPassword,
+      NewPassword,
+      NewPasswordConfirmation,
+    },
+    {
+      headers: {
+        Authorization: `Bearer {${token}}`,
+        'Content-Type': 'application/json',
+      },
+    }
+  )
+}
+
 export default {
   registerUserMail,
   sentEmailRegisterUser,
@@ -129,4 +152,5 @@ export default {
   registerUserGoogle,
   restorePassword,
   restoreChangePasswordUsser,
+  changePasswordUser,
 }

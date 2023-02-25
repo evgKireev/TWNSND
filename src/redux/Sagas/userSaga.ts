@@ -3,15 +3,17 @@ import { toast } from 'react-toastify'
 import { all, call, put, takeLatest } from 'redux-saga/effects'
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '../../@types/constant'
 import {
+  ChangePasswordPayloadType,
   ParamsUrlPayloadType,
   RestorePassword,
-  RestorePasswordData,
+  RestorePasswordlePayloadType,
   SentMailRegisterUser,
   SignInGooglePayloadType,
   SignInPayloadType,
   UserTypePayloadType,
 } from '../../@types/types/auth'
 import {
+  getChangePassword,
   getRestoreChangePassword,
   getRestorePassword,
   getSignInUser,
@@ -30,6 +32,7 @@ import {
   setConfirmStatusUser,
   setSignInStatusUser,
   setSignInStatusUserGoogle,
+  setStatusChangePassword,
   setStatusRestoreChangePassword,
   setStatusRestorePassword,
   setStatusUser,
@@ -171,19 +174,45 @@ function* restorePasswordWorker(actions: PayloadAction<RestorePassword>) {
 }
 
 function* restoreChangePasswordWorker(
-  actions: PayloadAction<RestorePasswordData>
+  actions: PayloadAction<RestorePasswordlePayloadType>
 ) {
   yield put(setStatusRestoreChangePassword('pending'))
+  const { data: restorePasswordData, callback } = actions.payload
   const { ok, data } = yield call(
     API.restoreChangePasswordUsser,
-    actions.payload
+    restorePasswordData
   )
   if (ok) {
     yield put(setStatusRestoreChangePassword('fullfilled'))
+    callback('/signin')
   } else {
     yield put(setStatusRestoreChangePassword('regected'))
     if (data.error_message === 'user_not_found') {
       toast.error('Пользователь с указанным email ну существует')
+    } else {
+      toast.error('Что-то пошло не так. Попробуйте еще раз!')
+    }
+  }
+}
+
+function* changePasswordWorker(
+  actions: PayloadAction<ChangePasswordPayloadType>
+) {
+  yield put(setStatusChangePassword('pending'))
+  const { data: dataChange, callback } = actions.payload
+  const { ok, data } = yield call(API.changePasswordUser, dataChange)
+  if (ok) {
+    yield put(setStatusChangePassword('fullfilled'))
+    toast.success('Пароль успешно изменен')
+    callback('/account')
+  } else {
+    yield put(setStatusChangePassword('regected'))
+    if (data.error_message === 'old_password_invalid') {
+      toast.error('Старый пароль не верный')
+    } else if (data.error_message === 'external_only') {
+      toast.error(
+        'Невозможно сменить пароль, так как Ваша регистрация происходила через внешние провайдеры'
+      )
     } else {
       toast.error('Что-то пошло не так. Попробуйте еще раз!')
     }
@@ -207,4 +236,5 @@ export default function* userSaga() {
   yield all([takeLatest(getRegisterUserGoogle, registerUserGoogleWorker)])
   yield all([takeLatest(getRestorePassword, restorePasswordWorker)])
   yield all([takeLatest(getRestoreChangePassword, restoreChangePasswordWorker)])
+  yield all([takeLatest(getChangePassword, changePasswordWorker)])
 }

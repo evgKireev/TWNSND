@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import Button, { ButtonTypes } from '../../components/UI/Button'
 import Input, { InputTypeEnum } from '../../components/UI/Input'
 import Loader from '../../components/UI/Loader'
@@ -9,6 +9,7 @@ import { getRestoreChangePassword } from '../../redux/SignUser/signInSlice'
 import styles from './RestoreChangePassword.module.scss'
 
 const RestoreChangePassword = () => {
+  const navigate = useNavigate()
   const [newPassword, setNewPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [newPasswordDirty, setNewPasswordDirty] = useState(false)
@@ -85,10 +86,13 @@ const RestoreChangePassword = () => {
     if (newPassword && confirmPassword) {
       dispatch(
         getRestoreChangePassword({
-          Email: email,
-          Password: newPassword,
-          ConfirmPassword: confirmPassword,
-          Code: formattedCode,
+          data: {
+            Email: email,
+            Password: newPassword,
+            ConfirmPassword: confirmPassword,
+            Code: formattedCode,
+          },
+          callback: (link) => navigate(link),
         })
       )
     } else {
@@ -133,7 +137,7 @@ const RestoreChangePassword = () => {
       link={'/signin/restore/passord'}
       textLink={'Назад'}
     >
-      {statusRestoreChangePassword === 'pending' ? (
+      {statusRestoreChangePassword === 'fullfilled' ? (
         <div className={styles.messageOk}>Ваш пароль был успешно изменен</div>
       ) : (
         <div className={styles.innerContainer}>
