@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import Button, { ButtonTypes } from '../../components/UI/Button'
 import Input, { InputTypeEnum } from '../../components/UI/Input'
@@ -20,7 +20,6 @@ const RestoreChangePassword = () => {
   const [okPasswordConfirm, setOkPasswordConfirm] = useState<
     boolean | undefined
   >(undefined)
-  const [validForm, setValidForm] = useState(false)
   const location = useLocation()
   const searchParams = new URLSearchParams(location.search)
   const email = searchParams.get('email')
@@ -43,7 +42,7 @@ const RestoreChangePassword = () => {
   const passworwHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewPassword(e.target.value)
     const re =
-      /(?=.*[0-9])(?=.*[!@#$%^&*_])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*_]{8,}/g
+      /(?=.*[0-9])(?=.*[!@#$%^&*_])(?=.*[A-ZА-Я])[0-9a-zA-Z!@#$%^&*_]{8,}/g
     if (!re.test(e.target.value)) {
       setPasswordError(
         '*Пароль должен содержать минимум 8 символов, 1 заглавную букву, 1 спецсимвол, 1 цифру'
@@ -62,7 +61,7 @@ const RestoreChangePassword = () => {
   const passworwConfirmHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setConfirmPassword(e.target.value)
     const re =
-      /(?=.*[0-9])(?=.*[!@#$%^&*_])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*_]{8,}/g
+      /(?=.*[0-9])(?=.*[!@#$%^&*_])(?=.*[A-ZА-Я])[0-9a-zA-Z!@#$%^&*_]{8,}/g
     if (!re.test(e.target.value)) {
       setPasswordConfirmError(
         '*Пароль должен содержать минимум 8 символов, 1 заглавную букву, 1 спецсимвол, 1 цифру'
@@ -72,10 +71,9 @@ const RestoreChangePassword = () => {
         setPasswordConfirmError('*Пароль не может быть пустым')
         setOkPasswordConfirm(false)
       }
-      if (e.target.value !== newPassword) {
-        setPasswordConfirmError('*Пароль не совпадает')
-        setOkPasswordConfirm(false)
-      }
+    } else if (e.target.value !== newPassword) {
+      setPasswordConfirmError('*Пароль не совпадает')
+      setOkPasswordConfirm(false)
     } else {
       setPasswordConfirmError('')
       setOkPasswordConfirm(true)
@@ -103,30 +101,23 @@ const RestoreChangePassword = () => {
         setOkPassword(false)
         setPasswordConfirmDirty(true)
         setNewPasswordDirty(true)
-        setValidForm(false)
       }
       if (!newPassword) {
         setPasswordError('*Пароль не может быть пустым')
         setOkPassword(false)
         setNewPasswordDirty(true)
-        setValidForm(false)
       }
       if (!confirmPassword) {
         setPasswordConfirmError('*Пароль не может быть пустым')
         setOkPasswordConfirm(false)
         setPasswordConfirmDirty(true)
-        setValidForm(false)
       }
     }
   }
 
-  useEffect(() => {
-    if (passwordError && passwordConfirmError) {
-      setValidForm(false)
-    } else {
-      setValidForm(true)
-    }
-  }, [passwordError, passwordConfirmError])
+  const validForm = useMemo(() => {
+    return okPassword && okPasswordConfirm
+  }, [okPassword, okPasswordConfirm])
 
   return statusRestoreChangePassword === 'pending' ? (
     <Loader />

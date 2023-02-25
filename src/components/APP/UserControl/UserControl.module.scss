@@ -46,19 +46,19 @@
   line-height: 24px;
 }
 
-.logaut {
+.logout {
   display: flex;
   align-items: center;
   gap: 21px;
   cursor: pointer;
 }
 
-.logautText {
+.logoutText {
   font-size: 24px;
   line-height: 24px;
 }
 
-.logautIcon {
+.logoutIcon {
   svg {
     height: 40px;
     width: 35px;
@@ -66,19 +66,19 @@
   }
 }
 
-.logautQuestionText {
+.logoutQuestionText {
   font-size: 24px;
   line-height: 24px;
   margin-bottom: 36px;
 }
 
-.logautBtn {
+.logoutBtn {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.btnLogaut {
+.btnLogout {
   font-size: 22px;
   line-height: 140%;
   padding: 13px 37px 16px 35px;

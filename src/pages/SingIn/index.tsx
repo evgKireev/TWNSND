@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { linkGoogle } from '../../@types/constant'
 import Facebook from '../../assets/SocialMediaIcons/Facebook'
@@ -28,7 +28,6 @@ const SignIn = () => {
   const [passwordError, setPasswordError] = useState('')
   const [emailDirty, setEmailDirty] = useState(false)
   const [passwordDirty, setPasswordDirty] = useState(false)
-  const [validForm, setValidForm] = useState(false)
   const { rememberPassword } = useAppSelector((state) => state.signInSlice)
 
   const blurHandler = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -103,13 +102,9 @@ const SignIn = () => {
     }
   }
 
-  useEffect(() => {
-    if (emailError && passwordError) {
-      setValidForm(false)
-    } else {
-      setValidForm(true)
-    }
-  }, [emailError, passwordError])
+  const validForm = useMemo(() => {
+    return okPassword
+  }, [okPassword])
 
   return (
     <FormContainer

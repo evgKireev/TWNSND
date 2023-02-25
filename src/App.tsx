@@ -1,18 +1,18 @@
 import { Route, Routes } from 'react-router-dom'
 import RegistrationConfirm from './pages/RegistrationConfirm'
-import { Account } from './pages/Account'
 import ChangePassword from './pages/ChangePassword'
+import Account from './pages/Account'
 import Home from './pages/Home'
 import SignUp from './pages/SignUp'
 import SignUpHome from './pages/SignUpHome'
 import SignIn from './pages/SingIn'
 import SuccessRegistration from './pages/SuccessRegistration'
 import CheckPasswordSocial from './pages/CheckPasswordSocial'
+import RestorePassword from './pages/RestorePassword'
+import RestoreChangePassword from './pages/RestoreChangePassword'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import './scss/app.scss'
-import RestorePassword from './pages/RestorePassword'
-import RestoreChangePassword from './pages/RestoreChangePassword'
 
 const App = () => {
   return (

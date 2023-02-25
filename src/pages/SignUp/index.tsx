@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button, { ButtonTypes } from '../../components/UI/Button'
 import Input, { InputTypeEnum } from '../../components/UI/Input'
@@ -34,14 +34,6 @@ const SignUp = () => {
   const [passwordError, setPasswordError] = useState('')
   const [passwordConfirmError, setPasswordConfirmError] = useState('')
   const [ferstNameError, setFerstNameError] = useState('')
-  const [validForm, setValidForm] = useState(false)
-  useEffect(() => {
-    if (emailError && passwordError && passwordConfirmError && ferstNameError) {
-      setValidForm(false)
-    } else {
-      setValidForm(true)
-    }
-  }, [emailError, passwordError, passwordConfirmError, ferstNameError])
 
   const blurHandler = (e: React.FocusEvent<HTMLInputElement>) => {
     switch (e.target.name) {
@@ -77,7 +69,7 @@ const SignUp = () => {
   const passworwHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value)
     const re =
-      /(?=.*[0-9])(?=.*[!@#$%^&*_])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*_]{8,}/g
+      /(?=.*[0-9])(?=.*[!@#$%^&*_])(?=.*[A-ZА-Я])[0-9a-zA-Z!@#$%^&*_]{8,}/g
     if (!re.test(e.target.value)) {
       setPasswordError(
         '*Пароль должен содержать минимум 8 символов, 1 заглавную букву, 1 спецсимвол, 1 цифру'
@@ -96,7 +88,7 @@ const SignUp = () => {
   const passworwConfirmHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPasswordConfirm(e.target.value)
     const re =
-      /(?=.*[0-9])(?=.*[!@#$%^&*_])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*_]{8,}/g
+      /(?=.*[0-9])(?=.*[!@#$%^&*_])(?=.*[A-ZА-Я])[0-9a-zA-Z!@#$%^&*_]{8,}/g
     if (!re.test(e.target.value)) {
       setPasswordConfirmError(
         '*Пароль должен содержать минимум 8 символов, 1 заглавную букву, 1 спецсимвол, 1 цифру'
@@ -106,10 +98,9 @@ const SignUp = () => {
         setPasswordConfirmError('*Пароль не может быть пустым')
         setOkPasswordConfirm(false)
       }
-      if (e.target.value !== password) {
-        setPasswordConfirmError('*Пароль не совпадает')
-        setOkPasswordConfirm(false)
-      }
+    } else if (e.target.value !== password) {
+      setPasswordConfirmError('*Пароль не совпадает')
+      setOkPasswordConfirm(false)
     } else {
       setPasswordConfirmError('')
       setOkPasswordConfirm(true)
@@ -162,35 +153,33 @@ const SignUp = () => {
         setPasswordConfirmDirty(true)
         setFirstNameDirty(true)
         setEmailDirty(true)
-        setValidForm(false)
       }
       if (!email) {
         setEmailError('*Введите электронную почту')
         setOkMail(false)
         setEmailDirty(true)
-        setValidForm(false)
       }
       if (!password) {
         setPasswordError('*Пароль не может быть пустым')
         setOkPassword(false)
         setPasswordDirty(true)
-        setValidForm(false)
       }
       if (!passwordConfirm) {
         setPasswordConfirmError('*Пароль не может быть пустым')
         setOkPasswordConfirm(false)
         setPasswordConfirmDirty(true)
-        setValidForm(false)
       }
       if (!firstName) {
         setFerstNameError('*Имя должно содержать минимум 2 символа')
         setOkName(false)
         setFirstNameDirty(true)
-        setValidForm(false)
       }
     }
   }
 
+  const validForm = useMemo(() => {
+    return okPassword && okPasswordConfirm && okMail && okName
+  }, [okPassword, okPasswordConfirm, okMail, okName])
   return statusRegisterUser === 'pending' ? (
     <Loader />
   ) : (

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { MY_URL } from '../../@types/constant'
 import Button, { ButtonTypes } from '../../components/UI/Button'
 import Input, { InputTypeEnum } from '../../components/UI/Input'
@@ -13,17 +13,9 @@ const RestorePassword = () => {
   const [emailDirty, setEmailDirty] = useState(false)
   const [okMail, setOkMail] = useState<boolean | undefined>(undefined)
   const [emailError, setEmailError] = useState('')
-  const [validForm, setValidForm] = useState(false)
   const { statusRestorePassword } = useAppSelector((state) => state.statusSlice)
   const dispatch = useAppDispatch()
 
-  useEffect(() => {
-    if (emailError) {
-      setValidForm(false)
-    } else {
-      setValidForm(true)
-    }
-  }, [emailError])
   const blurHandler = (e: React.FocusEvent<HTMLInputElement>) => {
     switch (e.target.name) {
       case 'E-mail':
@@ -59,11 +51,14 @@ const RestorePassword = () => {
         setEmailError('*Введите электронную почту')
         setOkMail(false)
         setEmailDirty(true)
-        setValidForm(false)
       }
     }
   }
-  console.log('s')
+
+  const validForm = useMemo(() => {
+    return okMail
+  }, [okMail])
+
   return statusRestorePassword === 'pending' ? (
     <Loader />
   ) : (

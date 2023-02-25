@@ -200,13 +200,12 @@ function* changePasswordWorker(
 ) {
   yield put(setStatusChangePassword('pending'))
   const { data: dataChange, callback } = actions.payload
-  const { ok, data } = yield call(API.changePasswordUser, dataChange)
+  const { ok, data, problem } = yield call(API.changePasswordUser, dataChange)
   if (ok) {
     yield put(setStatusChangePassword('fullfilled'))
     toast.success('Пароль успешно изменен')
     callback('/account')
   } else {
-    yield put(setStatusChangePassword('regected'))
     if (data.error_message === 'old_password_invalid') {
       toast.error('Старый пароль не верный')
     } else if (data.error_message === 'external_only') {
@@ -216,6 +215,7 @@ function* changePasswordWorker(
     } else {
       toast.error('Что-то пошло не так. Попробуйте еще раз!')
     }
+    yield put(setStatusChangePassword('regected'))
   }
 }
 

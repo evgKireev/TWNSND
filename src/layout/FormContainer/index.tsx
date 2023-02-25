@@ -24,7 +24,6 @@ const FormContainer: React.FC<FormContainerType> = ({
   className,
 }) => {
   const navigate = useNavigate()
-
   return (
     <div className={styles.wrap}>
       <div className={classNames(styles.inner, className)}>

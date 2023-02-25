@@ -17,8 +17,7 @@ let badgesArr = [
   'Маркетинг',
 ]
 
-export const Account = () => {
-  //TODO настроить правильный путь кнопки "изменить пароль"
+const Account = () => {
   const navigate = useNavigate()
   const [badges, setBadges] = useState<string[]>(badgesArr)
   const [editName, setEditName] = useState<boolean>(false)
@@ -96,7 +95,6 @@ export const Account = () => {
     <div className={styles.wrapper}>
       <div className={styles.header}>
         <div className={styles.logo}>LOGO</div>
-
         <ul className={styles.menu}>
           <li>
             <a href="/">Главная</a>
@@ -177,7 +175,7 @@ export const Account = () => {
           <div className={styles.editContainer}>
             <p className={styles.text}>Изменить пароль</p>
 
-            <button onClick={() => navigate('recovery/passord')}>
+            <button onClick={() => navigate('/signin/recovery/passord/change')}>
               <Edit />
             </button>
           </div>
@@ -297,3 +295,5 @@ export const Account = () => {
     </div>
   )
 }
+
+export default Account
