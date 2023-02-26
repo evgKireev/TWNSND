@@ -46,10 +46,6 @@ const FormContainer: React.FC<FormContainerType> = ({
           </a>
         </div>
         <div>{children}</div>
-        {/* <div className={styles.polis}>
-        Создавая аккаунт, вы соглашаетесь с
-        <span>политикой конфиденциальности и условиями использования LOGO</span>
-      </div> */}
       </div>
     </div>
   )

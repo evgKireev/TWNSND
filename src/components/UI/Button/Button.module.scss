@@ -2,11 +2,10 @@
 
 .button {
   border-radius: 5px;
-  font-family: 'Inter';
   font-style: normal;
   font-weight: 500;
-  font-size: 22px;
-  line-height: 27px;
+  font-size: 16px;
+  line-height: 19px;
   text-align: center;
   transition: all 0.5s;
   &:hover {
@@ -18,16 +17,15 @@
 .primary {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 20px;
   border: 1px solid $text_basic;
   color: $text_basic;
-  padding: 26px 80px;
+  padding: 15px 15px 15px 90px;
   transition: all 0.5s;
   &:hover {
     color: $button_1;
     transition: all 0.5s;
   }
-
   &:active {
     background-color: $button_1;
     color: $backgr_white;

@@ -6,7 +6,10 @@ import { getUser, setUser } from '../User/userSlice'
 import API from '../utils/API'
 
 function* getDataUserWorker() {
-  const token = localStorage.getItem(ACCESS_TOKEN_KEY) || ''
+  const token =
+    localStorage.getItem(ACCESS_TOKEN_KEY) ||
+    sessionStorage.getItem(ACCESS_TOKEN_KEY) ||
+    ''
   const { ok, data } = yield call(API.getUserData, token)
   yield put(setStatusDataUser('pending'))
   if (ok) {

@@ -1,4 +1,4 @@
-export const MailIcon = ({ width = '34', height = '28', fill = '#2D2D2D' }) => {
+export const MailIcon = ({ width = '33', height = '26', fill = '#2D2D2D' }) => {
   return (
     <svg
       width={width}

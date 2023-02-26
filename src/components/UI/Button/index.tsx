@@ -1,7 +1,6 @@
-import React, { FC, ReactElement } from 'react'
+import { FC, ReactElement } from 'react'
 import classNames from 'classnames'
 import styles from './Button.module.scss'
-
 
 export enum ButtonTypes {
   Primary = 'primary',
@@ -20,9 +19,7 @@ type ButtonProps = {
 
 const Button: FC<ButtonProps> = (props) => {
   const { type, title, onClick, className, disabled, icon } = props
-
   const buttonClassName = styles[type]
-
   return (
     <div
       className={classNames(styles.button, buttonClassName, className, {
