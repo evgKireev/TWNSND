@@ -88,7 +88,7 @@ function* signInUserWorker(actions: PayloadAction<SignInPayloadType>) {
   const { data: singInUserData, rememberPassword, callback } = actions.payload
   const { data, ok, problem } = yield call(API.signInUser, singInUserData)
   if (ok && data) {
-    if (rememberPassword) {
+    if (!rememberPassword) {
       localStorage.setItem(ACCESS_TOKEN_KEY, data?.access_token)
       localStorage.setItem(REFRESH_TOKEN_KEY, data?.refresh_token)
     } else {
