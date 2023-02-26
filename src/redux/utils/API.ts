@@ -150,11 +150,15 @@ const changePasswordUser = ({
 }
 
 const getUserData = (token: string) => {
-  return API_SERVER.get('/api/user/GetCustomer', {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  })
+  return API_SERVER.get(
+    '/api/user/GetCustomer',
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  )
 }
 
 export default {
