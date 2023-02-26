@@ -87,14 +87,15 @@ function* signInUserWorker(actions: PayloadAction<SignInPayloadType>) {
   yield put(setSignInStatusUser('pending'))
   const { data: singInUserData, rememberPassword, callback } = actions.payload
   const { data, ok, problem } = yield call(API.signInUser, singInUserData)
+  console.log(rememberPassword)
+
   if (ok && data) {
-    if (!rememberPassword) {
-      localStorage.setItem(ACCESS_TOKEN_KEY, data?.access_token)
-      localStorage.setItem(REFRESH_TOKEN_KEY, data?.refresh_token)
-    } else {
-      sessionStorage.setItem(ACCESS_TOKEN_KEY, data?.access_token)
-      sessionStorage.setItem(REFRESH_TOKEN_KEY, data?.refresh_token)
-    }
+    rememberPassword
+      ? localStorage.setItem(ACCESS_TOKEN_KEY, data?.access_token)
+      : sessionStorage.setItem(ACCESS_TOKEN_KEY, data?.access_token)
+    rememberPassword
+      ? sessionStorage.setItem(REFRESH_TOKEN_KEY, data?.refresh_token)
+      : localStorage.setItem(REFRESH_TOKEN_KEY, data?.refresh_token)
     yield put(setRegisterUser(true))
     callback('/')
     yield put(setSignInStatusUser('fullfilled'))

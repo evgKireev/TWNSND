@@ -29,7 +29,6 @@ const SignIn = () => {
   const [emailDirty, setEmailDirty] = useState(false)
   const [passwordDirty, setPasswordDirty] = useState(false)
   const { rememberPassword } = useAppSelector((state) => state.signInSlice)
-
   const blurHandler = (e: React.FocusEvent<HTMLInputElement>) => {
     switch (e.target.name) {
       case 'Пароль':

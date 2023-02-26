@@ -40,7 +40,6 @@ const Input: React.FC<InputType> = ({
 }) => {
   const inputStyles = styles[typeInput]
   const [checkPassword, setCheckPassword] = useState(false)
-  console.log(error)
   return (
     <div className={styles.wrap}>
       <input
