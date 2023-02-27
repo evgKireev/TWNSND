@@ -79,13 +79,6 @@ const signInUser = ({
   })
 }
 
-const getNewAccessToken = (refresh_token: string) => {
-  return API.post(
-    'connect/token?grant_type=refresh_token&client_id=Test_js_client',
-    { refresh_token }
-  )
-}
-
 const registerUserGoogle = ({
   code,
   redirectUriGoogle,
@@ -149,15 +142,26 @@ const changePasswordUser = ({
   )
 }
 
-const getUserData = (token: string) => {
+const getUserData = (accessToken: string) => {
   return API_SERVER.get(
     '/api/user/GetCustomer',
     {},
     {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${accessToken}`,
       },
     }
+  )
+}
+
+const verifyToken = (ACCESS_TOKEN: string) => {
+  return API.get('api/Account/CheckTokenExpiration', { ACCESS_TOKEN })
+}
+
+const getNewAccessToken = (refresh_token: string) => {
+  return API.post(
+    'connect/token?grant_type=refresh_token&client_id=Test_js_client',
+    { refresh_token }
   )
 }
 
@@ -172,4 +176,5 @@ export default {
   restorePassword,
   restoreChangePasswordUsser,
   changePasswordUser,
+  verifyToken,
 }

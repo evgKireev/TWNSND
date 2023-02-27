@@ -33,7 +33,7 @@ const signInSlice = createSlice({
       state,
       actions: PayloadAction<ChangePasswordPayloadType>
     ) => {},
-    logoutUser(state, actions: PayloadAction<undefined>) {},
+    logoutUser: (state, actions: PayloadAction<undefined>) => {},
     setRememberPassword: (state, actions: PayloadAction<boolean>) => {
       state.rememberPassword = actions.payload
     },

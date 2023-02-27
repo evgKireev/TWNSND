@@ -1,4 +1,5 @@
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '../../@types/constant'
 import Button, { ButtonTypes } from '../../components/UI/Button'
 import Loader from '../../components/UI/Loader'
 import FormContainer from '../../layout/FormContainer'
@@ -13,8 +14,8 @@ const SuccessRegistration = () => {
   const searchParams = new URLSearchParams(location.search)
   const userId = searchParams.get('userId')
   const email = searchParams.get('email')
-  const code = searchParams.get('code');
-  const formattedCode = code ? code.replace(/\s/g, '+') : null;
+  const code = searchParams.get('code')
+  const formattedCode = code ? code.replace(/\s/g, '+') : null
 
   const navigate = useNavigate()
   const regisrtationConfirmation = () => {

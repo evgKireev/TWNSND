@@ -16,58 +16,43 @@ export default function* callCheckingUser(api: any, ...rest: any) {
     ''
   const res: ApiResponse<any> = yield call(api, accessToken, ...rest)
   if (res.status === 401) {
-    const { data, ok }: ApiResponse<any> = yield call(
-      API.getNewAccessToken,
-      refreshToken
-    )
-    if (ok && data) {
-      const { access } = data
-      localStorage.setItem(ACCESS_TOKEN_KEY, access)
-      const newResponse: ApiResponse<any> = yield call(api, access, ...rest)
-      return newResponse
+    const { data }: ApiResponse<any> = yield call(API.verifyToken, accessToken)
+    if (data) {
+      if (data.isActive === false) {
+        const { data, ok }: ApiResponse<any> = yield call(
+          API.getNewAccessToken,
+          refreshToken
+        )
+        if (ok && data) {
+          const { access_token, refresh_token } = data
+          if (localStorage.getItem(ACCESS_TOKEN_KEY)) {
+            localStorage.setItem(ACCESS_TOKEN_KEY, access_token)
+            localStorage.setItem(ACCESS_TOKEN_KEY, refresh_token)
+          } else if (sessionStorage.getItem(ACCESS_TOKEN_KEY)) {
+            sessionStorage.setItem(ACCESS_TOKEN_KEY, access_token)
+            sessionStorage.setItem(ACCESS_TOKEN_KEY, refresh_token)
+          }
+          const newResponse: ApiResponse<any> = yield call(
+            api,
+            access_token,
+            ...rest
+          )
+          return newResponse
+        } else {
+          yield put(logoutUser())
+          toast.error(
+            'Срок действия вашего сеанса истек, пожалуйста, авторизуйтесь'
+          )
+        }
+      } else {
+        return res
+      }
     } else {
       yield put(logoutUser())
-      localStorage.removeItem(REFRESH_TOKEN_KEY)
-      localStorage.removeItem(ACCESS_TOKEN_KEY)
-      sessionStorage.removeItem(REFRESH_TOKEN_KEY)
-      sessionStorage.removeItem(ACCESS_TOKEN_KEY)
-      toast.error('Your session has expired, please log in')
+      toast.error(
+        'Срок действия вашего сеанса истек, пожалуйста, авторизуйтесь'
+      )
     }
-
-    // const { status: accessStatus }: ApiResponse<any> = yield call(
-    //   API.verifyToken,
-    //   accessToken
-    // )
-    // if (accessStatus === 401) {
-    //   const { status: refreshStatus }: ApiResponse<any> = yield call(
-    //     API.verifyToken,
-    //     refreshToken
-    //   )
-    //   if (refreshStatus === 200) {
-    //     const { data, ok }: ApiResponse<any> = yield call(
-    //       API.getNewAccessToken,
-    //       refreshToken
-    //     )
-    //     if (ok && data) {
-    //       const { access } = data
-    //       localStorage.setItem(ACCESS_TOKEN_KEY, access)
-    //       const newResponse: ApiResponse<any> = yield call(api, access, ...rest)
-    //       return newResponse
-    //     } else {
-    //       yield put(logoutUser())
-    //       localStorage.removeItem(REFRESH_TOKEN_KEY)
-    //       localStorage.removeItem(ACCESS_TOKEN_KEY)
-    //       toast.error('Your session has expired, please log in')
-    //     }
-    //   } else {
-    //     yield put(logoutUser())
-    //     localStorage.removeItem(REFRESH_TOKEN_KEY)
-    //     localStorage.removeItem(ACCESS_TOKEN_KEY)
-    //     toast.error('Your session has expired, please log in')
-    //   }
-    // } else {
-    //   return res
-    // }
   } else {
     return res
   }

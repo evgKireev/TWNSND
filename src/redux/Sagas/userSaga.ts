@@ -71,10 +71,7 @@ function* sentMailRegistrUser(actions: PayloadAction<SentMailRegisterUser>) {
 function* confirmRegistrUser(actions: PayloadAction<ParamsUrlPayloadType>) {
   yield put(setSuccessStatusUser('pending'))
   const { data: confirmRegisterUser, callback } = actions.payload
-  const { ok, data, problem } = yield call(
-    API.activateUser,
-    confirmRegisterUser
-  )
+  const { ok } = yield call(API.activateUser, confirmRegisterUser)
   if (ok) {
     yield put(setSuccessStatusUser('fullfilled'))
     callback()
@@ -86,7 +83,7 @@ function* confirmRegistrUser(actions: PayloadAction<ParamsUrlPayloadType>) {
 function* signInUserWorker(actions: PayloadAction<SignInPayloadType>) {
   yield put(setSignInStatusUser('pending'))
   const { data: singInUserData, rememberPassword, callback } = actions.payload
-  const { data, ok, problem } = yield call(API.signInUser, singInUserData)
+  const { data, ok } = yield call(API.signInUser, singInUserData)
   if (ok && data) {
     rememberPassword
       ? localStorage.setItem(ACCESS_TOKEN_KEY, data?.access_token)
