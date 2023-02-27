@@ -169,12 +169,7 @@ const verifyToken = (ACCESS_TOKEN: string) => {
 const getNewAccessToken = (refresh_token: string) => {
   return API.post(
     'connect/token?grant_type=refresh_token&client_id=Test_js_client',
-    {},
-    {
-      headers: {
-        Authorization: `Bearer ${refresh_token}`,
-      },
-    }
+    { refresh_token }
   )
 }
 
