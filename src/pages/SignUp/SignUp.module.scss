@@ -1,5 +1,4 @@
 @import '../../scss/vars';
-
 .passwordInfo {
   margin-top: 3px;
   font-weight: 400;
@@ -17,67 +16,62 @@
 .errorMessage {
   margin-top: 8px;
   font-weight: 400;
-  font-size: 16px;
-  line-height: 130%;
+  font-size: 12px;
+  line-height: 16px;
   color: $error;
 }
 
 .innerName {
   display: flex;
-  gap: 23px;
+  gap: 19px;
 }
 
 .checkbox {
+  margin-top: 18px;
   input {
     width: 24px;
     height: 24px;
   }
   display: flex;
   align-items: center;
-  gap: 20px;
-  margin-bottom: 25px;
+  gap: 14px;
+  margin-bottom: 28px;
   span {
     font-weight: 400;
-    font-size: 18px;
-    line-height: 130%;
+    font-size: 16px;
+    line-height: 18px;
   }
 }
 
-.emailInfo {
-  font-weight: 500;
-  font-size: 28px;
-  line-height: 30px;
-}
+// @media (max-width: 1024px) {
+//   .innerName {
+//     flex-direction: column;
+//     gap: 24px;
+//   }
+// }
 
-@media (max-width: 1024px) {
-  .innerName {
-    flex-direction: column;
-    gap: 24px;
-  }
-}
-
-@media (max-width: 450px) {
-  .innerInput {
-    gap: 15px;
-  }
-  .innerName {
-    gap: 15px;
-  }
-  .errorMessage,
-  .passwordInfo {
-    margin-top: 6px;
-    font-size: 10px;
-    line-height: 110%;
-  }
-  .checkbox {
-    input {
-      width: 14px;
-      height: 16px;
-    }
-    gap: 10px;
-    margin-bottom: 25px;
-    span {
-      font-size: 16px;
-    }
-  }
-}
+// @media (max-width: 450px) {
+//   .innerInput {
+//     gap: 15px;
+//   }
+//   .innerName {
+//     gap: 15px;
+//   }
+//   .errorMessage,
+//   .passwordInfo {
+//     margin-top: 6px;
+//     font-size: 10px;
+//     line-height: 110%;
+//   }
+//   .checkbox {
+//     input {
+//       width: 14px;
+//       height: 16px;
+//     }
+//     gap: 10px;
+//     margin-bottom: 25px;
+//     span {
+//       font-size: 16px;
+//     }
+//   }
+// }

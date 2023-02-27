@@ -1,59 +1,59 @@
 @import '../../../scss/vars';
-
 .wrap {
   position: relative;
 }
 .input {
   font-weight: 500;
-  font-size: 24px;
-  line-height: 29px;
+  font-size: 16px;
+  line-height: 19px;
   color: $border;
   border: 1px solid $border;
   border-radius: 5px;
-  height: 80px;
+  height: 60px;
   width: 100%;
   outline: none;
-  padding: 26px 70px 25px 50px;
+  padding: 20px 32px;
   &:focus {
     border: 2px solid $button_1;
     & + label {
-      top: 11px;
+      top: 7px;
       left: initial;
-      right: 40px;
-      font-size: 20px;
-      line-height: 24px;
+      right: 11px;
+      font-size: 14px;
+      line-height: 17px;
     }
   }
 }
 
 .label {
   position: absolute;
-  left: 50px;
-  top: 26px;
+  left: 32px;
+  top: 20px;
   font-weight: 500;
-  font-size: 24px;
-  line-height: 29px;
+  font-size: 16px;
+  line-height: 19px;
   color: $border;
   &::after {
     margin-left: 8px;
     content: '*';
     color: $error;
-    width: 13px;
-    height: 29px;
+    width: 12px;
+    height: 28px;
   }
 }
 
 .setlabel {
-  top: 11px;
+  top: 7px;
   left: initial;
-  right: 40px;
-  font-size: 20px;
-  line-height: 24px;
+  right: 32px;
+  font-size: 14px;
+  line-height: 17px;
 }
+
 .eye {
   cursor: pointer;
-  top: 33px;
-  right: 34px;
+  top: 20px;
+  right: 32px;
   position: absolute;
   svg {
     display: block;
@@ -63,32 +63,32 @@
 }
 
 .password {
-  font-size: 18px;
-  line-height: 20px;
+  font-size: 16px;
+  line-height: 19px;
   &:focus {
     & + label {
-      top: 6px;
-      left: 50px;
+      top: 7px;
+      left: 32px;
     }
   }
 }
 
 .confirm {
-  font-size: 18px;
-  line-height: 20px;
+  font-size: 16px;
+  line-height: 19px;
   &:focus {
     & + label {
-      top: 6px;
-      left: 50px;
+      top: 7px;
+      left: 32px;
     }
   }
 }
 
 .setlabelPassword {
-  top: 6px;
-  left: 50px;
-  font-size: 20px;
-  line-height: 24px;
+  top: 7px;
+  left: 32px;
+  font-size: 14px;
+  line-height: 17px;
 }
 
 .lastname,
