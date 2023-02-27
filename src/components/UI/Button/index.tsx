@@ -21,7 +21,7 @@ const Button: FC<ButtonProps> = (props) => {
   const { type, title, onClick, className, disabled, icon } = props
   const buttonClassName = styles[type]
   return (
-    <div
+    <button
       className={classNames(styles.button, buttonClassName, className, {
         [styles.disabled]: !!disabled,
       })}
@@ -29,7 +29,7 @@ const Button: FC<ButtonProps> = (props) => {
     >
       {icon}
       {title}
-    </div>
+    </button>
   )
 }
 
