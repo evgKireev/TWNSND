@@ -155,13 +155,26 @@ const getUserData = (accessToken: string) => {
 }
 
 const verifyToken = (ACCESS_TOKEN: string) => {
-  return API.get('api/Account/CheckTokenExpiration', { ACCESS_TOKEN })
+  return API.get(
+    'api/Account/CheckTokenExpiration',
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${ACCESS_TOKEN}`,
+      },
+    }
+  )
 }
 
 const getNewAccessToken = (refresh_token: string) => {
   return API.post(
     'connect/token?grant_type=refresh_token&client_id=Test_js_client',
-    { refresh_token }
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${refresh_token}`,
+      },
+    }
   )
 }
 
