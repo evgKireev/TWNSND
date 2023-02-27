@@ -2,15 +2,15 @@ import { create } from 'apisauce'
 export const ACCESS_TOKEN_KEY = 'accessToken1'
 export const REFRESH_TOKEN_KEY = 'refreshToken1'
 export const API = create({
-  baseURL: 'https://f5ca-37-45-91-246.eu.ngrok.io/',
+  baseURL: 'https://d5e3-185-158-218-132.eu.ngrok.io/',
 })
 export const API_GOOGLE = create({
-  baseURL: 'https://f5ca-37-45-91-246.eu.ngrok.io/',
+  baseURL: 'https://d5e3-185-158-218-132.eu.ngrok.io/',
 })
 export const API_SERVER = create({
   baseURL: 'https://localhost:7128',
 })
-export const MY_URL = 'https://twnsnd.vercel.app'
+export const MY_URL = 'http://localhost:3000'
 
 //SignIn Google
 export const redirectUriGoogle = MY_URL
