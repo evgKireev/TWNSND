@@ -29,8 +29,8 @@
 .checkbox {
   margin-top: 18px;
   input {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
   }
   display: flex;
   align-items: center;
@@ -43,35 +43,29 @@
   }
 }
 
-// @media (max-width: 1024px) {
-//   .innerName {
-//     flex-direction: column;
-//     gap: 24px;
-//   }
-// }
-
-// @media (max-width: 450px) {
-//   .innerInput {
-//     gap: 15px;
-//   }
-//   .innerName {
-//     gap: 15px;
-//   }
-//   .errorMessage,
-//   .passwordInfo {
-//     margin-top: 6px;
-//     font-size: 10px;
-//     line-height: 110%;
-//   }
-//   .checkbox {
-//     input {
-//       width: 14px;
-//       height: 16px;
-//     }
-//     gap: 10px;
-//     margin-bottom: 25px;
-//     span {
-//       font-size: 16px;
-//     }
-//   }
-// }
+@media (max-width: 580px) {
+  .innerInput {
+    gap: 15px;
+  }
+  .innerName {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .errorMessage,
+  .passwordInfo {
+    margin-top: 6px;
+    font-size: 10px;
+    line-height: 110%;
+  }
+  .checkbox {
+    input {
+      width: 14px;
+      height: 16px;
+    }
+    gap: 10px;
+    margin-bottom: 25px;
+    span {
+      font-size: 16px;
+    }
+  }
+}
