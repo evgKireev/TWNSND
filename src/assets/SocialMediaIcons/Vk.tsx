@@ -1,8 +1,12 @@
+import { useWindowSize } from '../../hooks/useWindowsSize'
+
 const Vk = () => {
+  const { width: widthWindow = 0 } = useWindowSize()
+
   return (
     <svg
-      width="44"
-      height="28"
+      width={widthWindow < 320 ? '30.8' : '33'}
+      height={widthWindow < 320 ? '19.6' : '21'}
       viewBox="0 0 44 28"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

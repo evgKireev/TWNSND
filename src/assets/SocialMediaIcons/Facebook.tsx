@@ -1,8 +1,12 @@
+import { useWindowSize } from '../../hooks/useWindowsSize'
+
 const Facebook = () => {
+  const { width: widthWindow = 0 } = useWindowSize()
+
   return (
     <svg
-      width="24"
-      height="46"
+      width={widthWindow < 320 ? '16.8' : '18'}
+      height={widthWindow < 320 ? '32.2' : '34.5'}
       viewBox="0 0 24 46"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
