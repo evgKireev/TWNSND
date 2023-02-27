@@ -16,6 +16,7 @@ const naw = [
 const Header = () => {
   const navigate = useNavigate()
   const { registerUser } = useAppSelector((state) => state.signInSlice)
+  const { userData } = useAppSelector((state) => state.userSlice)
   const [activeNaw, setActiveNaw] = useState('')
   const [openPanel, setOpenPanel] = useState(false)
   return (
@@ -26,7 +27,9 @@ const Header = () => {
         </div>
         {registerUser ? (
           <div className={styles.UserPanel}>
-            <div className={styles.userName}>A</div>
+            <div className={styles.userName}>
+              {userData?.given_name[0].toLocaleUpperCase()}
+            </div>
             <div
               className={styles.arrow}
               onClick={() => setOpenPanel(!openPanel)}
