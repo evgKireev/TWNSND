@@ -7,6 +7,7 @@ import Vk from '../../assets/SocialMediaIcons/Vk'
 import Button, { ButtonTypes } from '../../components/UI/Button'
 import ButtonIcon, { ButtonTypesIcon } from '../../components/UI/ButtonIcon'
 import Input, { InputTypeEnum } from '../../components/UI/Input'
+import Loader from '../../components/UI/Loader'
 import { useWindowSize } from '../../hooks/useWindowsSize'
 import FormContainer from '../../layout/FormContainer/index'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
@@ -29,6 +30,7 @@ const SignIn = () => {
   const [emailDirty, setEmailDirty] = useState(false)
   const [passwordDirty, setPasswordDirty] = useState(false)
   const { rememberPassword } = useAppSelector((state) => state.signInSlice)
+  const { statusSignIn } = useAppSelector((state) => state.statusSlice)
   const blurHandler = (e: React.FocusEvent<HTMLInputElement>) => {
     switch (e.target.name) {
       case 'Пароль':
@@ -105,7 +107,9 @@ const SignIn = () => {
     return okPassword
   }, [okPassword])
 
-  return (
+  return statusSignIn === 'pending' ? (
+    <Loader />
+  ) : (
     <FormContainer
       logo={'LOGO'}
       title={'Войти'}

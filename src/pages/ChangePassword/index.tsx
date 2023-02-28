@@ -27,9 +27,7 @@ const ChangePassword = () => {
     undefined
   )
   const dispatch = useAppDispatch()
-  const { statusRestoreChangePassword } = useAppSelector(
-    (state) => state.statusSlice
-  )
+  const { statusChangePassword } = useAppSelector((state) => state.statusSlice)
   const blurHandler = (e: React.FocusEvent<HTMLInputElement>) => {
     switch (e.target.name) {
       case 'Пароль':
@@ -141,7 +139,7 @@ const ChangePassword = () => {
     return okPassword && okPasswordConfirm && okOldPassword
   }, [okPassword, okPasswordConfirm, okOldPassword])
 
-  return statusRestoreChangePassword === 'pending' ? (
+  return statusChangePassword === 'pending' ? (
     <Loader />
   ) : (
     <FormContainer
@@ -150,75 +148,69 @@ const ChangePassword = () => {
       link={'/signin/restore/passord'}
       textLink={'Назад'}
     >
-      {statusRestoreChangePassword === 'fullfilled' ? (
-        <div className={styles.messageOk}>Ваш пароль был успешно изменен</div>
-      ) : (
-        <div className={styles.innerContainer}>
-          <div className={styles.innerInput}>
-            <div className={styles.label}>
-              <div className={styles.innerText}>Введите ваш текущий пароль</div>
-              <Input
-                onBlur={blurHandler}
-                type="password"
-                labelText={'Пароль'}
-                name={'Текущий пароль'}
-                disabled={false}
-                typeInput={InputTypeEnum.Password}
-                value={oldPassword}
-                onChange={(e) => oldPassworwHandler(e)}
-                error={Boolean(oldPasswordDirty && oldPasswordError)}
-                okValidat={okOldPassword}
-              />
-              {oldPasswordDirty && oldPasswordError && (
-                <div className={styles.errorMessage}>{oldPasswordError}</div>
-              )}
-            </div>
-            <div className={styles.label}>
-              <div className={styles.innerText}>Введите новый пароль</div>
-              <Input
-                onBlur={blurHandler}
-                type="password"
-                labelText={'Пароль'}
-                name={'Пароль'}
-                disabled={false}
-                typeInput={InputTypeEnum.Password}
-                value={newPassword}
-                onChange={(e) => passworwHandler(e)}
-                error={Boolean(newPasswordDirty && passwordError)}
-                okValidat={okPassword}
-              />
-              {newPasswordDirty && passwordError && (
-                <div className={styles.errorMessage}>{passwordError}</div>
-              )}
-            </div>
-            <div className={styles.label}>
-              <Input
-                onBlur={blurHandler}
-                type="password"
-                labelText={'Подтвердите пароль'}
-                name={'Подтвердите пароль'}
-                disabled={false}
-                typeInput={InputTypeEnum.Password}
-                value={confirmPassword}
-                onChange={(e) => passworwConfirmHandler(e)}
-                error={Boolean(passwordConfirmDirty && passwordError)}
-                okValidat={okPasswordConfirm}
-              />
-              {passwordConfirmDirty && passwordConfirmError && (
-                <div className={styles.errorMessage}>
-                  {passwordConfirmError}
-                </div>
-              )}
-            </div>
+      <div className={styles.innerContainer}>
+        <div className={styles.innerInput}>
+          <div className={styles.label}>
+            <div className={styles.innerText}>Введите ваш текущий пароль</div>
+            <Input
+              onBlur={blurHandler}
+              type="password"
+              labelText={'Пароль'}
+              name={'Текущий пароль'}
+              disabled={false}
+              typeInput={InputTypeEnum.Password}
+              value={oldPassword}
+              onChange={(e) => oldPassworwHandler(e)}
+              error={Boolean(oldPasswordDirty && oldPasswordError)}
+              okValidat={okOldPassword}
+            />
+            {oldPasswordDirty && oldPasswordError && (
+              <div className={styles.errorMessage}>{oldPasswordError}</div>
+            )}
           </div>
-          <Button
-            disabled={!validForm}
-            title={'Сохранить новый пароль'}
-            type={ButtonTypes.Secondary}
-            onClick={newPasswordHandler}
-          />
+          <div className={styles.label}>
+            <div className={styles.innerText}>Введите новый пароль</div>
+            <Input
+              onBlur={blurHandler}
+              type="password"
+              labelText={'Пароль'}
+              name={'Пароль'}
+              disabled={false}
+              typeInput={InputTypeEnum.Password}
+              value={newPassword}
+              onChange={(e) => passworwHandler(e)}
+              error={Boolean(newPasswordDirty && passwordError)}
+              okValidat={okPassword}
+            />
+            {newPasswordDirty && passwordError && (
+              <div className={styles.errorMessage}>{passwordError}</div>
+            )}
+          </div>
+          <div className={styles.label}>
+            <Input
+              onBlur={blurHandler}
+              type="password"
+              labelText={'Подтвердите пароль'}
+              name={'Подтвердите пароль'}
+              disabled={false}
+              typeInput={InputTypeEnum.Password}
+              value={confirmPassword}
+              onChange={(e) => passworwConfirmHandler(e)}
+              error={Boolean(passwordConfirmDirty && passwordError)}
+              okValidat={okPasswordConfirm}
+            />
+            {passwordConfirmDirty && passwordConfirmError && (
+              <div className={styles.errorMessage}>{passwordConfirmError}</div>
+            )}
+          </div>
         </div>
-      )}
+        <Button
+          disabled={!validForm}
+          title={'Сохранить новый пароль'}
+          type={ButtonTypes.Secondary}
+          onClick={newPasswordHandler}
+        />
+      </div>
     </FormContainer>
   )
 }

@@ -45,15 +45,14 @@ import API from '../utils/API'
 function* registerUserWorker(actions: PayloadAction<UserTypePayloadType>) {
   yield put(setStatusUser('pending'))
   const { data: registerUserData, callback } = actions.payload
-  const { ok, data } = yield call(API.registerUserMail, registerUserData)
-  if (ok) {
+  const { data, status } = yield call(API.registerUserMail, registerUserData)
+  if (status === 200) {
     yield put(setStatusUser('fullfilled'))
     yield put(setUserId(data.userId))
     callback()
-    if (data.code === 'DuplicateEmail') {
-      yield put(setStatusUser('regected'))
-      toast.error('Указанный Email адрес уже занят')
-    }
+  } else if (status === 400) {
+    yield put(setStatusUser('regected'))
+    toast.error('Указанный Email адрес уже занят')
   } else {
     yield put(setStatusUser('regected'))
     toast.error('Что-то пошло не так. Попробуйте еще раз!')
@@ -87,8 +86,8 @@ function* confirmRegistrUser(actions: PayloadAction<ParamsUrlPayloadType>) {
 function* signInUserWorker(actions: PayloadAction<SignInPayloadType>) {
   yield put(setSignInStatusUser('pending'))
   const { data: singInUserData, rememberPassword, callback } = actions.payload
-  const { data, ok } = yield call(API.signInUser, singInUserData)
-  if (ok && data) {
+  const { data, ok, status } = yield call(API.signInUser, singInUserData)
+  if (status === 200) {
     rememberPassword
       ? localStorage.setItem(ACCESS_TOKEN_KEY, data?.access_token)
       : sessionStorage.setItem(ACCESS_TOKEN_KEY, data?.access_token)
@@ -99,7 +98,7 @@ function* signInUserWorker(actions: PayloadAction<SignInPayloadType>) {
     callback('/')
     yield put(setRememberPassword(false))
     yield put(setSignInStatusUser('fullfilled'))
-
+  } else if (status === 400) {
     if (data.error_description === 'Email not confirmed') {
       yield put(setUserId(data.user_id))
       yield put(setEmail(data.email))
@@ -108,12 +107,12 @@ function* signInUserWorker(actions: PayloadAction<SignInPayloadType>) {
     } else if (data.error_description === 'Invalid username or password') {
       toast.error('Неверный пароль или email')
       yield put(setSignInStatusUser('rejected'))
-    } else if (data.error_description === 'Email not confirmed') {
-      toast.error('Email не подтвержден')
-      yield put(setSignInStatusUser('rejected'))
+    } else {
+      yield put(setSignInStatusUser('regected'))
+      toast.error('Что-то пошло не так. Попробуйте еще раз!')
     }
   } else {
-    yield put(setSuccessStatusUser('regected'))
+    yield put(setSignInStatusUser('regected'))
     toast.error('Что-то пошло не так. Попробуйте еще раз!')
   }
 }
@@ -132,14 +131,12 @@ function* registerUserGoogleWorker(
       localStorage.setItem(REFRESH_TOKEN_KEY, data?.refresh_token)
       yield put(setRegisterUser(true))
       callback('/')
+    } else {
       if (data.error_description === 'local_account_exist') {
         yield put(setEmail(data.Email))
         callback('/check/password/social')
         yield put(setSignInStatusUserGoogle('regected'))
       }
-    } else {
-      yield put(setSuccessStatusUser('regected'))
-      toast.error('Что-то пошло не так. Попробуйте еще раз!')
     }
   } else {
     yield put(setSignInStatusUserGoogle('pending'))
@@ -150,6 +147,7 @@ function* registerUserGoogleWorker(
       localStorage.setItem(REFRESH_TOKEN_KEY, data?.refresh_token)
       yield put(setRegisterUser(true))
       callback('/')
+    } else {
       if (data.error_description === 'wrong_local_email') {
         toast.error('Неверный e-mail')
         yield put(setSignInStatusUserGoogle('regected'))
@@ -160,33 +158,31 @@ function* registerUserGoogleWorker(
         toast.error('Что-то пошло не так. Попробуйте еще раз!')
         yield put(setSignInStatusUserGoogle('regected'))
       }
-    } else {
-      yield put(setSignInStatusUserGoogle('regected'))
-      toast.error('Что-то пошло не так. Попробуйте еще раз!')
     }
   }
 }
 
 function* restorePasswordWorker(actions: PayloadAction<RestorePassword>) {
   yield put(setStatusRestorePassword('pending'))
-  const { ok, data } = yield call(API.restorePassword, actions.payload)
-  if (ok) {
+  const { data, status } = yield call(API.restorePassword, actions.payload)
+  if (status === 200) {
     yield put(setStatusRestorePassword('fullfilled'))
+  } else if (status === 404) {
     if (data.error_message === 'user_not_found') {
       toast.error('Пользователь с указанным email ну существует')
-      yield put(setStatusRestorePassword('regected'))
-    } else if (data.error_message === 'external_only') {
-      toast.error(
-        'Невозможно восстановить пароль, так как Ваша регистрация происходила через внешние провайдеры'
-      )
       yield put(setStatusRestorePassword('regected'))
     } else {
       toast.error('Что-то пошло не так. Попробуйте еще раз!')
       yield put(setStatusRestorePassword('regected'))
     }
-  } else {
+  } else if (status === 400) {
+    toast.error(
+      'Невозможно восстановить пароль, так как Ваша регистрация происходила через внешние провайдеры'
+    )
     yield put(setStatusRestorePassword('regected'))
+  } else {
     toast.error('Что-то пошло не так. Попробуйте еще раз!')
+    yield put(setStatusRestorePassword('regected'))
   }
 }
 
@@ -195,23 +191,21 @@ function* restoreChangePasswordWorker(
 ) {
   yield put(setStatusRestoreChangePassword('pending'))
   const { data: restorePasswordData, callback } = actions.payload
-  const { ok, data } = yield call(
+  const { ok, data, status } = yield call(
     API.restoreChangePasswordUsser,
     restorePasswordData
   )
-  if (ok) {
+  if (status === 200) {
     yield put(setStatusRestoreChangePassword('fullfilled'))
     callback('/signin')
+  } else if (status === 404) {
     if (data.error_message === 'user_not_found') {
       toast.error('Пользователь с указанным email ну существует')
       yield put(setStatusRestoreChangePassword('regected'))
-    } else {
-      toast.error('Что-то пошло не так. Попробуйте еще раз!')
-      yield put(setStatusRestoreChangePassword('regected'))
     }
   } else {
-    yield put(setStatusRestoreChangePassword('regected'))
     toast.error('Что-то пошло не так. Попробуйте еще раз!')
+    yield put(setStatusRestoreChangePassword('regected'))
   }
 }
 
@@ -220,11 +214,12 @@ function* changePasswordWorker(
 ) {
   yield put(setStatusChangePassword('pending'))
   const { data: dataChange, callback } = actions.payload
-  const { ok, data, problem } = yield call(API.changePasswordUser, dataChange)
-  if (ok) {
+  const { data, status } = yield call(API.changePasswordUser, dataChange)
+  if (status === 200) {
     yield put(setStatusChangePassword('fullfilled'))
     toast.success('Пароль успешно изменен')
     callback('/account')
+  } else if (status === 400) {
     if (data.error_message === 'old_password_invalid') {
       toast.error('Старый пароль не верный')
       yield put(setStatusChangePassword('regected'))
@@ -232,9 +227,6 @@ function* changePasswordWorker(
       toast.error(
         'Невозможно сменить пароль, так как Ваша регистрация происходила через внешние провайдеры'
       )
-      yield put(setStatusChangePassword('regected'))
-    } else {
-      toast.error('Что-то пошло не так. Попробуйте еще раз!')
       yield put(setStatusChangePassword('regected'))
     }
   } else {

@@ -2,10 +2,10 @@ import { create } from 'apisauce'
 export const ACCESS_TOKEN_KEY = 'accessToken1'
 export const REFRESH_TOKEN_KEY = 'refreshToken1'
 export const API = create({
-  baseURL: 'https://d5e3-185-158-218-132.eu.ngrok.io/',
+  baseURL: 'https://identiy-server.onrender.com',
 })
 export const API_GOOGLE = create({
-  baseURL: 'https://d5e3-185-158-218-132.eu.ngrok.io/',
+  baseURL: 'https://identiy-server.onrender.com',
 })
 export const API_SERVER = create({
   baseURL: 'https://localhost:7128',
