@@ -171,7 +171,7 @@ const SignIn = () => {
         />
 
         <p className={styles.text}>
-          {width > 320 ? 'или войдите с помощью' : 'Или'}
+          {width > 480 ? 'или войдите с помощью' : 'Или'}
         </p>
 
         <div className={styles.iconsContainer}>

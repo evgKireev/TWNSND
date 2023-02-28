@@ -5,8 +5,8 @@ const Facebook = () => {
 
   return (
     <svg
-      width={widthWindow < 320 ? '16.8' : '18'}
-      height={widthWindow < 320 ? '32.2' : '34.5'}
+      width={widthWindow < 480 ? '16.8' : '18'}
+      height={widthWindow < 480 ? '32.2' : '34.5'}
       viewBox="0 0 24 46"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
