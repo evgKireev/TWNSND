@@ -1,3 +1,5 @@
+@import '../../scss/vars';
+
 .inner {
   display: flex;
   flex-direction: column;
@@ -6,4 +8,67 @@
 
 .btnIcons {
   display: none;
+}
+
+.innerMobile {
+  display: flex;
+  flex-direction: column;
+}
+.buttonMailMobile {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 16px 10px;
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  border: 1px solid;
+  border: 1px solid $text_basic;
+  color: $text_basic;
+
+  transition: all 0.5s;
+  cursor: pointer;
+  &:hover {
+    cursor: pointer;
+    transition: all 0.5s;
+  }
+  &:active {
+    background-color: $text_basic;
+    color: $white;
+  }
+}
+
+.text {
+  text-align: center;
+  margin-block: 30px 24px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.2px;
+}
+
+.iconsContainer {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-bottom: 46px;
+}
+
+.innerLink {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.2px;
+}
+
+.link {
+  color: $button_1;
+  cursor: pointer;
 }
