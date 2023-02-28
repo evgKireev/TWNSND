@@ -38,7 +38,7 @@ const SignUpHome = () => {
       textLink={'Войти'}
       text={'Уже есть аккаунт?'}
     >
-      {width > 320 ? (
+      {width > 480 ? (
         <div className={styles.inner}>
           {regUser.map((value, index) => (
             <a href={value.link} key={index + 1}>
