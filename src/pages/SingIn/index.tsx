@@ -1,6 +1,6 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { ACCESS_TOKEN_KEY, linkGoogle } from '../../@types/constant'
+import { linkGoogle } from '../../@types/constant'
 import Facebook from '../../assets/SocialMediaIcons/Facebook'
 import { GoogleIcon } from '../../assets/SocialMediaIcons/GoogleIcon'
 import Vk from '../../assets/SocialMediaIcons/Vk'
@@ -171,7 +171,7 @@ const SignIn = () => {
         />
 
         <p className={styles.text}>
-          {width > 320 ? 'или войдите с помощью' : 'Или'}
+          {width > 480 ? 'или войдите с помощью' : 'Или'}
         </p>
 
         <div className={styles.iconsContainer}>

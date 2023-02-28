@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button, { ButtonTypes } from '../../components/UI/Button'
 import Input, { InputTypeEnum } from '../../components/UI/Input'
@@ -33,7 +33,7 @@ const SignUp = () => {
   const [emailError, setEmailError] = useState('')
   const [passwordError, setPasswordError] = useState('')
   const [passwordConfirmError, setPasswordConfirmError] = useState('')
-  const [ferstNameError, setFerstNameError] = useState('')
+  const [firstNameError, setFirstNameError] = useState('')
 
   const blurHandler = (e: React.FocusEvent<HTMLInputElement>) => {
     switch (e.target.name) {
@@ -111,14 +111,14 @@ const SignUp = () => {
     setFirstName(e.target.value)
     const re = /^[а-яА-Я]{2}|[a-zA-Z]{2}$/
     if (!re.test(e.target.value)) {
-      setFerstNameError('*Имя должно содержать минимум 2 символа')
+      setFirstNameError('*Имя должно содержать минимум 2 символа')
       setOkName(false)
       if (e.target.value.length < 1) {
-        setFerstNameError('*Имя должно содержать минимум 2 символа')
+        setFirstNameError('*Имя должно содержать минимум 2 символа')
         setOkName(false)
       }
     } else {
-      setFerstNameError('')
+      setFirstNameError('')
       setOkName(true)
     }
   }
@@ -135,7 +135,7 @@ const SignUp = () => {
             ConfirmPassword: passwordConfirm,
           },
           callback: () => {
-            navigate(`/confirm/password`)
+            navigate('/confirm/password')
           },
         })
       )
@@ -144,7 +144,7 @@ const SignUp = () => {
         setPasswordError('*Пароль не может быть пустым')
         setPasswordConfirmError('*Пароль не может быть пустым')
         setEmailError('*Введите электронную почту')
-        setFerstNameError('*Имя должно содержать минимум 2 символа')
+        setFirstNameError('*Имя должно содержать минимум 2 символа')
         setOkPasswordConfirm(false)
         setOkPassword(false)
         setOkMail(false)
@@ -170,7 +170,7 @@ const SignUp = () => {
         setPasswordConfirmDirty(true)
       }
       if (!firstName) {
-        setFerstNameError('*Имя должно содержать минимум 2 символа')
+        setFirstNameError('*Имя должно содержать минимум 2 символа')
         setOkName(false)
         setFirstNameDirty(true)
       }
@@ -203,11 +203,11 @@ const SignUp = () => {
                 typeInput={InputTypeEnum.FirstName}
                 value={firstName}
                 onChange={(e) => firstNameHandler(e)}
-                error={Boolean(firstNameDirty && ferstNameError)}
+                error={Boolean(firstNameDirty && firstNameError)}
                 okValidat={okName}
               />
-              {firstNameDirty && ferstNameError && (
-                <div className={styles.errorMessage}>{ferstNameError}</div>
+              {firstNameDirty && firstNameError && (
+                <div className={styles.errorMessage}>{firstNameError}</div>
               )}
             </div>
             <div className={styles.label}>

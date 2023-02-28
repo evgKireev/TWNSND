@@ -4,10 +4,8 @@ import { VKFooter } from '../../../assets/FooterIcons/VKFooter'
 import { WhatsAppFooter } from '../../../assets/FooterIcons/WhatsAppFooter'
 import LogoWhite from '../../../assets/img/logoWhite'
 import Button, { ButtonTypes } from '../../UI/Button'
-import { InputTypeEnum } from '../../UI/Input'
 import styles from './Footer.module.scss'
 
-type InputType = {}
 const Footer = () => {
   const [email, setEmail] = useState('')
   return (

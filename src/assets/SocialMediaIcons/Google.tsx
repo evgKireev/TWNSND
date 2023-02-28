@@ -5,8 +5,8 @@ export const GoogleIcon = () => {
 
   return (
     <svg
-      width={widthWindow < 320 ? '27.4' : '29.4'}
-      height={widthWindow < 320 ? '28' : '30'}
+      width={widthWindow < 480 ? '27.4' : '29.4'}
+      height={widthWindow < 480 ? '28' : '30'}
       viewBox="0 0 30 30"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

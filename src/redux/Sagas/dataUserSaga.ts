@@ -1,4 +1,3 @@
-import { toast } from 'react-toastify'
 import { all, put, takeLatest } from 'redux-saga/effects'
 import { setStatusDataUser } from '../SignUser/statusSlice'
 import { getUser, setUser } from '../User/userSlice'
