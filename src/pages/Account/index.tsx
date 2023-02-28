@@ -21,7 +21,6 @@ let badgesArr = [
 const Account = () => {
   const navigate = useNavigate()
   const { userData } = useAppSelector((state) => state.userSlice)
-  console.log(userData)
 
   const [badges, setBadges] = useState<string[]>(badgesArr)
   const [editName, setEditName] = useState<boolean>(false)
@@ -93,6 +92,10 @@ const Account = () => {
   const removeBadge = (index: number) => {
     const newBadgesArr = [...badges.slice(0, index), ...badges.slice(index + 1)]
     setBadges(newBadgesArr)
+  }
+
+  const saveData = () => {
+    //TODO Вызываем диспатч и отправояем данные на сервер из стейтов (firstName, lastName, email.....)
   }
 
   return (
@@ -192,7 +195,8 @@ const Account = () => {
             <input
               type="text"
               name="Имя"
-              value={firstName}
+              disabled={!editName}
+              value={userData?.given_name}
               onChange={(e) => firstNameHandler(e)}
               className={classNames(styles.inputName, styles.inputsGeneral, {
                 [styles.inputError]: editName && errorFirstName,
@@ -202,7 +206,8 @@ const Account = () => {
             <input
               type="text"
               name="Фамилия"
-              value={lastName}
+              disabled={!editName}
+              value={userData?.family_name}
               onChange={(e) => lastNameHandler(e)}
               className={classNames(styles.inputName, styles.inputsGeneral, {
                 [styles.inputError]: editName && errorLastName,
@@ -221,7 +226,8 @@ const Account = () => {
             <input
               type="email"
               name="email"
-              value={email}
+              disabled={!editEmail}
+              value={userData?.email}
               onChange={(e) => emailHandler(e)}
               className={classNames(styles.inputEmail, styles.inputsGeneral, {
                 [styles.inputError]: editEmail && errorEmail,
@@ -295,7 +301,9 @@ const Account = () => {
         <button className={styles.addBadge}>Добавить</button>
       </div>
 
-      <button className={styles.save}>Сохранить </button>
+      <button className={styles.save} onClick={saveData}>
+        Сохранить
+      </button>
     </div>
   )
 }
