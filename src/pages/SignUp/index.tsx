@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button, { ButtonTypes } from '../../components/UI/Button'
 import Input, { InputTypeEnum } from '../../components/UI/Input'
@@ -135,7 +135,7 @@ const SignUp = () => {
             ConfirmPassword: passwordConfirm,
           },
           callback: () => {
-            navigate(`/confirm/password`)
+            navigate('/confirm/password')
           },
         })
       )

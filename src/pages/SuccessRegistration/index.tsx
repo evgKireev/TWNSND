@@ -1,5 +1,5 @@
-import { useLocation, useNavigate, useParams } from 'react-router-dom'
-import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '../../@types/constant'
+import { useLocation, useNavigate } from 'react-router-dom'
+
 import Button, { ButtonTypes } from '../../components/UI/Button'
 import Loader from '../../components/UI/Loader'
 import FormContainer from '../../layout/FormContainer'

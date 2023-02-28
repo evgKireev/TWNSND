@@ -1,14 +1,13 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit'
 
-type initialStateType = {};
+type initialStateType = {}
 
-const initialState: initialStateType = {};
+const initialState: initialStateType = {}
 
 const otherSlice = createSlice({
   name: 'other',
   initialState,
   reducers: {},
-});
+})
 
-export const {} = otherSlice.actions;
-export default otherSlice.reducer;
+export default otherSlice.reducer

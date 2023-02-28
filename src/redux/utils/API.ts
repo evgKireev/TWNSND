@@ -31,7 +31,7 @@ const registerUserMail = ({
     LastName,
     Country,
   })
-  return API.post(`api/Account/Register`, body, {
+  return API.post('api/Account/Register', body, {
     headers: {
       'Content-Type': 'application/json',
     },
@@ -44,7 +44,7 @@ const sentEmailRegisterUser = ({
   ReturnUrl,
 }: SentMailRegisterUser) => {
   return API.post(
-    `api/Account/SendConfirmationEmail`,
+    'api/Account/SendConfirmationEmail',
     { Email, UserId, ReturnUrl },
     {
       headers: {
@@ -56,7 +56,7 @@ const sentEmailRegisterUser = ({
 
 const activateUser = ({ userId, email, code }: ParamsUrlType) => {
   return API.post(
-    `api/Account/ConfirmEmail`,
+    'api/Account/ConfirmEmail',
     { userId, email, code },
     {
       headers: {
@@ -108,7 +108,7 @@ const restoreChangePasswordUsser = ({
   ConfirmPassword,
 }: RestorePasswordData) => {
   return API.post(
-    `api/Account/ResetPassword`,
+    'api/Account/ResetPassword',
     { Email, Code, Password, ConfirmPassword },
     {
       headers: {

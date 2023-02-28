@@ -21,9 +21,9 @@ const Home = () => {
   const { statusRegisterUserGoogle } = useAppSelector(
     (state) => state.statusSlice
   )
-  
+
   useEffect(() => {
-    if (state != stateGoogle) {
+    if (state !== stateGoogle) {
       return
     } else if (state && code) {
       dispatch(setCode(code))
