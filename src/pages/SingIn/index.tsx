@@ -109,7 +109,7 @@ const SignIn = () => {
     <FormContainer
       logo={'LOGO'}
       title={'Войти'}
-      link={'/signup/mail'}
+      link={'/signup'}
       textLink={'Зарегистрироваться'}
       text={'Нет аккаунта?'}
     >
@@ -173,21 +173,18 @@ const SignIn = () => {
         <div className={styles.iconsContainer}>
           <ButtonIcon
             type={ButtonTypesIcon.FB}
-            onClick={() => {}}
             disabled={false}
             icon={<Facebook />}
           />
           <a href={linkGoogle}>
             <ButtonIcon
               type={ButtonTypesIcon.G}
-              onClick={() => {}}
               disabled={false}
               icon={<GoogleIcon />}
             />
           </a>
           <ButtonIcon
             type={ButtonTypesIcon.VK}
-            onClick={() => {}}
             disabled={false}
             icon={<Vk />}
           />
