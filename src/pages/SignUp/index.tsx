@@ -1,5 +1,7 @@
+import classNames from 'classnames'
 import { useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Check from '../../assets/img/Check'
 import Button, { ButtonTypes } from '../../components/UI/Button'
 import Input, { InputTypeEnum } from '../../components/UI/Input'
 import Loader from '../../components/UI/Loader'
@@ -34,7 +36,7 @@ const SignUp = () => {
   const [passwordError, setPasswordError] = useState('')
   const [passwordConfirmError, setPasswordConfirmError] = useState('')
   const [firstNameError, setFirstNameError] = useState('')
-
+  const [rememberPassword, setRememberPassword] = useState(false)
   const blurHandler = (e: React.FocusEvent<HTMLInputElement>) => {
     switch (e.target.name) {
       case 'Пароль':
@@ -280,15 +282,12 @@ const SignUp = () => {
             )}
           </div>
         </div>
-        <div className={styles.checkbox}>
-          <input type="checkbox" />
-          <span>Запомнить пароль</span>
-        </div>
         <Button
           disabled={!validForm}
           title={'Создать аккаунт'}
           type={ButtonTypes.Secondary}
           onClick={registerUserHandler}
+          className={styles.btn}
         />
       </div>
     </FormContainer>

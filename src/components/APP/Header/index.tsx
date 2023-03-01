@@ -22,9 +22,7 @@ const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.headerTop}>
-        <div className={styles.logo}>
-          <img src={logo} alt="logo" />
-        </div>
+        <div className={styles.logo}>LOGO</div>
         {registerUser ? (
           <div className={styles.UserPanel}>
             <div className={styles.userName}>

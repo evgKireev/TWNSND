@@ -20,10 +20,6 @@
 }
 
 .checkbox {
-  input {
-    width: 24px;
-    height: 24px;
-  }
   display: flex;
   align-items: center;
   gap: 14px;
@@ -34,6 +30,37 @@
     line-height: 130%;
   }
 }
+
+.inputCheckbox {
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  position: absolute;
+}
+
+.vueCheckbox {
+  width: 24px;
+  height: 24px;
+  border: 1px solid #2d2d2d;
+  background-color: #ffff;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+}
+
+.vueCheckboxActive {
+  border: 1px solid transparent;
+  background-color: #223972;
+  color: #f6f5f5;
+  svg {
+    position: absolute;
+    top: 4px;
+    left: 3px;
+  }
+}
+
 
 .text {
   text-align: center;
@@ -118,7 +145,7 @@
     margin-bottom: 22px;
   }
   .innerLink {
-    gap: 8px;
+    justify-content: space-around;
   }
   .textLink,
   .link {

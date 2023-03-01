@@ -4,8 +4,8 @@
 }
 .input {
   font-weight: 500;
-  font-size: 16px;
-  line-height: 19px;
+  font-size: 14px;
+  line-height: 16px;
   color: $border;
   border: 1px solid $border;
   border-radius: 5px;
@@ -16,11 +16,10 @@
   &:focus {
     border: 2px solid $button_1;
     & + label {
-      top: 7px;
-      left: initial;
-      right: 11px;
-      font-size: 14px;
-      line-height: 17px;
+      top: 5px;
+      left: 32px;
+      font-size: 12px;
+      line-height: 16px;
     }
   }
 }
@@ -43,11 +42,10 @@
 }
 
 .setlabel {
-  top: 7px;
-  left: initial;
-  right: 32px;
-  font-size: 14px;
-  line-height: 17px;
+  top: 5px;
+  left: 32px;
+  font-size: 12px;
+  line-height: 16px;
 }
 
 .eye {
@@ -60,35 +58,6 @@
     width: 19px;
     height: 20px;
   }
-}
-
-.password {
-  font-size: 16px;
-  line-height: 19px;
-  &:focus {
-    & + label {
-      top: 7px;
-      left: 32px;
-    }
-  }
-}
-
-.confirm {
-  font-size: 16px;
-  line-height: 19px;
-  &:focus {
-    & + label {
-      top: 7px;
-      left: 32px;
-    }
-  }
-}
-
-.setlabelPassword {
-  top: 7px;
-  left: 32px;
-  font-size: 14px;
-  line-height: 17px;
 }
 
 .lastname,
@@ -133,8 +102,8 @@
     padding: 18px 16px 19px 23px;
     &:focus {
       & + label {
-        font-size: 14px;
-        line-height: 18px;
+        font-size: 10px;
+        line-height: 14px;
       }
     }
   }
@@ -146,35 +115,12 @@
     left: 25px;
   }
 
-  .password {
-    &:focus {
-      & + label {
-        top: 5px;
-        left: 25px;
-      }
-    }
-  }
-
-  .confirm {
-    &:focus {
-      & + label {
-        top: 5px;
-        left: 25px;
-      }
-    }
-  }
-
   .setlabel {
     top: 11px;
     left: initial;
     right: 40px;
-    font-size: 14px;
-    line-height: 18px;
-  }
-
-  .setlabelPassword {
-    top: 5px;
-    left: 25px;
+    font-size: 10px;
+    line-height: 14px;
   }
 
   .eye {
