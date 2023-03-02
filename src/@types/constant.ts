@@ -2,13 +2,13 @@ import { create } from 'apisauce'
 export const ACCESS_TOKEN_KEY = 'accessToken1'
 export const REFRESH_TOKEN_KEY = 'refreshToken1'
 export const API = create({
-  baseURL: 'https://identiy-server.onrender.com',
+  baseURL: 'https://identity-server.onrender.com',
 })
 export const API_GOOGLE = create({
   baseURL: 'https://identiy-server.onrender.com',
 })
 export const API_SERVER = create({
-  baseURL: 'https://backend-user-api-862c.onrender.com',
+  baseURL: 'https://twsnd-backend.onrender.com',
 })
 export const MY_URL = 'https://twnsnd.vercel.app'
 
