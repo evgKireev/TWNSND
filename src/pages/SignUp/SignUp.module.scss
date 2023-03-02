@@ -17,7 +17,7 @@
   margin-top: 8px;
   font-weight: 400;
   font-size: 12px;
-  line-height: 16px;
+  line-height: 18px;
   color: $error;
 }
 
@@ -55,5 +55,10 @@
     span {
       font-size: 16px;
     }
+  }
+  .errorMessage {
+    margin-top: 6px;
+    font-size: 10px;
+    line-height: 16px;
   }
 }
