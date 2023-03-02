@@ -5,7 +5,7 @@ export const API = create({
   baseURL: 'https://identity-server.onrender.com',
 })
 export const API_GOOGLE = create({
-  baseURL: 'https://identiy-server.onrender.com',
+  baseURL: 'https://identity-server.onrender.com',
 })
 export const API_SERVER = create({
   baseURL: 'https://twsnd-backend.onrender.com',
