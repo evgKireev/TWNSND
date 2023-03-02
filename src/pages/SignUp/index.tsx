@@ -1,5 +1,7 @@
+import classNames from 'classnames'
 import { useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Check from '../../assets/img/Check'
 import Button, { ButtonTypes } from '../../components/UI/Button'
 import Input, { InputTypeEnum } from '../../components/UI/Input'
 import Loader from '../../components/UI/Loader'
@@ -24,17 +26,20 @@ const SignUp = () => {
   const [passwordDirty, setPasswordDirty] = useState(false)
   const [passwordConfirmDirty, setPasswordConfirmDirty] = useState(false)
   const [firstNameDirty, setFirstNameDirty] = useState(false)
+  const [lastNameDirty, setLastNameDirty] = useState(false)
   const [okPassword, setOkPassword] = useState<boolean | undefined>(undefined)
   const [okPasswordConfirm, setOkPasswordConfirm] = useState<
     boolean | undefined
   >(undefined)
   const [okMail, setOkMail] = useState<boolean | undefined>(undefined)
   const [okName, setOkName] = useState<boolean | undefined>(undefined)
+  const [okLastName, setOkLastName] = useState<boolean | undefined>(undefined)
   const [emailError, setEmailError] = useState('')
   const [passwordError, setPasswordError] = useState('')
   const [passwordConfirmError, setPasswordConfirmError] = useState('')
   const [firstNameError, setFirstNameError] = useState('')
-
+  const [lastNameError, setLastNameError] = useState('')
+  const [rememberPassword, setRememberPassword] = useState(false)
   const blurHandler = (e: React.FocusEvent<HTMLInputElement>) => {
     switch (e.target.name) {
       case 'Пароль':
@@ -48,6 +53,9 @@ const SignUp = () => {
         break
       case 'Имя':
         setFirstNameDirty(true)
+        break
+      case 'Фамилия':
+        setLastNameDirty(true)
     }
   }
 
@@ -113,13 +121,21 @@ const SignUp = () => {
     if (!re.test(e.target.value)) {
       setFirstNameError('*Имя должно содержать минимум 2 символа')
       setOkName(false)
-      if (e.target.value.length < 1) {
-        setFirstNameError('*Имя должно содержать минимум 2 символа')
-        setOkName(false)
-      }
     } else {
       setFirstNameError('')
       setOkName(true)
+    }
+  }
+
+  const lastNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLastName(e.target.value)
+    const re = /^[а-яА-Я]{2}|[a-zA-Z]{2}$/
+    if (!re.test(e.target.value)) {
+      setLastNameError('*Фамилия должна содержать минимум 2 символа')
+      setOkLastName(false)
+    } else {
+      setLastNameError('')
+      setOkLastName(true)
     }
   }
 
@@ -140,19 +156,22 @@ const SignUp = () => {
         })
       )
     } else {
-      if (!firstName && !email && !password && !passwordConfirm) {
+      if (!firstName && !email && !password && !passwordConfirm && !lastName) {
         setPasswordError('*Пароль не может быть пустым')
         setPasswordConfirmError('*Пароль не может быть пустым')
         setEmailError('*Введите электронную почту')
         setFirstNameError('*Имя должно содержать минимум 2 символа')
+        setLastNameError('*Фамилия должна содержать минимум 2 символа')
         setOkPasswordConfirm(false)
         setOkPassword(false)
         setOkMail(false)
         setOkName(false)
+        setOkLastName(false)
         setPasswordDirty(true)
         setPasswordConfirmDirty(true)
         setFirstNameDirty(true)
         setEmailDirty(true)
+        setLastNameDirty(true)
       }
       if (!email) {
         setEmailError('*Введите электронную почту')
@@ -173,6 +192,11 @@ const SignUp = () => {
         setFirstNameError('*Имя должно содержать минимум 2 символа')
         setOkName(false)
         setFirstNameDirty(true)
+      }
+      if (!lastName) {
+        setLastNameError('*Фамилия должна содержать минимум 2 символа')
+        setOkLastName(false)
+        setLastNameDirty(true)
       }
     }
   }
@@ -212,15 +236,20 @@ const SignUp = () => {
             </div>
             <div className={styles.label}>
               <Input
-                onBlur={() => {}}
+                onBlur={blurHandler}
                 type="text"
                 labelText={'Фамилия'}
                 name={'Фамилия'}
                 disabled={false}
                 typeInput={InputTypeEnum.LastName}
+                error={Boolean(lastNameDirty && lastNameError)}
                 value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
+                okValidat={okLastName}
+                onChange={(e) => lastNameHandler(e)}
               />
+              {lastNameDirty && lastNameError && (
+                <div className={styles.errorMessage}>{lastNameError}</div>
+              )}
             </div>
           </div>
           <div className={styles.label}>
@@ -280,15 +309,12 @@ const SignUp = () => {
             )}
           </div>
         </div>
-        <div className={styles.checkbox}>
-          <input type="checkbox" />
-          <span>Запомнить пароль</span>
-        </div>
         <Button
           disabled={!validForm}
           title={'Создать аккаунт'}
           type={ButtonTypes.Secondary}
           onClick={registerUserHandler}
+          className={styles.btn}
         />
       </div>
     </FormContainer>

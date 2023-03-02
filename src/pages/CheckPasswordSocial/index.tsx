@@ -77,7 +77,7 @@ const CheckPasswordSocial = () => {
       textLink={'Домой'}
     >
       <div className={styles.inner}>
-        <div>
+        <div className={styles.text}>
           Аккаунт с email {email} уже существует. Войдите в него, чтобы
           привязать Google.
         </div>

@@ -77,7 +77,7 @@ const RestorePassword = () => {
         <>
           <div className={styles.text}>
             Для восстановления доступа укажите электронную почту, привязанную к
-            вашему профилю
+            вашему профилю.
           </div>
           <div className={styles.label}>
             <Input

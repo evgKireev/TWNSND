@@ -17,30 +17,18 @@
   margin-top: 8px;
   font-weight: 400;
   font-size: 12px;
-  line-height: 16px;
+  line-height: 18px;
   color: $error;
 }
 
 .innerName {
   display: flex;
   gap: 19px;
+  justify-content: space-between;
 }
 
-.checkbox {
-  margin-top: 18px;
-  input {
-    width: 20px;
-    height: 20px;
-  }
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 28px;
-  span {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 18px;
-  }
+.btn {
+  margin-top: 28px;
 }
 
 @media (max-width: 580px) {
@@ -67,5 +55,10 @@
     span {
       font-size: 16px;
     }
+  }
+  .errorMessage {
+    margin-top: 6px;
+    font-size: 10px;
+    line-height: 16px;
   }
 }

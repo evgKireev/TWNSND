@@ -59,8 +59,6 @@ const Input: React.FC<InputType> = ({
           [styles.setlabel]: value,
           [styles.errorLabel]: error,
           [styles.eldiz]: typeInput === 'lastname',
-          [styles.setlabelPassword]:
-            (typeInput === 'password' || typeInput === 'confirm') && value,
           [styles.setlabelName]:
             (typeInput === 'lastname' || typeInput === 'firstname') && value,
         })}

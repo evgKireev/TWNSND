@@ -16,6 +16,8 @@ import {
   setRememberPassword,
 } from '../../redux/SignUser/signInSlice'
 import styles from './SignIn.module.scss'
+import classNames from 'classnames'
+import Check from '../../assets/img/Check'
 
 const SignIn = () => {
   const { width = 0 } = useWindowSize()
@@ -42,7 +44,6 @@ const SignIn = () => {
         break
     }
   }
-
   const emailHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value)
     const re =
@@ -159,7 +160,16 @@ const SignIn = () => {
           className={styles.checkbox}
           onChange={() => dispatch(setRememberPassword(!rememberPassword))}
         >
-          <input type="checkbox" />
+          <label>
+            <input type="checkbox" className={styles.inputCheckbox} />
+            <span
+              className={classNames(styles.vueCheckbox, {
+                [styles.vueCheckboxActive]: rememberPassword,
+              })}
+            >
+              {rememberPassword ? <Check /> : null}
+            </span>
+          </label>
           <span>Запомнить пароль</span>
         </div>
 

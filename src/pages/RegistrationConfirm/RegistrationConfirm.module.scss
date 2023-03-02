@@ -1,4 +1,10 @@
-.text{
-    text-align: center;
-    margin-bottom: 40px;
+.text {
+  font-size: 21px;
+  margin-bottom: 40px;
+}
+
+@media (max-width: 480px) {
+  .text {
+    font-size: 17px;
+  }
 }

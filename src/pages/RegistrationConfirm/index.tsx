@@ -1,4 +1,4 @@
-import {  MY_URL } from '../../@types/constant'
+import { MY_URL } from '../../@types/constant'
 import Button, { ButtonTypes } from '../../components/UI/Button'
 import Loader from '../../components/UI/Loader'
 import FormContainer from '../../layout/FormContainer'
@@ -38,7 +38,7 @@ const RegistrationConfirm = () => {
         <div>
           <div className={styles.text}>
             Для дальнейшей регистрации, Вам необходимо активировать ссылку,
-            которая будет отправлена на Вашу эоектронную почту {email}.
+            которая будет отправлена на Вашу электронную почту {email}.
           </div>
           <Button
             title={'Активировать'}
