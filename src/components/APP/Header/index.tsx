@@ -25,7 +25,10 @@ const Header = () => {
         <div className={styles.logo}>LOGO</div>
         {registerUser ? (
           <div className={styles.UserPanel}>
-            <div className={styles.userName}>
+            <div
+              className={styles.userName}
+              onClick={() => navigate('/account')}
+            >
               {userData?.given_name[0].toLocaleUpperCase()}
             </div>
             <div
