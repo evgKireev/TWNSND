@@ -144,7 +144,7 @@ const ChangePassword = () => {
   ) : (
     <FormContainer
       logo={'LOGO'}
-      title={'Восстановление пароля'}
+      title={'Изменение пароля'}
       link={'/signin/restore/passord'}
       textLink={'Назад'}
     >
