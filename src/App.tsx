@@ -25,6 +25,7 @@ const App = () => {
       dispatch(getUser())
     }
   }, [registerUser])
+  console.log(registerUser)
   return (
     <>
       <Routes>

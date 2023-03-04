@@ -57,7 +57,7 @@ const Account = () => {
 
   const firstNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFirstName(e.target.value)
-    const re = /^\S(([a-zA-Z\s\-]{1,30})|([а-яА-ЯЁё\s\-]{1,30}))$/u
+    const re = /^[a-zA-Zа-яА-Я]+([- ]?[a-zA-Zа-яА-Я]+)*$/gm
     if (!re.test(e.target.value)) {
       setErrorFirstName(true)
       setOkFirstName(false)
@@ -74,7 +74,7 @@ const Account = () => {
 
   const lastNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLastName(e.target.value)
-    const re = /^\S(([a-zA-Z\s\-]{1,30})|([а-яА-ЯЁё\s\-]{1,30}))$/u
+    const re = /^[a-zA-Zа-яА-Я]+([- ]?[a-zA-Zа-яА-Я]+)*$/gm
     if (!re.test(e.target.value)) {
       setErrorLastName(true)
       setOkLastName(false)

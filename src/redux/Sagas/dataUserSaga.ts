@@ -9,7 +9,6 @@ import callCheckingUser from './callCheckingUser'
 
 function* getDataUserWorker() {
   const { data, status } = yield callCheckingUser(API.getUserData)
-  console.log(status)
   yield put(setStatusDataUser('pending'))
   if (status === 200) {
     yield put(setStatusDataUser('fullfilled'))

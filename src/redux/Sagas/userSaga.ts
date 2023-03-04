@@ -236,11 +236,12 @@ function* changePasswordWorker(
 }
 
 function* logoutUserWorker() {
-  yield put(setRegisterUser(false))
+  console.log('все')
   localStorage.removeItem(ACCESS_TOKEN_KEY)
   localStorage.removeItem(REFRESH_TOKEN_KEY)
   sessionStorage.removeItem(ACCESS_TOKEN_KEY)
   sessionStorage.removeItem(REFRESH_TOKEN_KEY)
+  yield put(setRegisterUser(false))
 }
 
 export default function* userSaga() {
