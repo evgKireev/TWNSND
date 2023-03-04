@@ -236,7 +236,6 @@ function* changePasswordWorker(
 }
 
 function* logoutUserWorker() {
-  console.log('все')
   localStorage.removeItem(ACCESS_TOKEN_KEY)
   localStorage.removeItem(REFRESH_TOKEN_KEY)
   sessionStorage.removeItem(ACCESS_TOKEN_KEY)

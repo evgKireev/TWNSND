@@ -115,7 +115,7 @@ const SignUp = () => {
 
   const firstNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFirstName(e.target.value)
-    const re = /^[a-zA-Zа-яА-Я]+([- ]?[a-zA-Zа-яА-Я]+)*$/gm
+    const re = /^(([a-zA-Zа-яА-Я\-])+([- ]?[a-zA-Zа-яА-Я\-]+){1,25})*$/gm
     if (!re.test(e.target.value)) {
       setFirstNameError(
         '*Имя должно содержать минимум 2 символа, без пробелов и специальных символов.'
@@ -129,7 +129,7 @@ const SignUp = () => {
 
   const lastNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLastName(e.target.value)
-    const re = /^[a-zA-Zа-яА-Я]+([- ]?[a-zA-Zа-яА-Я]+)*$/gm
+    const re = /^(([a-zA-Zа-яА-Я\-])+([- ]?[a-zA-Zа-яА-Я\-]+){1,25})*$/gm
     if (!re.test(e.target.value)) {
       setLastNameError(
         '*Фамилия должна содержать минимум 2 символа и не содержать специальные символы.'

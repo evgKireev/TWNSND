@@ -16,10 +16,13 @@ export default function* callCheckingUser(api: any, ...rest: any) {
     ''
   const res: ApiResponse<any> = yield call(api, accessToken, ...rest)
   if (res.status === 401) {
-    const { ok, data }: ApiResponse<any> = yield call(
+    const { ok, data, status }: ApiResponse<any> = yield call(
       API.verifyToken,
       accessToken
     )
+    console.log(data)
+    console.log(status)
+    console.log(ok)
     if (ok && data) {
       if (data.isActive === false) {
         const { data, ok }: ApiResponse<any> = yield call(
