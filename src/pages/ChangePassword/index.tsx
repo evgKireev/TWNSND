@@ -44,7 +44,7 @@ const ChangePassword = () => {
   const oldPassworwHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setOldPassword(e.target.value)
     if (!e.target.value) {
-      setOldPasswordError('*Пароль не может быть пустым')
+      setOldPasswordError('*Пароль не может быть пустым.')
       setOldOkPassword(false)
     } else {
       setOldPasswordError('')
@@ -55,14 +55,14 @@ const ChangePassword = () => {
   const passworwHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewPassword(e.target.value)
     const re =
-      /(?=.*[0-9])(?=.*[!@#$%^&*_])(?=.*[A-ZА-Я])[0-9a-zA-Z!@#$%^&*_]{8,}/g
+      /(?=.*[0-9])(?=.*[!@#$%^&*_])(?=.*[A-Za-zА-Яа-я])[0-9а-яА-ЯёЁa-zA-Z!@#$%^&*_]{8,}/g
     if (!re.test(e.target.value)) {
       setPasswordError(
-        '*Пароль должен содержать минимум 8 символов, 1 заглавную букву, 1 спецсимвол, 1 цифру'
+        '*Пароль должен содержать минимум 8 символов, 1 заглавную букву, 1 спецсимвол, 1 цифру.'
       )
       setOkPassword(false)
       if (!e.target.value) {
-        setPasswordError('*Пароль не может быть пустым')
+        setPasswordError('*Пароль не может быть пустым.')
         setOkPassword(false)
       }
     } else {
@@ -74,18 +74,18 @@ const ChangePassword = () => {
   const passworwConfirmHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setConfirmPassword(e.target.value)
     const re =
-      /(?=.*[0-9])(?=.*[!@#$%^&*_])(?=.*[A-ZА-Я])[0-9a-zA-Z!@#$%^&*_]{8,}/g
+      /(?=.*[0-9])(?=.*[!@#$%^&*_])(?=.*[A-Za-zА-Яа-я])[0-9а-яА-ЯёЁa-zA-Z!@#$%^&*_]{8,}/g
     if (!re.test(e.target.value)) {
       setPasswordConfirmError(
-        '*Пароль должен содержать минимум 8 символов, 1 заглавную букву, 1 спецсимвол, 1 цифру'
+        '*Пароль должен содержать минимум 8 символов, 1 заглавную букву, 1 спецсимвол, 1 цифру.'
       )
       setOkPasswordConfirm(false)
       if (!e.target.value) {
-        setPasswordConfirmError('*Пароль не может быть пустым')
+        setPasswordConfirmError('*Пароль не может быть пустым.')
         setOkPasswordConfirm(false)
       }
     } else if (e.target.value !== newPassword) {
-      setPasswordConfirmError('*Пароль не совпадает')
+      setPasswordConfirmError('*Пароль не совпадает.')
       setOkPasswordConfirm(false)
     } else {
       setPasswordConfirmError('')
@@ -95,21 +95,26 @@ const ChangePassword = () => {
 
   const newPasswordHandler = () => {
     if (newPassword && confirmPassword && oldPassword) {
-      dispatch(
-        getChangePassword({
-          data: {
-            OldPassword: oldPassword,
-            NewPassword: newPassword,
-            NewPasswordConfirmation: confirmPassword,
-          },
-          callback: (link) => navigate(link),
-        })
-      )
+      if (newPassword !== confirmPassword) {
+        setPasswordConfirmError('*Пароль не совпадает.')
+        setOkPasswordConfirm(false)
+      } else {
+        dispatch(
+          getChangePassword({
+            data: {
+              OldPassword: oldPassword,
+              NewPassword: newPassword,
+              NewPasswordConfirmation: confirmPassword,
+            },
+            callback: (link) => navigate(link),
+          })
+        )
+      }
     } else {
       if (!newPassword && !confirmPassword && !oldPassword) {
-        setPasswordError('*Пароль не может быть пустым')
-        setPasswordConfirmError('*Пароль не может быть пустым')
-        setOldPasswordError('*Пароль не может быть пустым')
+        setPasswordError('*Пароль не может быть пустым.')
+        setPasswordConfirmError('*Пароль не может быть пустым.')
+        setOldPasswordError('*Пароль не может быть пустым.')
         setOkPasswordConfirm(false)
         setOkPassword(false)
         setOldOkPassword(false)
@@ -118,17 +123,17 @@ const ChangePassword = () => {
         setOldPasswordDirty(true)
       }
       if (!newPassword) {
-        setPasswordError('*Пароль не может быть пустым')
+        setPasswordError('*Пароль не может быть пустым.')
         setOkPassword(false)
         setNewPasswordDirty(true)
       }
       if (!confirmPassword) {
-        setPasswordConfirmError('*Пароль не может быть пустым')
+        setPasswordConfirmError('*Пароль не может быть пустым.')
         setOkPasswordConfirm(false)
         setPasswordConfirmDirty(true)
       }
       if (!oldPassword) {
-        setOldPasswordError('*Пароль не может быть пустым')
+        setOldPasswordError('*Пароль не может быть пустым.')
         setOldOkPassword(false)
         setOldPasswordDirty(true)
       }
@@ -145,7 +150,7 @@ const ChangePassword = () => {
     <FormContainer
       logo={'LOGO'}
       title={'Изменение пароля'}
-      link={'/signin/restore/passord'}
+      link={'/restore-passord'}
       textLink={'Назад'}
     >
       <div className={styles.innerContainer}>

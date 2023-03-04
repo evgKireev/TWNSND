@@ -182,7 +182,7 @@ const Account = () => {
           <div className={styles.editContainer}>
             <p className={styles.text}>Изменить пароль</p>
 
-            <button onClick={() => navigate('/signin/recovery/passord/change')}>
+            <button onClick={() => navigate('recovery-passord-change')}>
               <Edit />
             </button>
           </div>

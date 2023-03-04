@@ -42,14 +42,14 @@ const RestoreChangePassword = () => {
   const passworwHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewPassword(e.target.value)
     const re =
-      /(?=.*[0-9])(?=.*[!@#$%^&*_])(?=.*[A-ZА-Я])[0-9a-zA-Z!@#$%^&*_]{8,}/g
+      /(?=.*[0-9])(?=.*[!@#$%^&*_])(?=.*[A-Za-zА-Яа-я])[0-9а-яА-ЯёЁa-zA-Z!@#$%^&*_]{8,}/g
     if (!re.test(e.target.value)) {
       setPasswordError(
-        '*Пароль должен содержать минимум 8 символов, 1 заглавную букву, 1 спецсимвол, 1 цифру'
+        '*Пароль должен содержать минимум 8 символов, 1 заглавную букву, 1 спецсимвол, 1 цифру.'
       )
       setOkPassword(false)
       if (!e.target.value) {
-        setPasswordError('*Пароль не может быть пустым')
+        setPasswordError('*Пароль не может быть пустым.')
         setOkPassword(false)
       }
     } else {
@@ -61,18 +61,18 @@ const RestoreChangePassword = () => {
   const passworwConfirmHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setConfirmPassword(e.target.value)
     const re =
-      /(?=.*[0-9])(?=.*[!@#$%^&*_])(?=.*[A-ZА-Я])[0-9a-zA-Z!@#$%^&*_]{8,}/g
+      /(?=.*[0-9])(?=.*[!@#$%^&*_])(?=.*[A-Za-zА-Яа-я])[0-9а-яА-ЯёЁa-zA-Z!@#$%^&*_]{8,}/g
     if (!re.test(e.target.value)) {
       setPasswordConfirmError(
-        '*Пароль должен содержать минимум 8 символов, 1 заглавную букву, 1 спецсимвол, 1 цифру'
+        '*Пароль должен содержать минимум 8 символов, 1 заглавную букву, 1 спецсимвол, 1 цифру.'
       )
       setOkPasswordConfirm(false)
       if (!e.target.value) {
-        setPasswordConfirmError('*Пароль не может быть пустым')
+        setPasswordConfirmError('*Пароль не может быть пустым.')
         setOkPasswordConfirm(false)
       }
     } else if (e.target.value !== newPassword) {
-      setPasswordConfirmError('*Пароль не совпадает')
+      setPasswordConfirmError('*Пароль не совпадает.')
       setOkPasswordConfirm(false)
     } else {
       setPasswordConfirmError('')
@@ -82,33 +82,38 @@ const RestoreChangePassword = () => {
 
   const newPasswordHandler = () => {
     if (newPassword && confirmPassword) {
-      dispatch(
-        getRestoreChangePassword({
-          data: {
-            Email: email,
-            Password: newPassword,
-            ConfirmPassword: confirmPassword,
-            Code: formattedCode,
-          },
-          callback: (link) => navigate(link),
-        })
-      )
+      if (newPassword !== confirmPassword) {
+        setPasswordConfirmError('*Пароль не совпадает.')
+        setOkPasswordConfirm(false)
+      } else {
+        dispatch(
+          getRestoreChangePassword({
+            data: {
+              Email: email,
+              Password: newPassword,
+              ConfirmPassword: confirmPassword,
+              Code: formattedCode,
+            },
+            callback: (link) => navigate(link),
+          })
+        )
+      }
     } else {
       if (!newPassword && !confirmPassword) {
-        setPasswordError('*Пароль не может быть пустым')
-        setPasswordConfirmError('*Пароль не может быть пустым')
+        setPasswordError('*Пароль не может быть пустым.')
+        setPasswordConfirmError('*Пароль не может быть пустым.')
         setOkPasswordConfirm(false)
         setOkPassword(false)
         setPasswordConfirmDirty(true)
         setNewPasswordDirty(true)
       }
       if (!newPassword) {
-        setPasswordError('*Пароль не может быть пустым')
+        setPasswordError('*Пароль не может быть пустым.')
         setOkPassword(false)
         setNewPasswordDirty(true)
       }
       if (!confirmPassword) {
-        setPasswordConfirmError('*Пароль не может быть пустым')
+        setPasswordConfirmError('*Пароль не может быть пустым.')
         setOkPasswordConfirm(false)
         setPasswordConfirmDirty(true)
       }
@@ -125,7 +130,7 @@ const RestoreChangePassword = () => {
     <FormContainer
       logo={'LOGO'}
       title={'Восстановление пароля'}
-      link={'/signin/restore/passord'}
+      link={'/restore-passord'}
       textLink={'Назад'}
     >
       {statusRestoreChangePassword === 'fullfilled' ? (

@@ -43,12 +43,12 @@ const RestorePassword = () => {
       dispatch(
         getRestorePassword({
           Email: email,
-          ReturnUrl: `${MY_URL}/signin/restore/passord/change`,
+          ReturnUrl: `${MY_URL}/restore-passord-change`,
         })
       )
     } else {
       if (!email) {
-        setEmailError('*Введите электронную почту')
+        setEmailError('*Введите электронную почту.')
         setOkMail(false)
         setEmailDirty(true)
       }

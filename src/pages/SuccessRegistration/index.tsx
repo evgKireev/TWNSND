@@ -39,7 +39,7 @@ const SuccessRegistration = () => {
       <div>
         <div>
           <Button
-            title={'Зарегистрироваться'}
+            title={'Завершить регистрацию'}
             type={ButtonTypes.Secondary}
             onClick={regisrtationConfirmation}
           />

@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import { ReactElement } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Arrow from '../../assets/img/arow'
 import styles from './FormContainer.module.scss'
 
@@ -23,7 +23,6 @@ const FormContainer: React.FC<FormContainerType> = ({
   text,
   className,
 }) => {
-  const navigate = useNavigate()
   return (
     <div className={styles.wrap}>
       <div className={classNames(styles.inner, className)}>
@@ -33,17 +32,20 @@ const FormContainer: React.FC<FormContainerType> = ({
           className={classNames(styles.innerLink, {
             [styles.innerLinkNon]: !text,
           })}
-          onClick={() => navigate(link)}
         >
           {textLink === 'Войти' || 'Зарегистрироваться' ? (
             <p className={styles.text}>{text}</p>
           ) : null}
-          <a className={styles.link} href={link}>
-            <div className={styles.linkInner}>
+          <div className={styles.link}>
+            <Link
+              to={textLink === 'Назад' ? '..' : link}
+              className={styles.linkInner}
+              relative="path"
+            >
               {textLink === 'Назад' ? <Arrow /> : null}
               {textLink}
-            </div>
-          </a>
+            </Link>
+          </div>
         </div>
         <div>{children}</div>
       </div>

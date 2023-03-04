@@ -48,7 +48,7 @@ const SignUpHome = () => {
                 icon={value.icon}
                 onClick={() =>
                   value.title === 'Зарегистрироваться через почту' &&
-                  navigate('/signup/mail')
+                  navigate('mail')
                 }
               />
             </a>
@@ -56,12 +56,13 @@ const SignUpHome = () => {
         </div>
       ) : (
         <div className={styles.innerMobile}>
-          <a href="/signup/mail">
-            <button type="button" className={styles.buttonMailMobile}>
-              <MailIcon width="26.67" height="21.33" /> регистрация через E-mail
-            </button>
-          </a>
-
+          <button
+            type="button"
+            className={styles.buttonMailMobile}
+            onClick={() => navigate('/signup-mail')}
+          >
+            <MailIcon width="26.67" height="21.33" /> регистрация через E-mail
+          </button>
           <p className={styles.text}>Или</p>
 
           <div className={styles.iconsContainer}>
