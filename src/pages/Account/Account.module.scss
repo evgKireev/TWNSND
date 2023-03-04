@@ -50,15 +50,15 @@
 
 .link {
   border-right: 2px solid #737475;
-  color: $text2;
+  color: #737475;
   &:last-child {
     border-right: none;
   }
 }
 
 .activeLink {
-  border: 2px solid #b9dcf0;
-  color: $blue;
+  border: 2px solid $white;
+  color: $white;
 }
 
 .item {
@@ -182,43 +182,49 @@
   appearance: none;
   background-image: url('../../assets/AccountIcons/arrow.svg');
   background-repeat: no-repeat;
-  background-position-x: calc(100% - 81px);
+  background-position-x: calc(100% - 24px);
   background-position-y: 30px;
 }
 
 .badgesContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(293px, 1fr));
-  grid-gap: 85px;
-  margin-block: 65px 77px;
+  grid-template-columns: repeat(auto-fill, minmax(244px, 1fr));
+  align-items: end;
+  row-gap: 41px;
+  column-gap: 121px;
+  margin-block: 61px 65px;
 }
 
 .badgeWrapper {
   display: flex;
   align-items: center;
+  min-width: 244px;
+  height: 46px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: $light_blue;
 }
 
 .badge {
+  flex-grow: 1;
   text-align: center;
-  width: 218px;
-  padding: 12px 20px;
-  margin-right: 36px;
-  border-radius: 5px;
-  background: $light_blue;
-  font-size: 32px;
-  line-height: 39px;
+  font-size: 28px;
+  line-height: 30px;
   color: $text;
 }
 
+.badgeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .addBadge {
-  width: 218px;
-  padding: 12px 20px;
-  background: $gray;
-  border: 1px solid $total_black;
-  border-radius: 10px;
-  font-size: 28px;
-  line-height: 30px;
-  color: $white;
+  width: 79px;
+  height: 79px;
+  padding: 20px;
+  background: $light_blue;
+  border-radius: 50%;
 }
 
 .save {

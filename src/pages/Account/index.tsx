@@ -7,6 +7,7 @@ import classNames from 'classnames'
 import { useState } from 'react'
 import { Close } from '../../assets/AccountIcons/Close'
 import { useAppSelector } from '../../redux/hooks'
+import { Plus } from '../../assets/AccountIcons/Plus'
 
 let badgesArr = [
   'Маркетинг',
@@ -117,7 +118,9 @@ const Account = () => {
           </li>
         </ul>
 
-        <div className={styles.userLogo}>A</div>
+        <div className={styles.userLogo}>
+          {userData?.given_name[0].toLocaleUpperCase()}
+        </div>
       </div>
 
       <ul className={styles.navigation}>
@@ -288,6 +291,7 @@ const Account = () => {
             <div className={styles.badgeWrapper} key={uuidv4()}>
               <div className={styles.badge}>{badge}</div>
               <button
+                className={styles.badgeButton}
                 onClick={() => {
                   removeBadge(index)
                 }}
@@ -297,8 +301,9 @@ const Account = () => {
             </div>
           )
         })}
-
-        <button className={styles.addBadge}>Добавить</button>
+        <button className={styles.addBadge}>
+          <Plus />
+        </button>
       </div>
 
       <button className={styles.save} onClick={saveData}>
