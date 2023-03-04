@@ -16,3 +16,9 @@ export type UserType = {
   role: string
   country: string
 }
+
+export type ChangeUserData = {
+  FirstName: string
+  LastName: string
+  Country: string
+}

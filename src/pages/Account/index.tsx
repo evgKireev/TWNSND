@@ -6,7 +6,10 @@ import { Edit } from '../../assets/AccountIcons/Edit'
 import classNames from 'classnames'
 import { useState } from 'react'
 import { Close } from '../../assets/AccountIcons/Close'
-import { useAppSelector } from '../../redux/hooks'
+import { useAppDispatch, useAppSelector } from '../../redux/hooks'
+import { Plus } from '../../assets/AccountIcons/Plus'
+import { changeUser } from '../../redux/User/userSlice'
+import Loader from '../../components/UI/Loader'
 
 let badgesArr = [
   'Маркетинг',
@@ -21,6 +24,8 @@ let badgesArr = [
 const Account = () => {
   const navigate = useNavigate()
   const { userData } = useAppSelector((state) => state.userSlice)
+  const { statusDataUser } = useAppSelector((state) => state.statusSlice)
+  const dispatch = useAppDispatch()
 
   const [badges, setBadges] = useState<string[]>(badgesArr)
   const [editName, setEditName] = useState<boolean>(false)
@@ -44,7 +49,7 @@ const Account = () => {
 
   const firstNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFirstName(e.target.value)
-    const re = /^[а-яА-Я]{2}|[a-zA-Z]{2}$/
+    const re = /^\S(([a-zA-Z\s\-]{1,30})|([а-яА-ЯЁё\s\-]{1,30}))$/u
     if (!re.test(e.target.value)) {
       setErrorFirstName(true)
       setOkFirstName(false)
@@ -61,7 +66,7 @@ const Account = () => {
 
   const lastNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLastName(e.target.value)
-    const re = /^[а-яА-Я]{2}|[a-zA-Z]{2}$/
+    const re = /^\S(([a-zA-Z\s\-]{1,30})|([а-яА-ЯЁё\s\-]{1,30}))$/u
     if (!re.test(e.target.value)) {
       setErrorLastName(true)
       setOkLastName(false)
@@ -95,10 +100,18 @@ const Account = () => {
   }
 
   const saveData = () => {
-    //TODO Вызываем диспатч и отправояем данные на сервер из стейтов (firstName, lastName, email.....)
+    dispatch(
+      changeUser({
+        FirstName: firstName,
+        LastName: lastName,
+        Country: country,
+      })
+    )
   }
 
-  return (
+  return statusDataUser === 'pending' ? (
+    <Loader />
+  ) : (
     <div className={styles.wrapper}>
       <div className={styles.header}>
         <div className={styles.logo}>LOGO</div>
@@ -117,7 +130,9 @@ const Account = () => {
           </li>
         </ul>
 
-        <div className={styles.userLogo}>A</div>
+        <div className={styles.userLogo}>
+          {userData?.given_name[0].toLocaleUpperCase()}
+        </div>
       </div>
 
       <ul className={styles.navigation}>
@@ -288,6 +303,7 @@ const Account = () => {
             <div className={styles.badgeWrapper} key={uuidv4()}>
               <div className={styles.badge}>{badge}</div>
               <button
+                className={styles.badgeButton}
                 onClick={() => {
                   removeBadge(index)
                 }}
@@ -297,8 +313,9 @@ const Account = () => {
             </div>
           )
         })}
-
-        <button className={styles.addBadge}>Добавить</button>
+        <button className={styles.addBadge}>
+          <Plus />
+        </button>
       </div>
 
       <button className={styles.save} onClick={saveData}>

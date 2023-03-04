@@ -1,6 +1,5 @@
 import styles from './Header.module.scss'
 import headerImg from '../../../assets/img/header.png'
-import logo from '../../../assets/img/logo.svg'
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md'
 import { useState } from 'react'
 import classNames from 'classnames'
