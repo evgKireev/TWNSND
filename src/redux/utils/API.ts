@@ -14,6 +14,7 @@ import {
   SignInType,
   UserType,
 } from '../../@types/types/auth'
+import { ChangeUserData } from '../../@types/types/user'
 
 const registerUserMail = ({
   FirstName,
@@ -173,6 +174,25 @@ const getNewAccessToken = (refresh_token: string) => {
   )
 }
 
+const changeUserData = (
+  { FirstName, LastName, Country }: ChangeUserData,
+  accessToken: string
+) => {
+  return API_SERVER.put(
+    '/api/user/EditCustomerAsync',
+    {
+      FirstName,
+      LastName,
+      Country,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  )
+}
+
 export default {
   registerUserMail,
   sentEmailRegisterUser,
@@ -185,4 +205,5 @@ export default {
   restoreChangePasswordUsser,
   changePasswordUser,
   verifyToken,
+  changeUserData,
 }
