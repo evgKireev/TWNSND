@@ -175,11 +175,11 @@ const getNewAccessToken = (refresh_token: string) => {
 }
 
 const changeUserData = (
-  { FirstName, LastName, Country }: ChangeUserData,
-  accessToken: string
+  accessToken: string,
+  { FirstName, LastName, Country }: ChangeUserData
 ) => {
   return API_SERVER.put(
-    '/api/user/EditCustomerAsync',
+    '/api/user/ChangeUserInfo',
     {
       FirstName,
       LastName,
@@ -188,6 +188,7 @@ const changeUserData = (
     {
       headers: {
         Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
       },
     }
   )

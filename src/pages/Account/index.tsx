@@ -4,11 +4,11 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import avatar from '../../assets/img/avatar.png'
 import { Edit } from '../../assets/AccountIcons/Edit'
 import classNames from 'classnames'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Close } from '../../assets/AccountIcons/Close'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { Plus } from '../../assets/AccountIcons/Plus'
-import { changeUser } from '../../redux/User/userSlice'
+import { changeUser, getUser } from '../../redux/User/userSlice'
 import Loader from '../../components/UI/Loader'
 
 let badgesArr = [
@@ -24,21 +24,16 @@ let badgesArr = [
 const Account = () => {
   const navigate = useNavigate()
   const { userData } = useAppSelector((state) => state.userSlice)
-  const { statusDataUser } = useAppSelector((state) => state.statusSlice)
   const dispatch = useAppDispatch()
-
   const setInitialFirstName = () => {
     return userData?.given_name ? userData?.given_name : ''
   }
-
   const setInitialLastName = () => {
     return userData?.family_name ? userData?.family_name : ''
   }
-
   const setInitialEmail = () => {
     return userData?.email ? userData?.email : ''
   }
-
   const [badges, setBadges] = useState<string[]>(badgesArr)
   const [editName, setEditName] = useState<boolean>(false)
   const [editEmail, setEditEmail] = useState<boolean>(false)
@@ -58,6 +53,7 @@ const Account = () => {
   const [country, setCountry] = useState<string>('')
   const [business, setBusiness] = useState<string>('')
   const [role, setRole] = useState<string>('')
+  const { statusChangeUser } = useAppSelector((state) => state.statusSlice)
 
   const firstNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFirstName(e.target.value)
@@ -114,20 +110,17 @@ const Account = () => {
   const saveData = () => {
     dispatch(
       changeUser({
-        FirstName: firstName,
-        LastName: lastName,
-        Country: country,
+        data: {
+          FirstName: firstName,
+          LastName: lastName,
+          Country: 'dddd',
+        },
+        callback: () => {}, //тут оставлю пусто , чуть позже посмотрим как реалтзуем
       })
     )
-
-    if (userData) {
-      setFirstName(userData?.given_name)
-      setLastName(userData?.family_name)
-      setEmail(userData?.email)
-    }
   }
 
-  return statusDataUser === 'pending' ? (
+  return statusChangeUser === 'pending' ? (
     <Loader />
   ) : (
     <div className={styles.wrapper}>

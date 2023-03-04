@@ -22,3 +22,8 @@ export type ChangeUserData = {
   LastName: string
   Country: string
 }
+
+export type ChangeUserPayload = {
+  data: ChangeUserData
+  callback: () => void
+}

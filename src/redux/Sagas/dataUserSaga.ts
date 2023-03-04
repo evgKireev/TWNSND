@@ -1,7 +1,7 @@
 import { PayloadAction } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify'
 import { all, put, takeLatest } from 'redux-saga/effects'
-import { ChangeUserData } from '../../@types/types/user'
+import { ChangeUserPayload } from '../../@types/types/user'
 import { setStatusDataUser, setStatusChangeUser } from '../SignUser/statusSlice'
 import { changeUser, getUser, setUser } from '../User/userSlice'
 import API from '../utils/API'
@@ -18,23 +18,16 @@ function* getDataUserWorker() {
   }
 }
 
-function* changeUserWorker(actions: PayloadAction<ChangeUserData>) {
+function* changeUserWorker(actions: PayloadAction<ChangeUserPayload>) {
   yield put(setStatusChangeUser('pending'))
-  const { status, data } = yield callCheckingUser(
-    API.changeUserData,
-    actions.payload
-  )
+  const { data: changeUserData, callback } = actions.payload
+  const { status } = yield callCheckingUser(API.changeUserData, changeUserData)
   if (status === 200) {
     yield put(setStatusChangeUser('fullfilled'))
-    yield put(getUser())
-  } else if (status === 404) {
-    if (data.error_message === 'user_not_found') {
-      toast.error('Пользователь не был найден')
-      yield put(setStatusChangeUser('regected'))
-    }
+    callback()
   } else {
     toast.error('Что-то пошло не так. Попробуйте еще раз!')
-    yield put(setStatusDataUser('regected'))
+    yield put(setStatusChangeUser('regected'))
   }
 }
 
