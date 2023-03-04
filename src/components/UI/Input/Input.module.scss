@@ -12,7 +12,7 @@
   height: 60px;
   width: 100%;
   outline: none;
-  padding: 25px 32px 15px 32px;
+  padding: 23px 60px 17px 32px;
   &:focus {
     border: 2px solid $button_1;
     & + label {
@@ -25,6 +25,8 @@
 }
 
 .label {
+  transition: all 0.4s;
+
   position: absolute;
   left: 32px;
   top: 20px;

@@ -82,6 +82,7 @@
 }
 
 .userName {
+  cursor: pointer;
   height: 60px;
   width: 60px;
   background: linear-gradient(315deg, #4fa0ff 0%, #83f8ff 100%);
@@ -91,7 +92,6 @@
   justify-content: center;
   align-items: center;
   font-size: 28px;
-  cursor: pointer;
 }
 
 .naw {

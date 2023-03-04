@@ -1,7 +1,5 @@
-import classNames from 'classnames'
 import { useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import Check from '../../assets/img/Check'
 import Button, { ButtonTypes } from '../../components/UI/Button'
 import Input, { InputTypeEnum } from '../../components/UI/Input'
 import Loader from '../../components/UI/Loader'
@@ -77,14 +75,14 @@ const SignUp = () => {
   const passworwHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value)
     const re =
-      /(?=.*[0-9])(?=.*[!@#$%^&*_])(?=.*[A-ZА-Я])[0-9a-zA-Z!@#$%^&*_]{8,}/g
+      /(?=.*[0-9])(?=.*[!@#$%^&*_])(?=.*[A-Za-zА-Яа-я])[0-9а-яА-ЯёЁa-zA-Z!@#$%^&*_]{8,}/g
     if (!re.test(e.target.value)) {
       setPasswordError(
-        '*Пароль должен содержать минимум 8 символов, 1 заглавную букву, 1 спецсимвол, 1 цифру'
+        '*Пароль должен содержать минимум 8 символов, 1 заглавную букву, 1 спецсимвол, 1 цифру.'
       )
       setOkPassword(false)
       if (!e.target.value) {
-        setPasswordError('*Пароль не может быть пустым')
+        setPasswordError('*Пароль не может быть пустым.')
         setOkPassword(false)
       }
     } else {
@@ -96,18 +94,18 @@ const SignUp = () => {
   const passworwConfirmHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPasswordConfirm(e.target.value)
     const re =
-      /(?=.*[0-9])(?=.*[!@#$%^&*_])(?=.*[A-ZА-Я])[0-9a-zA-Z!@#$%^&*_]{8,}/g
+      /(?=.*[0-9])(?=.*[!@#$%^&*_])(?=.*[A-Za-zА-Яа-я])[0-9а-яА-ЯёЁa-zA-Z!@#$%^&*_]{8,}/g
     if (!re.test(e.target.value)) {
       setPasswordConfirmError(
-        '*Пароль должен содержать минимум 8 символов, 1 заглавную букву, 1 спецсимвол, 1 цифру'
+        '*Пароль должен содержать минимум 8 символов, 1 заглавную букву, 1 спецсимвол, 1 цифру.'
       )
       setOkPasswordConfirm(false)
       if (!e.target.value) {
-        setPasswordConfirmError('*Пароль не может быть пустым')
+        setPasswordConfirmError('*Пароль не может быть пустым.')
         setOkPasswordConfirm(false)
       }
     } else if (e.target.value !== password) {
-      setPasswordConfirmError('*Пароль не совпадает')
+      setPasswordConfirmError('*Пароль не совпадает.')
       setOkPasswordConfirm(false)
     } else {
       setPasswordConfirmError('')
@@ -117,9 +115,11 @@ const SignUp = () => {
 
   const firstNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFirstName(e.target.value)
-    const re = /^[а-яА-Я]{2}|[a-zA-Z]{2}$/
+    const re = /^\S(([a-zA-Z\s\-]{1,30})|([а-яА-ЯЁё\s\-]{1,30}))$/u
     if (!re.test(e.target.value)) {
-      setFirstNameError('*Имя должно содержать минимум 2 символа')
+      setFirstNameError(
+        '*Имя должно содержать минимум 2 символа, без пробелов и специальных символов.'
+      )
       setOkName(false)
     } else {
       setFirstNameError('')
@@ -129,9 +129,11 @@ const SignUp = () => {
 
   const lastNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLastName(e.target.value)
-    const re = /^[а-яА-Я]{2}|[a-zA-Z]{2}$/
+    const re = /^\S(([a-zA-Z\s\-]{1,30})|([а-яА-ЯЁё\s\-]{1,30}))$/u
     if (!re.test(e.target.value)) {
-      setLastNameError('*Фамилия должна содержать минимум 2 символа')
+      setLastNameError(
+        '*Фамилия должна содержать минимум 2 символа и не содержать специальные символы.'
+      )
       setOkLastName(false)
     } else {
       setLastNameError('')
@@ -141,27 +143,32 @@ const SignUp = () => {
 
   const registerUserHandler = () => {
     if (firstName && email && password && passwordConfirm) {
-      dispatch(
-        getRegisterUser({
-          data: {
-            FirstName: firstName,
-            LastName: lastName,
-            Email: email,
-            Password: password,
-            ConfirmPassword: passwordConfirm,
-          },
-          callback: () => {
-            navigate('/confirm/password')
-          },
-        })
-      )
+      if (password !== passwordConfirm) {
+        setPasswordConfirmError('*Пароль не совпадает.')
+        setOkPasswordConfirm(false)
+      } else {
+        dispatch(
+          getRegisterUser({
+            data: {
+              FirstName: firstName,
+              LastName: lastName,
+              Email: email,
+              Password: password,
+              ConfirmPassword: passwordConfirm,
+            },
+            callback: () => {
+              navigate('/confirm-password')
+            },
+          })
+        )
+      }
     } else {
       if (!firstName && !email && !password && !passwordConfirm && !lastName) {
-        setPasswordError('*Пароль не может быть пустым')
-        setPasswordConfirmError('*Пароль не может быть пустым')
-        setEmailError('*Введите электронную почту')
-        setFirstNameError('*Имя должно содержать минимум 2 символа')
-        setLastNameError('*Фамилия должна содержать минимум 2 символа')
+        setPasswordError('*Пароль не может быть пустым.')
+        setPasswordConfirmError('*Пароль не может быть пустым.')
+        setEmailError('*Введите электронную почту.')
+        setFirstNameError('*Имя должно содержать минимум 2 символа.')
+        setLastNameError('*Фамилия должна содержать минимум 2 символа.')
         setOkPasswordConfirm(false)
         setOkPassword(false)
         setOkMail(false)
@@ -172,29 +179,32 @@ const SignUp = () => {
         setFirstNameDirty(true)
         setEmailDirty(true)
         setLastNameDirty(true)
+      } else if (passwordConfirm !== password) {
+        setPasswordConfirmError('*Пароль не совпадает.')
+        setOkPasswordConfirm(false)
       }
       if (!email) {
-        setEmailError('*Введите электронную почту')
+        setEmailError('*Введите электронную почту.')
         setOkMail(false)
         setEmailDirty(true)
       }
       if (!password) {
-        setPasswordError('*Пароль не может быть пустым')
+        setPasswordError('*Пароль не может быть пустым.')
         setOkPassword(false)
         setPasswordDirty(true)
       }
       if (!passwordConfirm) {
-        setPasswordConfirmError('*Пароль не может быть пустым')
+        setPasswordConfirmError('*Пароль не может быть пустым.')
         setOkPasswordConfirm(false)
         setPasswordConfirmDirty(true)
       }
       if (!firstName) {
-        setFirstNameError('*Имя должно содержать минимум 2 символа')
+        setFirstNameError('*Имя должно содержать минимум 2 символа.')
         setOkName(false)
         setFirstNameDirty(true)
       }
       if (!lastName) {
-        setLastNameError('*Фамилия должна содержать минимум 2 символа')
+        setLastNameError('*Фамилия должна содержать минимум 2 символа.')
         setOkLastName(false)
         setLastNameDirty(true)
       }

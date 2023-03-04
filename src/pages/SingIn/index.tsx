@@ -62,7 +62,7 @@ const SignIn = () => {
   const passworwHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value)
     if (!e.target.value) {
-      setPasswordError('*Пароль не может быть пустым')
+      setPasswordError('*Пароль не может быть пустым.')
       setOkPassword(false)
     } else {
       setPasswordError('')
@@ -84,20 +84,20 @@ const SignIn = () => {
       dispatch(setRememberPassword(true))
     } else {
       if (!email && !password) {
-        setPasswordError('*Пароль не может быть пустым')
-        setEmailError('*Введите электронную почту')
+        setPasswordError('*Пароль не может быть пустым.')
+        setEmailError('*Введите электронную почту.')
         setOkPassword(false)
         setOkMail(false)
         setPasswordDirty(true)
         setEmailDirty(true)
       }
       if (!email) {
-        setEmailError('*Введите электронную почту')
+        setEmailError('*Введите электронную почту.')
         setOkMail(false)
         setEmailDirty(true)
       }
       if (!password) {
-        setPasswordError('*Пароль не может быть пустым')
+        setPasswordError('*Пароль не может быть пустым.')
         setOkPassword(false)
         setPasswordDirty(true)
       }
@@ -207,7 +207,7 @@ const SignIn = () => {
           <p className={styles.textLink}>Забыли пароль?</p>
           <div
             className={styles.link}
-            onClick={() => navigate('/signin/restore/passord')}
+            onClick={() => navigate('restore-passord')}
           >
             Восстановить пароль
           </div>

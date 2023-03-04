@@ -30,19 +30,19 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="signup" element={<SignUpHome />} />
-        <Route path="/signup/mail" element={<SignUp />} />
+        <Route path=":slag/mail" element={<SignUp />} />
         <Route path="signin" element={<SignIn />} />
         <Route path="account" element={<Account />} />
         <Route path="success" element={<SuccessRegistration />} />
-        <Route path="check/password/social" element={<CheckPasswordSocial />} />
-        <Route path="signin/restore/passord" element={<RestorePassword />} />
-        <Route path="confirm/password" element={<RegistrationConfirm />} />
+        <Route path="check-password-social" element={<CheckPasswordSocial />} />
+        <Route path=":slag/restore-passord" element={<RestorePassword />} />
+        <Route path="confirm-password" element={<RegistrationConfirm />} />
         <Route
-          path="signin/recovery/passord/change"
+          path=":slag/recovery-passord-change"
           element={<ChangePassword />}
         />
         <Route
-          path="signin/restore/passord/change"
+          path="restore-passord-change"
           element={<RestoreChangePassword />}
         />
       </Routes>

@@ -32,7 +32,7 @@ const CheckPasswordSocial = () => {
   const passworwHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value)
     if (!e.target.value) {
-      setPasswordError('*Пароль не может быть пустым')
+      setPasswordError('*Пароль не может быть пустым.')
       setOkPassword(false)
     } else {
       setPasswordError('')
@@ -56,7 +56,7 @@ const CheckPasswordSocial = () => {
       )
     } else {
       if (!password) {
-        setPasswordError('*Пароль не может быть пустым')
+        setPasswordError('*Пароль не может быть пустым.')
         setOkPassword(false)
         setPasswordDirty(true)
       }

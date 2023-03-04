@@ -102,7 +102,7 @@ function* signInUserWorker(actions: PayloadAction<SignInPayloadType>) {
     if (data.error_description === 'Email not confirmed') {
       yield put(setUserId(data.user_id))
       yield put(setEmail(data.email))
-      callback('/confirm/password')
+      callback('/confirm-password')
       yield put(setSignInStatusUser('rejected'))
     } else if (data.error_description === 'Invalid username or password') {
       toast.error('Неверный пароль или email')
@@ -134,7 +134,7 @@ function* registerUserGoogleWorker(
     } else {
       if (data.error_description === 'local_account_exist') {
         yield put(setEmail(data.Email))
-        callback('/check/password/social')
+        callback('/check-password-social')
         yield put(setSignInStatusUserGoogle('regected'))
       }
     }
@@ -169,7 +169,7 @@ function* restorePasswordWorker(actions: PayloadAction<RestorePassword>) {
     yield put(setStatusRestorePassword('fullfilled'))
   } else if (status === 404) {
     if (data.error_message === 'user_not_found') {
-      toast.error('Пользователь с указанным email ну существует')
+      toast.error('Пользователь с указанным email не существует')
       yield put(setStatusRestorePassword('regected'))
     } else {
       toast.error('Что-то пошло не так. Попробуйте еще раз!')
@@ -200,7 +200,7 @@ function* restoreChangePasswordWorker(
     callback('/signin')
   } else if (status === 404) {
     if (data.error_message === 'user_not_found') {
-      toast.error('Пользователь с указанным email ну существует')
+      toast.error('Пользователь с указанным email не существует')
       yield put(setStatusRestoreChangePassword('regected'))
     }
   } else {
