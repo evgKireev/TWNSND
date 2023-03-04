@@ -15,6 +15,7 @@ export default function* callCheckingUser(api: any, ...rest: any) {
     sessionStorage.getItem(REFRESH_TOKEN_KEY) ||
     ''
   const res: ApiResponse<any> = yield call(api, accessToken, ...rest)
+  console.log(res)
   if (res.status === 401) {
     const { data }: ApiResponse<any> = yield call(API.verifyToken, accessToken)
     if (data) {

@@ -8,9 +8,10 @@ import API from '../utils/API'
 import callCheckingUser from './callCheckingUser'
 
 function* getDataUserWorker() {
-  const { data, ok } = yield callCheckingUser(API.getUserData)
+  const { data, status } = yield callCheckingUser(API.getUserData)
+  console.log(status)
   yield put(setStatusDataUser('pending'))
-  if (ok && data) {
+  if (status === 200) {
     yield put(setStatusDataUser('fullfilled'))
     yield put(setUser(data))
   } else {
