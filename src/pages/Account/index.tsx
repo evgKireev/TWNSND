@@ -27,20 +27,32 @@ const Account = () => {
   const { statusDataUser } = useAppSelector((state) => state.statusSlice)
   const dispatch = useAppDispatch()
 
+  const setInitialFirstName = () => {
+    return userData?.given_name ? userData?.given_name : ''
+  }
+
+  const setInitialLastName = () => {
+    return userData?.family_name ? userData?.family_name : ''
+  }
+
+  const setInitialEmail = () => {
+    return userData?.email ? userData?.email : ''
+  }
+
   const [badges, setBadges] = useState<string[]>(badgesArr)
   const [editName, setEditName] = useState<boolean>(false)
   const [editEmail, setEditEmail] = useState<boolean>(false)
-  const [firstName, setFirstName] = useState('')
+  const [firstName, setFirstName] = useState(setInitialFirstName())
   const [errorFirstName, setErrorFirstName] = useState<boolean | undefined>(
     undefined
   )
   const [okFirstName, setOkFirstName] = useState<boolean | undefined>(undefined)
-  const [lastName, setLastName] = useState('')
+  const [lastName, setLastName] = useState(setInitialLastName())
   const [errorLastName, setErrorLastName] = useState<boolean | undefined>(
     undefined
   )
   const [okLastName, setOkLastName] = useState<boolean | undefined>(undefined)
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState(setInitialEmail())
   const [errorEmail, setErrorEmail] = useState<boolean | undefined>(undefined)
   const [okEmail, setOkEmail] = useState<boolean | undefined>(undefined)
   const [country, setCountry] = useState<string>('')
@@ -107,6 +119,12 @@ const Account = () => {
         Country: country,
       })
     )
+
+    if (userData) {
+      setFirstName(userData?.given_name)
+      setLastName(userData?.family_name)
+      setEmail(userData?.email)
+    }
   }
 
   return statusDataUser === 'pending' ? (
@@ -211,7 +229,7 @@ const Account = () => {
               type="text"
               name="Имя"
               disabled={!editName}
-              value={userData?.given_name}
+              value={firstName}
               onChange={(e) => firstNameHandler(e)}
               className={classNames(styles.inputName, styles.inputsGeneral, {
                 [styles.inputError]: editName && errorFirstName,
@@ -222,7 +240,7 @@ const Account = () => {
               type="text"
               name="Фамилия"
               disabled={!editName}
-              value={userData?.family_name}
+              value={lastName}
               onChange={(e) => lastNameHandler(e)}
               className={classNames(styles.inputName, styles.inputsGeneral, {
                 [styles.inputError]: editName && errorLastName,
@@ -242,7 +260,7 @@ const Account = () => {
               type="email"
               name="email"
               disabled={!editEmail}
-              value={userData?.email}
+              value={email}
               onChange={(e) => emailHandler(e)}
               className={classNames(styles.inputEmail, styles.inputsGeneral, {
                 [styles.inputError]: editEmail && errorEmail,
