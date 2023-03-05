@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { MY_URL } from '../../@types/constant'
 import Button, { ButtonTypes } from '../../components/UI/Button'
+import ErrorInput from '../../components/UI/ErrorInput'
 import Input, { InputTypeEnum } from '../../components/UI/Input'
 import Loader from '../../components/UI/Loader'
 import FormContainer from '../../layout/FormContainer'
@@ -93,7 +94,7 @@ const RestorePassword = () => {
               okValidat={okMail}
             />
             {emailDirty && emailError && (
-              <div className={styles.errorMessage}>{emailError}</div>
+              <ErrorInput errorMessage={emailError} />
             )}
           </div>
           <Button

@@ -13,17 +13,6 @@
   gap: 24px;
 }
 
-.errorMessage {
-  transition: min-height 0.2s ease, max-height 0.2s ease, visibility 0.2s ease,
-    opacity 0.2s ease;
-  margin-top: 8px;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 18px;
-  color: $error;
-}
-
-
 .innerName {
   display: flex;
   gap: 19px;

@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button, { ButtonTypes } from '../../components/UI/Button'
+import ErrorInput from '../../components/UI/ErrorInput'
 import Input, { InputTypeEnum } from '../../components/UI/Input'
 import Loader from '../../components/UI/Loader'
 import FormContainer from '../../layout/FormContainer/index'
@@ -170,7 +171,7 @@ const ChangePassword = () => {
               okValidat={okOldPassword}
             />
             {oldPasswordDirty && oldPasswordError && (
-              <div className={styles.errorMessage}>{oldPasswordError}</div>
+              <ErrorInput errorMessage={oldPasswordError} />
             )}
           </div>
           <div className={styles.label}>
@@ -188,7 +189,7 @@ const ChangePassword = () => {
               okValidat={okPassword}
             />
             {newPasswordDirty && passwordError && (
-              <div className={styles.errorMessage}>{passwordError}</div>
+              <ErrorInput errorMessage={passwordError} />
             )}
           </div>
           <div className={styles.label}>
@@ -205,7 +206,7 @@ const ChangePassword = () => {
               okValidat={okPasswordConfirm}
             />
             {passwordConfirmDirty && passwordConfirmError && (
-              <div className={styles.errorMessage}>{passwordConfirmError}</div>
+              <ErrorInput errorMessage={passwordConfirmError} />
             )}
           </div>
         </div>

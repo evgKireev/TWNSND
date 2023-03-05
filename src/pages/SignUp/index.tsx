@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button, { ButtonTypes } from '../../components/UI/Button'
+import ErrorInput from '../../components/UI/ErrorInput'
 import Input, { InputTypeEnum } from '../../components/UI/Input'
 import Loader from '../../components/UI/Loader'
 import FormContainer from '../../layout/FormContainer/index'
@@ -241,7 +242,7 @@ const SignUp = () => {
                 okValidat={okName}
               />
               {firstNameDirty && firstNameError && (
-                <div className={styles.errorMessage}>{firstNameError}</div>
+                <ErrorInput errorMessage={firstNameError} />
               )}
             </div>
             <div className={styles.label}>
@@ -258,7 +259,7 @@ const SignUp = () => {
                 onChange={(e) => lastNameHandler(e)}
               />
               {lastNameDirty && lastNameError && (
-                <div className={styles.errorMessage}>{lastNameError}</div>
+                <ErrorInput errorMessage={lastNameError} />
               )}
             </div>
           </div>
@@ -276,12 +277,10 @@ const SignUp = () => {
               okValidat={okMail}
             />
             {!!errorMessagesRegistration ? (
-              <div className={styles.errorMessage}>
-                {errorMessagesRegistration}
-              </div>
+              <ErrorInput errorMessage={errorMessagesRegistration} />
             ) : null}
             {emailDirty && emailError && (
-              <div className={styles.errorMessage}>{emailError}</div>
+              <ErrorInput errorMessage={emailError} />
             )}
           </div>
           <div className={styles.label}>
@@ -298,7 +297,7 @@ const SignUp = () => {
               okValidat={okPassword}
             />
             {passwordDirty && passwordError && (
-              <div className={styles.errorMessage}>{passwordError}</div>
+              <ErrorInput errorMessage={passwordError} />
             )}
           </div>
           <div className={styles.label}>
@@ -315,7 +314,7 @@ const SignUp = () => {
               okValidat={okPasswordConfirm}
             />
             {passwordConfirmDirty && passwordConfirmError && (
-              <div className={styles.errorMessage}>{passwordConfirmError}</div>
+              <ErrorInput errorMessage={passwordConfirmError} />
             )}
           </div>
         </div>
