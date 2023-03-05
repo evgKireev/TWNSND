@@ -18,6 +18,7 @@ import {
 import styles from './SignIn.module.scss'
 import classNames from 'classnames'
 import Check from '../../assets/img/Check'
+import ErrorInput from '../../components/UI/ErrorInput'
 
 const SignIn = () => {
   const { width = 0 } = useWindowSize()
@@ -134,7 +135,7 @@ const SignIn = () => {
               okValidat={okMail}
             />
             {emailDirty && emailError && (
-              <div className={styles.errorMessage}>{emailError}</div>
+              <ErrorInput errorMessage={emailError} />
             )}
           </div>
           <div className={styles.label}>
@@ -151,7 +152,7 @@ const SignIn = () => {
               okValidat={okPassword}
             />
             {passwordDirty && passwordError && (
-              <div className={styles.errorMessage}>{passwordError}</div>
+              <ErrorInput errorMessage={passwordError} />
             )}
           </div>
         </div>

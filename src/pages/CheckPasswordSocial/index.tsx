@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { MY_URL } from '../../@types/constant'
 import Button, { ButtonTypes } from '../../components/UI/Button'
+import ErrorInput from '../../components/UI/ErrorInput'
 import Input, { InputTypeEnum } from '../../components/UI/Input'
 import Loader from '../../components/UI/Loader'
 import FormContainer from '../../layout/FormContainer'
@@ -95,7 +96,7 @@ const CheckPasswordSocial = () => {
             okValidat={okPassword}
           />
           {passwordDirty && passwordError && (
-            <div className={styles.errorMessage}>{passwordError}</div>
+            <ErrorInput errorMessage={passwordError} />
           )}
         </div>
         <Button
