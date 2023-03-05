@@ -1,23 +1,28 @@
 import styles from './Header.module.scss'
-import headerImg from '../../../assets/img/header.png'
-import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md'
 import { useState } from 'react'
 import classNames from 'classnames'
 import UserControl from '../UserControl'
 import { useAppSelector } from '../../../redux/hooks'
-import { useNavigate } from 'react-router-dom'
-const naw = [
-  'Сервис по подбору решений',
-  'Поиск по параметрам',
-  'Готовые решения',
-  'Блог',
-]
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import ButtonNew, { ButtonNewTypes } from '../../UI/ButtonNew'
+import { PathNames } from '../../../pages/Router/Router'
+
 const Header = () => {
+  const naw = [
+    { title: 'Главная', link: PathNames.Home },
+    { title: 'Платформы', link: PathNames.Platforms },
+    { title: 'FAQ', link: '' },
+    { title: 'Каталог', link: '' },
+    { title: 'Блог', link: '' },
+    { title: 'Контакты', link: '' },
+  ]
   const navigate = useNavigate()
   const { registerUser } = useAppSelector((state) => state.signInSlice)
   const { userData } = useAppSelector((state) => state.userSlice)
-  const [activeNaw, setActiveNaw] = useState('')
+  const [activeNaw, setActiveNaw] = useState('Главная')
   const [openPanel, setOpenPanel] = useState(false)
+  const location = useLocation()
+  console.log(location.pathname)
   return (
     <header className={styles.header}>
       <div className={styles.headerTop}>
@@ -26,63 +31,42 @@ const Header = () => {
           <div className={styles.UserPanel}>
             <div
               className={styles.userName}
-              onClick={() => navigate('/account')}
-            >
-              {userData?.given_name[0].toLocaleUpperCase()}
-            </div>
-            <div
-              className={styles.arrow}
               onClick={() => setOpenPanel(!openPanel)}
             >
-              {openPanel ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}
+              {userData?.given_name[0].toLocaleUpperCase()}
+              {userData?.family_name[0].toLocaleUpperCase()}
             </div>
             <UserControl openPanel={openPanel} />
           </div>
         ) : (
           <div className={styles.innerControl}>
-            <button
-              className={styles.registerBtn}
-              onClick={() => navigate('/signup')}
-            >
-              Зарегистрироваться
-            </button>
-            <button
-              className={styles.loginBtn}
-              onClick={() => navigate('/signin')}
-            >
-              Войти
-            </button>
+            <ButtonNew
+              title={'Зарегистрироваться'}
+              type={ButtonNewTypes.Primary}
+              onClick={() => navigate(PathNames.SignUp)}
+            />
+            <ButtonNew
+              title={'Войти'}
+              type={ButtonNewTypes.Secondary}
+              onClick={() => navigate(PathNames.SignIn)}
+            />
           </div>
         )}
       </div>
       <nav className={styles.naw}>
         {naw.map((value, index) => (
-          <div
-            onClick={() => setActiveNaw(value)}
-            key={index}
-            className={classNames(styles.nawItem, {
-              [styles.active]: value === activeNaw,
-            })}
-          >
-            {value}
-          </div>
+          <Link to={value.link} key={index}>
+            <div
+              onClick={() => setActiveNaw(value.title)}
+              className={classNames(styles.nawItem, {
+                [styles.active]: value.link === location.pathname,
+              })}
+            >
+              {value.title}
+            </div>
+          </Link>
         ))}
       </nav>
-      <div className={styles.hr}></div>
-      <div className={styles.headerButtom}>
-        <div className={styles.content}>
-          <h1 className={styles.title}>
-            Сервис подбора, настройки чат-ботов и сценариев их использования
-          </h1>
-          <div className={styles.innerItem}>
-            <div>Готовые решения по сферам и задачам бизнеса</div>
-            <div>Самостоятельный подбор чат-ботов по параметрам</div>
-            <div>Подберем и настроим чат-ботов под ваши задачи</div>
-          </div>
-          <button className={styles.btn}>Выбрать шаблон</button>
-        </div>
-        <img src={headerImg} alt="images" />
-      </div>
     </header>
   )
 }

@@ -7,6 +7,7 @@ import Loader from '../../components/UI/Loader'
 import FormContainer from '../../layout/FormContainer/index'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { getRegisterUser, setEmail } from '../../redux/SignUser/signUpSlice'
+import { PathNames } from '../Router/Router'
 import styles from './SignUp.module.scss'
 
 const SignUp = () => {
@@ -158,7 +159,7 @@ const SignUp = () => {
               ConfirmPassword: passwordConfirm,
             },
             callback: () => {
-              navigate('/confirm-password')
+              navigate(PathNames.RegistrationConfirm)
             },
           })
         )
@@ -221,7 +222,7 @@ const SignUp = () => {
     <FormContainer
       logo={'LOGO'}
       title={'Создать аккаунт'}
-      link={'/signup'}
+      link={PathNames.SignUp}
       textLink={'Назад'}
       text={''}
     >

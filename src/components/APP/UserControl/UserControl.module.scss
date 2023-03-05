@@ -1,114 +1,85 @@
 @import '../../../scss/vars';
 
 .userControl {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   position: absolute;
   opacity: 0;
-  transform: translateY(-75px);
+  transform: translateY(-30px);
   transition: all 0.9s;
   z-index: -1;
   right: 0;
-  top: 85px;
-  background-color: $button_disabled;
-  border-radius: 8px;
-  padding: 48px 30px 50px 30px;
-  width: 466px;
+  top: 60px;
+  background-color: $white;
+  border-radius: 15px;
+  padding: 20px;
+  width: 291px;
+  height: 271px;
   color: $border;
   font-weight: 500;
-}
-
-.userInfo {
-  display: flex;
-  align-items: center;
-  gap: 29px;
-  margin-bottom: 50px;
+  box-shadow: 0px 6px 12px rgba(24, 39, 75, 0.12),
+    0px 8px 24px rgba(24, 39, 75, 0.08);
 }
 
 .userNameOne {
-  width: 80px;
-  height: 80px;
-  background: linear-gradient(315deg, #4fa0ff 0%, #83f8ff 100%);
+  width: 46px;
+  height: 46px;
+  background-color: #0176d3;
   border-radius: 50%;
   color: $bg;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 32px;
-}
-
-.userName {
-  font-size: 28px;
-  line-height: 30px;
-  margin-bottom: 2px;
-}
-
-.userEmail {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
   font-size: 18px;
   line-height: 24px;
 }
 
+.userName {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  color: $black;
+  margin-bottom: 6px;
+}
+
+.userEmail {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  color: #bfc1c8;
+}
+
 .logout {
+  padding-top: 18px;
+  border-top: 1px solid #bfc1c8;
   display: flex;
   align-items: center;
-  gap: 21px;
+  gap: 15px;
   cursor: pointer;
 }
 
 .logoutText {
-  font-size: 24px;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
   line-height: 24px;
+  color: #032d60;
 }
 
 .logoutIcon {
   svg {
-    height: 40px;
-    width: 35px;
-    color: $button_1;
-  }
-}
-
-.logoutQuestionText {
-  font-size: 24px;
-  line-height: 24px;
-  margin-bottom: 36px;
-}
-
-.logoutBtn {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.btnLogout {
-  font-size: 22px;
-  line-height: 140%;
-  padding: 13px 37px 16px 35px;
-  background-color: $text;
-  border-radius: 4px;
-  color: $bg;
-  cursor: pointer;
-  border: none;
-  &:hover {
-    background-color: $btn_hover;
-    transition: all 0.5s;
-  }
-  &:active {
-    background-color: $button_1;
-  }
-}
-
-.btnCancel {
-  font-size: 22px;
-  line-height: 140%;
-  padding: 13px 30px 16px 26px;
-  background-color: $backgr_white;
-  border-radius: 4px;
-  color: $text;
-  cursor: pointer;
-  border: 2px solid transparent;
-  transition: all 0.5s;
-  &:hover {
-    border: 2px solid $text;
-    transition: all 0.5s;
+    height: 24px;
+    width: 24px;
+    color: #032d60;
   }
 }
 

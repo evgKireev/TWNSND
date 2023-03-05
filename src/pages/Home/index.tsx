@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { redirectUriGoogle, stateGoogle } from '../../@types/constant'
 import Footer from '../../components/APP/Footer'
 import Header from '../../components/APP/Header'
@@ -9,6 +9,7 @@ import {
   getRegisterUserGoogle,
   setCode,
 } from '../../redux/SignUser/signUpSlice'
+import { getUser } from '../../redux/User/userSlice'
 import styles from './Home.module.scss'
 
 const Home = () => {
@@ -18,6 +19,7 @@ const Home = () => {
   const code = searchParams.get('code')
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+  const { registerUser } = useAppSelector((state) => state.signInSlice)
   const { statusRegisterUserGoogle } = useAppSelector(
     (state) => state.statusSlice
   )
@@ -37,12 +39,18 @@ const Home = () => {
       )
     }
   }, [])
+  useEffect(() => {
+    if (registerUser) {
+      dispatch(getUser())
+    }
+  }, [registerUser])
   return statusRegisterUserGoogle === 'pending' ? (
     <Loader />
   ) : (
     <>
       <div className={styles.container}>
         <Header />
+        <Outlet />
       </div>
       <Footer />
     </>

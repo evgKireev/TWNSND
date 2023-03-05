@@ -1,0 +1,55 @@
+@import '../../../scss/vars';
+
+.button {
+  width: 100%;
+  border-radius: 14px;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 140%;
+  text-align: center;
+  transition: all 0.5s;
+  &:hover {
+    cursor: pointer;
+    transition: all 0.5s;
+  }
+}
+
+.primary {
+  color: $btn;
+  border: 1px solid $btn;
+  background-color: transparent;
+  padding: 16px 24px;
+  transition: all 0.5s;
+  &:hover {
+    background-color: btn_bg;
+    color: $hover;
+    transition: all 0.5s;
+  }
+  &:active {
+    background-color: transparent;
+    color: $active;
+  }
+  &:disabled {
+    pointer-events: none;
+  }
+}
+
+.secondary {
+  padding: 16px 37px;
+  background-color: $btn;
+  color: $white;
+  border: none;
+  transition: all 0.5s;
+  &:hover {
+    background-color: $hover;
+    transition: all 0.5s;
+  }
+  &:active {
+    background-color: $active;
+  }
+  &:disabled {
+    pointer-events: none;
+  }
+}

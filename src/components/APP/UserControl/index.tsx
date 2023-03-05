@@ -10,7 +10,6 @@ type UserControlType = {
 }
 const UserControl: React.FC<UserControlType> = ({ openPanel }) => {
   const { userData } = useAppSelector((state) => state.userSlice)
-  const [logoutQuestion, setLogoutQuestion] = useState(false)
   const dispatch = useAppDispatch()
   return (
     <div
@@ -18,41 +17,16 @@ const UserControl: React.FC<UserControlType> = ({ openPanel }) => {
         [styles.blockModal]: openPanel,
       })}
     >
-      <div className={styles.userInfo}>
-        <div className={styles.userNameOne}>
-          {userData?.given_name[0].toLocaleUpperCase()}
-        </div>
-        <div>
-          <div className={styles.userName}>{userData?.given_name}</div>
-          <div className={styles.userEmail}>{userData?.email}</div>
-        </div>
+      <div>
+        <div className={styles.userName}>{userData?.given_name}</div>
+        <div className={styles.userEmail}>{userData?.email}</div>
       </div>
-      {logoutQuestion ? (
-        <div className={styles.logoutQuestion}>
-          <div className={styles.logoutQuestionText}>Выйти из профиля?</div>
-          <div className={styles.logoutBtn}>
-            <button
-              className={styles.btnLogout}
-              onClick={() => dispatch(logoutUser())}
-            >
-              Выйти
-            </button>
-            <button
-              className={styles.btnCancel}
-              onClick={() => setLogoutQuestion(false)}
-            >
-              Отмена
-            </button>
-          </div>
+      <div className={styles.logout} onClick={() => dispatch(logoutUser())}>
+        <div className={styles.logoutIcon}>
+          <FiLogOut />
         </div>
-      ) : (
-        <div className={styles.logout} onClick={() => setLogoutQuestion(true)}>
-          <div className={styles.logoutIcon}>
-            <FiLogOut />
-          </div>
-          <div className={styles.logoutText}>Выйти из профиля</div>
-        </div>
-      )}
+        <div className={styles.logoutText}>Выйти</div>
+      </div>
     </div>
   )
 }

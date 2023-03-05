@@ -4,11 +4,11 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import avatar from '../../assets/img/avatar.png'
 import { Edit } from '../../assets/AccountIcons/Edit'
 import classNames from 'classnames'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Close } from '../../assets/AccountIcons/Close'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { Plus } from '../../assets/AccountIcons/Plus'
-import { changeUser, getUser } from '../../redux/User/userSlice'
+import { changeUser } from '../../redux/User/userSlice'
 import Loader from '../../components/UI/Loader'
 
 let badgesArr = [
