@@ -23,7 +23,7 @@
   padding: 16px 24px;
   transition: all 0.5s;
   &:hover {
-    background-color: btn_bg;
+    background-color: $btn_bg;
     color: $hover;
     transition: all 0.5s;
   }

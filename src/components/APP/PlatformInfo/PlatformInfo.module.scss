@@ -1,0 +1,41 @@
+@import '../../../scss/vars';
+
+.container {
+   display: flex;
+   gap: 60px;
+}
+
+.image {
+   width: 590px;
+   height: 280px;
+}
+
+.containerInfo {
+   width: 590px;
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+}
+
+.title {
+   font-family: 'Montserrat';
+   font-style: normal;
+   font-weight: 500;
+   font-size: 28px;
+   line-height: 36px;
+   color: $title;
+}
+
+.description {
+   font-family: 'Montserrat';
+   font-style: normal;
+   font-weight: 400;
+   font-size: 16px;
+   line-height: 22px;
+   color: $text;
+   margin-bottom: 20px;
+}
+
+.button {
+   width: 196px;
+}
