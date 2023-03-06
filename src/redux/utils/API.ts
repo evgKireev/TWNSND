@@ -172,6 +172,7 @@ const getNewAccessToken = (refresh_token: string) => {
   return API.post('/connect/token', body, {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
+      'Cache-Control': 'no-cache',
     },
   })
 }
