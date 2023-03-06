@@ -168,15 +168,12 @@ const verifyToken = (ACCESS_TOKEN: string) => {
 }
 
 const getNewAccessToken = (refresh_token: string) => {
-  return API.post(
-    `https://localhost:7247/connect/token?grant_type=refresh_token&client_id=Test_js_client&refresh_token=${refresh_token}`,
-    {},
-    {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-    }
-  )
+  const body = `grant_type=refresh_token&client_id=Test_js_client&refresh_token=${refresh_token}`
+  return API.post('/connect/token', body, {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+  })
 }
 
 const changeUserData = (
