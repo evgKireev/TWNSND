@@ -8,6 +8,7 @@ import Loader from '../../components/UI/Loader'
 import FormContainer from '../../layout/FormContainer'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { getRegisterUserGoogle } from '../../redux/SignUser/signUpSlice'
+import { PathNames } from '../Router/Router'
 import styles from './CheckPasswordSocial.module.scss'
 
 const CheckPasswordSocial = () => {
@@ -74,7 +75,7 @@ const CheckPasswordSocial = () => {
     <FormContainer
       logo={'Logo'}
       title={'Проверка пароля'}
-      link={'/'}
+      link={PathNames.Home}
       textLink={'Домой'}
     >
       <div className={styles.inner}>

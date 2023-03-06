@@ -10,6 +10,7 @@ import Button, { ButtonTypes } from '../../components/UI/Button'
 import ButtonIcon, { ButtonTypesIcon } from '../../components/UI/ButtonIcon'
 import { useWindowSize } from '../../hooks/useWindowsSize'
 import FormContainer from '../../layout/FormContainer'
+import { PathNames } from '../Router/Router'
 import styles from './SignUpHome.module.scss'
 
 const regUser = [
@@ -34,7 +35,7 @@ const SignUpHome = () => {
     <FormContainer
       logo={'Logo'}
       title={'Создать аккаунт'}
-      link={'/signin'}
+      link={PathNames.SignIn}
       textLink={'Войти'}
       text={'Уже есть аккаунт?'}
     >
@@ -59,7 +60,7 @@ const SignUpHome = () => {
           <button
             type="button"
             className={styles.buttonMailMobile}
-            onClick={() => navigate('/signup-mail')}
+            onClick={() => navigate(PathNames.SignUpMail)}
           >
             <MailIcon width="26.67" height="21.33" /> регистрация через E-mail
           </button>
@@ -86,7 +87,10 @@ const SignUpHome = () => {
           </div>
           <div className={styles.innerLink}>
             <p>Уже есть аккаунт?</p>
-            <div className={styles.link} onClick={() => navigate('/signin')}>
+            <div
+              className={styles.link}
+              onClick={() => navigate(PathNames.SignIn)}
+            >
               Войти
             </div>
           </div>

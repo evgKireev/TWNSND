@@ -19,6 +19,7 @@ import styles from './SignIn.module.scss'
 import classNames from 'classnames'
 import Check from '../../assets/img/Check'
 import ErrorInput from '../../components/UI/ErrorInput'
+import { PathNames } from '../Router/Router'
 
 const SignIn = () => {
   const { width = 0 } = useWindowSize()
@@ -115,7 +116,7 @@ const SignIn = () => {
     <FormContainer
       logo={'LOGO'}
       title={'Войти'}
-      link={'/signup'}
+      link={PathNames.SignUp}
       textLink={'Зарегистрироваться'}
       text={'Нет аккаунта?'}
     >

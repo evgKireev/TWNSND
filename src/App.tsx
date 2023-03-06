@@ -1,54 +1,25 @@
-import { Route, Routes } from 'react-router-dom'
-import RegistrationConfirm from './pages/RegistrationConfirm'
-import ChangePassword from './pages/ChangePassword'
-import Account from './pages/Account'
-import Home from './pages/Home'
-import SignUp from './pages/SignUp'
-import SignUpHome from './pages/SignUpHome'
-import SignIn from './pages/SingIn'
-import SuccessRegistration from './pages/SuccessRegistration'
-import CheckPasswordSocial from './pages/CheckPasswordSocial'
-import RestorePassword from './pages/RestorePassword'
-import RestoreChangePassword from './pages/RestoreChangePassword'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import './scss/app.scss'
-import { useAppDispatch, useAppSelector } from './redux/hooks'
-import { useEffect } from 'react'
-import { getUser } from './redux/User/userSlice'
+import Router from './pages/Router/Router'
+import { Provider } from 'react-redux'
+import { store } from './redux/store'
 
-const App = () => {
-  const { registerUser } = useAppSelector((state) => state.signInSlice)
-  const dispatch = useAppDispatch()
-  useEffect(() => {
-    if (registerUser) {
-      dispatch(getUser())
-    }
-  }, [registerUser])
+function App() {
   return (
-    <>
-      <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="signup" element={<SignUpHome />} />
-        <Route path=":slag/mail" element={<SignUp />} />
-        <Route path="signin" element={<SignIn />} />
-        <Route path="account" element={<Account />} />
-        <Route path="success" element={<SuccessRegistration />} />
-        <Route path="check-password-social" element={<CheckPasswordSocial />} />
-        <Route path=":slag/restore-passord" element={<RestorePassword />} />
-        <Route path="confirm-password" element={<RegistrationConfirm />} />
-        <Route
-          path=":slag/recovery-passord-change"
-          element={<ChangePassword />}
-        />
-        <Route
-          path="restore-passord-change"
-          element={<RestoreChangePassword />}
-        />
-      </Routes>
+    <div className="App">
+      <Router />
       <ToastContainer position="bottom-right" />
-    </>
+    </div>
   )
 }
 
-export default App
+const AppWithStore = () => {
+  return (
+    <Provider store={store}>
+      <App />
+    </Provider>
+  )
+}
+
+export default AppWithStore

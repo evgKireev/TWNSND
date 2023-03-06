@@ -1,1 +1,60 @@
 @import '../../../scss/vars';
+
+.hr {
+  height: 60px;
+  background-color: #737475;
+  margin-bottom: 57px;
+}
+
+.headerButtom {
+  display: flex;
+  gap: 42px;
+}
+
+.content {
+  max-width: 593px;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 120%;
+  margin-bottom: 48px;
+}
+
+.innerItem {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 34px;
+  margin-bottom: 68px;
+}
+.img {
+  max-width: 805px;
+  height: 570px;
+  overflow: hidden;
+  img {
+    object-fit: cover;
+  }
+}
+
+.btn {
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 140%;
+  padding: 13px 52px 16px 49px;
+  background-color: $text;
+  border-radius: 4px;
+  color: $bg;
+  cursor: pointer;
+  border: none;
+  &:hover {
+    background-color: $btn_hover;
+    transition: all 0.5s;
+  }
+  &:active {
+    background-color: $button_1;
+  }
+}

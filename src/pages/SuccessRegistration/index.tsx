@@ -1,10 +1,10 @@
 import { useLocation, useNavigate } from 'react-router-dom'
-
 import Button, { ButtonTypes } from '../../components/UI/Button'
 import Loader from '../../components/UI/Loader'
 import FormContainer from '../../layout/FormContainer'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { getRegistrationConfirmUser } from '../../redux/SignUser/signUpSlice'
+import { PathNames } from '../Router/Router'
 import styles from './SuccessRegistration.module.scss'
 
 const SuccessRegistration = () => {
@@ -22,7 +22,7 @@ const SuccessRegistration = () => {
     dispatch(
       getRegistrationConfirmUser({
         data: { userId, email, code: formattedCode },
-        callback: () => navigate('/signin'),
+        callback: () => navigate(PathNames.SignIn),
       })
     )
   }
@@ -32,7 +32,7 @@ const SuccessRegistration = () => {
     <FormContainer
       logo={''}
       title={'Завершение регистрации'}
-      link={'/'}
+      link={PathNames.Home}
       textLink={''}
       className={styles.comtainer}
     >

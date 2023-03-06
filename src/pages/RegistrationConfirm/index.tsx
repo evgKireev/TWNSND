@@ -4,6 +4,7 @@ import Loader from '../../components/UI/Loader'
 import FormContainer from '../../layout/FormContainer'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { getMailRegisterUser } from '../../redux/SignUser/signUpSlice'
+import { PathNames } from '../Router/Router'
 import styles from './RegistrationConfirm.module.scss'
 
 const RegistrationConfirm = () => {
@@ -26,7 +27,7 @@ const RegistrationConfirm = () => {
     <FormContainer
       logo={''}
       title={'Подтверждение регистрации'}
-      link={'/'}
+      link={PathNames.Home}
       textLink={'Главная'}
     >
       {statusConfirmUser === 'fullfilled' ? (

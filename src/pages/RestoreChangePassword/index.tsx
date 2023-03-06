@@ -7,6 +7,7 @@ import Loader from '../../components/UI/Loader'
 import FormContainer from '../../layout/FormContainer/index'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { getRestoreChangePassword } from '../../redux/SignUser/signInSlice'
+import { PathNames } from '../Router/Router'
 import styles from './RestoreChangePassword.module.scss'
 
 const RestoreChangePassword = () => {
@@ -131,7 +132,7 @@ const RestoreChangePassword = () => {
     <FormContainer
       logo={'LOGO'}
       title={'Восстановление пароля'}
-      link={'/restore-passord'}
+      link={PathNames.RestorePassword}
       textLink={'Назад'}
     >
       {statusRestoreChangePassword === 'fullfilled' ? (
