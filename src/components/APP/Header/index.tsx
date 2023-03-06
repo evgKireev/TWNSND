@@ -22,7 +22,6 @@ const Header = () => {
   const [activeNaw, setActiveNaw] = useState('Главная')
   const [openPanel, setOpenPanel] = useState(false)
   const location = useLocation()
-  console.log(location.pathname)
   return (
     <header className={styles.header}>
       <div className={styles.headerTop}>
