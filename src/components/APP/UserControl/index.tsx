@@ -18,7 +18,9 @@ const UserControl: React.FC<UserControlType> = ({ openPanel }) => {
       })}
     >
       <div>
-        <div className={styles.userName}>{userData?.given_name}</div>
+        <div className={styles.userName}>
+          `${userData?.given_name} ${userData?.family_name}`
+        </div>
         <div className={styles.userEmail}>{userData?.email}</div>
       </div>
       <div className={styles.logout} onClick={() => dispatch(logoutUser())}>
