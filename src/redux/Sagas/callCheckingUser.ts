@@ -32,10 +32,10 @@ export default function* callCheckingUser(api: any, ...rest: any) {
           const { access_token, refresh_token } = data
           if (localStorage.getItem(ACCESS_TOKEN_KEY)) {
             localStorage.setItem(ACCESS_TOKEN_KEY, access_token)
-            localStorage.setItem(ACCESS_TOKEN_KEY, refresh_token)
+            localStorage.setItem(REFRESH_TOKEN_KEY, refresh_token)
           } else if (sessionStorage.getItem(ACCESS_TOKEN_KEY)) {
             sessionStorage.setItem(ACCESS_TOKEN_KEY, access_token)
-            sessionStorage.setItem(ACCESS_TOKEN_KEY, refresh_token)
+            sessionStorage.setItem(REFRESH_TOKEN_KEY, refresh_token)
           }
           const newResponse: ApiResponse<any> = yield call(
             api,
