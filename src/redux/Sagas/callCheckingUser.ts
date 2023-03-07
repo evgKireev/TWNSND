@@ -27,8 +27,6 @@ export default function* callCheckingUser(api: any, ...rest: any) {
           refreshToken
         )
         if (ok && data) {
-          console.log(data)
-          console.log(data.access_token)
           const { access_token, refresh_token } = data
           if (localStorage.getItem(ACCESS_TOKEN_KEY)) {
             localStorage.setItem(ACCESS_TOKEN_KEY, access_token)
