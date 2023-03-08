@@ -1,5 +1,4 @@
 import classNames from 'classnames'
-import { useState } from 'react'
 import { FiLogOut } from 'react-icons/fi'
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks'
 import { logoutUser } from '../../../redux/SignUser/signInSlice'

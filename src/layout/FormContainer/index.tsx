@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import { ReactElement } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Arrow from '../../assets/img/arow'
 import styles from './FormContainer.module.scss'
 

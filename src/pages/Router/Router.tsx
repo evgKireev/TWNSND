@@ -4,6 +4,7 @@ import Account from '../Account'
 import ChangePassword from '../ChangePassword'
 import CheckPasswordSocial from '../CheckPasswordSocial'
 import Home from '../Home'
+import PlatformDetails from '../PlatformDetails'
 import Platforms from '../Platforms'
 import RegistrationConfirm from '../RegistrationConfirm'
 import RestoreChangePassword from '../RestoreChangePassword'
@@ -27,6 +28,7 @@ export enum PathNames {
   ChangePassword = ':slag/recovery-passord-change',
   RestoreChangePassword = '/restore-passord-change',
   RegistrationConfirm = '/confirm-password',
+  PlatformDetails = '/platforms/',
 }
 
 const Router = () => {
@@ -58,6 +60,10 @@ const Router = () => {
         <Route
           path={PathNames.RestoreChangePassword}
           element={<RestoreChangePassword />}
+        />
+        <Route
+          path={`${PathNames.PlatformDetails}:id`}
+          element={<PlatformDetails />}
         />
       </Routes>
     </BrowserRouter>
