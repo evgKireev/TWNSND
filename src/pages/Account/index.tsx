@@ -329,7 +329,11 @@ const Account = () => {
         </button>
       </div>
 
-      <button className={styles.save} onClick={saveData}>
+      <button
+        className={styles.save}
+        onClick={saveData}
+        disabled={errorFirstName || errorLastName || errorEmail}
+      >
         Сохранить
       </button>
     </div>

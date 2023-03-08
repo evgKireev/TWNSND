@@ -1,3 +1,10 @@
 .wrap {
   margin-bottom: 110px;
 }
+
+.platformsCardsWrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  grid-gap: 25px;
+}
