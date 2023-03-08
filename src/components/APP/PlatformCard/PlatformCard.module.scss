@@ -8,9 +8,13 @@
   padding: 20px;
   border: 0.6px solid $light_border;
   border-radius: 26px;
-
+  transition: all 0.5s;
   &:active {
     border: 0.6px solid $bright_border;
+  }
+  &:hover {
+    transform: scale(0.9);
+    transition: all 0.5s;
   }
 }
 
