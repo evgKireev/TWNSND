@@ -14,3 +14,12 @@ export type PlatformType = {
     name: string
   }[]
 }
+
+export type GetPlatforms = {
+  skip: number
+  take: number
+}
+
+export type GetPlatformsPayload = {
+  data: GetPlatforms
+}

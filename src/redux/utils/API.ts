@@ -15,6 +15,7 @@ import {
   SignInType,
   UserType,
 } from '../../@types/types/auth'
+import { GetPlatforms } from '../../@types/types/platforms'
 import { ChangeUserData } from '../../@types/types/user'
 
 const registerUserMail = ({
@@ -198,6 +199,14 @@ const changeUserData = (
   )
 }
 
+const getPlatforms = ({ skip, take }: GetPlatforms) => {
+  console.log('jnkjn')
+  return API_SERVER.get('/api/PlatformCard/Platforms', {
+    skip,
+    take,
+  })
+}
+
 export default {
   registerUserMail,
   sentEmailRegisterUser,
@@ -211,4 +220,5 @@ export default {
   changePasswordUser,
   verifyToken,
   changeUserData,
+  getPlatforms,
 }

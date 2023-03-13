@@ -2,18 +2,29 @@
 import { Link } from 'react-router-dom'
 import { PlatformType } from '../../../@types/types/platforms'
 import { PathNames } from '../../../pages/Router/Router'
-import platform1 from '../../../assets/img/platforms/platform1.png'
 import { v4 as uuidv4 } from 'uuid'
 import styles from './PlatformCard.module.scss'
 import Star from '../../../assets/img/Star'
 import { setHight } from '../../../utils/setHeight'
 import { useEffect } from 'react'
+import { SERVER } from '../../../@types/constant'
+import { motion } from 'framer-motion'
 
 interface IProps {
   platform: PlatformType
+  index: number
 }
 
-const PlatformCard = ({ platform }: IProps) => {
+const platformCardVariants = {
+  visible: (index: number) => ({
+    opacity: 1,
+    scale: 1,
+    transition: { delay: index * 0.1 },
+  }),
+  hidden: { opacity: 0, scale: 1.2 },
+}
+
+const PlatformCard = ({ platform, index }: IProps) => {
   const { id, name, rating, description, imageUrl, messengers, categories } =
     platform
 
@@ -25,9 +36,15 @@ const PlatformCard = ({ platform }: IProps) => {
 
   return (
     <Link to={`${PathNames.PlatformDetails}${id}`}>
-      <div className={styles.wrapper}>
+      <motion.div
+        className={styles.wrapper}
+        variants={platformCardVariants}
+        initial="hidden"
+        animate="visible"
+        custom={index}
+      >
         <div className={styles.header} id="categories">
-          <img src={platform1} alt={name} className={styles.image} />
+          <img src={SERVER + imageUrl} alt={name} className={styles.image} />
           <div className={styles.categoriesWrapper}>
             {categories.map((category) => {
               return (
@@ -60,7 +77,7 @@ const PlatformCard = ({ platform }: IProps) => {
               })
             : messengers[0].name}
         </div>
-      </div>
+      </motion.div>
     </Link>
   )
 }
