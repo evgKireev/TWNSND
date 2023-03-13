@@ -26,7 +26,12 @@
 }
 
 .image {
-  height: max-content;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  border: 0.6px solid #bfc1c8;
+  border-radius: 15px;
+  object-fit: contain;
 }
 
 .categoriesWrapper {
